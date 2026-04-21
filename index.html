@@ -471,9 +471,23 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
    ================================================== */
 #home { display: none; padding-bottom: 120px; background: var(--cream); }
 #home.active { display: block; }
+.home-brand-strip {
+  position: sticky; top: 0; z-index: 11;
+  background: linear-gradient(180deg, var(--cream-mist) 0%, var(--cream) 100%);
+  color: var(--rose);
+  font-size: 12px; font-weight: 800; letter-spacing: 2.5px;
+  text-align: center;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 8px;
+  border-bottom: 1px solid rgba(201, 123, 99, 0.08);
+}
+.home-brand-strip::before,
+.home-brand-strip::after {
+  content: ''; display: inline-block; vertical-align: middle;
+  width: 18px; height: 1px; background: var(--rose-soft); margin: 0 8px;
+}
 .home-topbar {
-  position: sticky; top: 0; z-index: 10;
-  background: rgba(250, 243, 231, 0.88);
+  position: sticky; top: 36px; z-index: 10;
+  background: rgba(250, 243, 231, 0.92);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   padding: 12px 18px 10px;
   display: flex; justify-content: space-between; align-items: center;
@@ -1057,6 +1071,7 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
 
 <!-- ==================== HOME ==================== -->
 <div class="screen" id="home">
+  <div class="home-brand-strip">mommysalma.com</div>
   <div class="home-topbar">
     <div class="home-greeting">Assalamualaikum,<br><strong id="home-name-display">Mommy ✨</strong></div>
     <div class="home-stats">
@@ -1419,24 +1434,24 @@ const LESSONS = [
     parenting:{t:"Sholat lima waktu bukan cuma ibadah — dia adalah latihan mengalahkan hawa nafsu lima kali sehari. Anak yang terbiasa sholat, punya benteng dari dalam dirinya sendiri.",a:"Ustadz Adi Hidayat"},
     body:["Mom, kita khawatir anak kena narkoba, pergaulan bebas, bullying. Jawabannya sederhana: <b>pastiin sholatnya benar dulu</b>.","Disiplin 5 kali sehari membentuk pengendalian diri, ketenangan, tanggung jawab, kesadaran moral. <b>Nggak bisa didapat dari les manapun</b>.","Sholat = benteng paling ampuh."],
     actions:["Review jujur: apa 3 kekurangan atau kebiasaan si kecil yang paling Mom khawatirkan saat ini? Tulis di notes — ini PR kita untuk diperbaiki pelan-pelan.","Puji si kecil hari ini — saat dia sholat, atau saat dia melakukan kebaikan lain (misal: berbagi, jujur, membantu). Pujian spesifik: 'Mama bangga kamu tadi ___'"],
-    reflection:"Kalau aku lihat karakter si kecil sekarang, mana yang paling butuh dibentuk oleh kebiasaan sholat?"},
+    reflection:"Hari ini, 1 kebaikan apa yang si kecil lakukan? Apakah aku sudah pujinya langsung?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:5,title:"Belajar Parenting dari Rasulullah SAW",
     quote:{t:"Sungguh telah ada pada (diri) Rasulullah itu suri teladan yang baik bagimu...",s:"QS. Al-Ahzab: 21"},
     parenting:{t:"Tidak ada metode parenting yang lebih sempurna daripada cara Rasulullah mendidik — tegas dalam prinsip, lembut dalam cara. Cukup kita teladani beliau.",a:"Ustadz Budi Ashari, Pakar Parenting Nabawiyah"},
     body:["Parenting terbaik udah dicontohkan 14 abad lalu.","<b>Teladan sebelum perintah.</b> Rasulullah sholat tahajjud DULU, baru sahabat ikuti.","<b>Lembut, sabar.</b> Waktu cucu Rasulullah naik ke punggungnya saat sujud, beliau memperlama sujud — bukan dimarahi.","<b>Doa yang nggak putus</b> — senjata paling ampuh."],
     actions:["Pilih 1 prinsip Rasulullah hari ini, praktikkan","Baca 1 kisah parenting Rasulullah, ceritakan ke pasangan"],
-    reflection:"Gaya parentingku lebih mirip Rasulullah, atau cara orangtuaku dulu?"},
+    reflection:"Dari prinsip parenting Rasulullah tadi — mana yang belum aku terapkan ke si kecil, dan mau mulai hari ini?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:6,title:"Refleksi &amp; Komitmen Minggu Pertama",
     quote:{t:"Sesungguhnya Allah tidak akan mengubah keadaan suatu kaum sehingga mereka mengubah keadaan yang ada pada diri mereka sendiri.",s:"QS. Ar-Ra'd: 11"},
-    parenting:{t:"Kebiasaan adalah cara kita memprogram ulang hati.",a:"Prof. Ahmad Mubarok, Psikologi Islam"},
+    parenting:{t:"Hisablah dirimu sendiri sebelum engkau dihisab. Timbang amalmu sebelum ditimbang.",a:"Umar bin Khattab RA"},
     body:["Mom, selamat! 6 hari berhasil. Banyak mommy lain nyerah di hari ke-3.","Mindset yang benar bukan cuma 'tahu' — tapi <b>merasa, meyakini, terbakar</b>.","Minggu depan kita masuk ke hal praktis: memahami si kecil sesuai usianya."],
     actions:["Review catatan hari 1–5","Tulis 'Surat untuk Diri Sendiri'","Sholat hajat malam ini"],
-    reflection:"Dari 6 hari ini, mana yang paling menyentuh hatiku?"},
+    reflection:"Setelah 6 hari belajar mindset, apa 1 komitmen konkret yang akan aku pegang selama 30 hari ke depan?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:7,title:"Tanggung Jawab Terbesar Kita, Mom",
     quote:{t:"Hai orang-orang yang beriman, peliharalah dirimu dan keluargamu dari api neraka...",s:"QS. At-Tahrim: 6"},
     parenting:{t:"Anak adalah amanah di tangan orangtuanya. Hatinya yang suci adalah permata yang masih polos, siap menerima apa yang diukirkan padanya.",a:"Imam Al-Ghazali, Ihya Ulumuddin"},
     body:["Mom, selama ini kita ukur sukses dari nilai sekolah, prestasi. Semua penting.","Tapi ada yang jauh lebih penting: apakah si kecil tumbuh jadi pribadi yang menegakkan sholat?","Ayat itu mulai dengan 'jaga diri sendiri dulu', baru keluarga. Tanggung jawab utama: <b>menyelamatkan anak dari neraka</b>.","Setiap anak yang nggak sholat, <b>ada ibunya yang akan dimintai pertanggungjawaban</b>."],
-    actions:["Tulis: 'Tanggung jawab terbesarku sebagai ibu adalah ____'","Sholat 5 waktu tepat waktu hari ini"],
+    actions:["Bayangkan 20 tahun lagi si kecil dewasa — apa yang paling Mom sesali kalau dia tumbuh jauh dari Allah? Tulis 1 kalimat jujur di notes.","Hari ini, sholat 1 waktu bareng si kecil — meski cuma berdiri di samping Mom. Biar dia lihat dan merekam bahwa Mom pun serius sama ibadah ini."],
     reflection:"Apakah sholat masuk 3 kekhawatiran teratasku untuk si kecil?"},
   {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:8,title:"Fitrah — Dia Lahir Sudah Mengenal Allah",
     quote:{t:"Setiap anak dilahirkan dalam keadaan fitrah.",s:"HR. Bukhari Muslim"},
