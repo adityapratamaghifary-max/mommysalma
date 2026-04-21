@@ -948,6 +948,144 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
 .cta-sage { background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage-mist) 100%); }
 .cta-sage .cta-btn { background: var(--sage-deep); box-shadow: 0 3px 0 var(--sage-dark); }
 
+/* ==================================================
+   FINAL CELEBRATION (Day 30)
+   ================================================== */
+@keyframes confettiFall {
+  0% { transform: translateY(-120vh) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translateY(120vh) rotate(720deg); opacity: 0; }
+}
+@keyframes crownFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.05); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(42, 32, 23, 0.08); }
+  50% { box-shadow: 0 6px 20px rgba(201, 169, 97, 0.28); }
+}
+.final-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: linear-gradient(180deg, rgba(42, 32, 23, 0.75) 0%, rgba(168, 95, 72, 0.8) 100%);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  display: none;
+  overflow-y: auto;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  justify-content: center; align-items: flex-start;
+}
+.final-overlay.open { display: flex; animation: fadeIn 0.4s; }
+.final-confetti {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+}
+.final-confetti span {
+  position: absolute; top: -40px; font-size: 28px;
+  animation: confettiFall 4s linear infinite;
+}
+.final-card {
+  position: relative; z-index: 2;
+  background: linear-gradient(145deg, var(--cream-mist) 0%, var(--cream) 40%, #F5E0C8 100%);
+  width: 100%; max-width: 420px;
+  border-radius: 28px;
+  padding: 44px 28px 32px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(42, 32, 23, 0.4), 0 0 0 1px rgba(201, 169, 97, 0.3);
+  animation: pop 0.55s cubic-bezier(0.22, 1.25, 0.36, 1.2);
+  margin-top: 20px;
+}
+.final-crown {
+  font-size: 80px; margin-bottom: 10px;
+  display: inline-block;
+  animation: crownFloat 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 8px 16px rgba(201, 169, 97, 0.4));
+}
+.final-eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: 4px;
+  color: var(--rose); margin-bottom: 8px;
+  background: var(--rose-mist); display: inline-block;
+  padding: 6px 14px; border-radius: 100px;
+}
+.final-title {
+  font-family: 'Fraunces', serif; font-size: 38px;
+  line-height: 1.05; font-weight: 700;
+  color: var(--ink); margin-bottom: 14px;
+  letter-spacing: -0.025em;
+}
+.final-title em {
+  font-style: italic; color: var(--rose); font-weight: 500;
+}
+.final-lead {
+  font-size: 14.5px; color: var(--ink-soft); line-height: 1.55;
+  margin-bottom: 22px;
+}
+.final-lead b { color: var(--rose-deep); font-weight: 700; }
+.final-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  margin: 20px 0 22px;
+}
+.final-stat {
+  background: white; padding: 14px 6px; border-radius: 16px;
+  animation: glowPulse 3.5s ease-in-out infinite;
+}
+.final-stat:nth-child(2) { animation-delay: 0.5s; }
+.final-stat:nth-child(3) { animation-delay: 1s; }
+.fs-val {
+  font-family: 'Fraunces', serif; font-size: 24px; font-weight: 800;
+  color: var(--rose); line-height: 1;
+}
+.fs-lbl {
+  font-size: 9px; font-weight: 800; color: var(--muted);
+  letter-spacing: 1.5px; margin-top: 5px;
+}
+.final-quote {
+  background: linear-gradient(135deg, var(--sage-light), var(--sage-mist));
+  border-left: 4px solid var(--sage-deep);
+  padding: 18px 20px; border-radius: 0 16px 16px 0;
+  margin: 20px 0;
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 14.5px; line-height: 1.5;
+  color: var(--sage-dark); text-align: left;
+}
+.final-quote-src {
+  display: block;
+  font-size: 11px; color: var(--sage-deep);
+  font-weight: 700; margin-top: 10px; font-style: normal; letter-spacing: 0.3px;
+}
+.final-message { margin: 20px 0; }
+.final-message p {
+  font-size: 14px; color: var(--ink-soft); line-height: 1.6;
+  margin-bottom: 10px; text-align: left;
+}
+.final-message b { color: var(--rose-deep); }
+.final-btn-primary, .final-btn-secondary {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 16px 24px;
+  border: none; border-radius: 100px;
+  font-size: 15px; font-weight: 800; cursor: pointer;
+  font-family: inherit; letter-spacing: 0.3px;
+  transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 10px;
+}
+.final-btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+  color: white;
+  box-shadow: 0 5px 0 var(--rose-dark), 0 10px 24px rgba(168, 95, 72, 0.35);
+}
+.final-btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--rose-dark), 0 6px 14px rgba(168, 95, 72, 0.28);
+}
+.final-btn-secondary {
+  background: transparent; color: var(--muted);
+  box-shadow: none; font-weight: 600;
+  padding: 12px;
+}
+.final-btn-secondary:active { color: var(--rose); }
+.final-footer {
+  font-size: 11.5px; color: var(--muted); margin-top: 14px;
+  letter-spacing: 0.3px;
+}
+.final-footer b { color: var(--rose); font-weight: 700; }
+
 /* Locked toast */
 .toast {
   position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px);
@@ -1207,6 +1345,50 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
   </div>
 </div>
 
+<!-- ==================== FINAL CELEBRATION (Day 30) ==================== -->
+<div class="final-overlay" id="final-overlay">
+  <div class="final-confetti">
+    <span style="left:5%; animation-delay: 0s">🌸</span>
+    <span style="left:15%; animation-delay: 0.3s">✨</span>
+    <span style="left:25%; animation-delay: 0.6s">🌟</span>
+    <span style="left:35%; animation-delay: 0.1s">💖</span>
+    <span style="left:45%; animation-delay: 0.5s">🌸</span>
+    <span style="left:55%; animation-delay: 0.2s">✨</span>
+    <span style="left:65%; animation-delay: 0.7s">💫</span>
+    <span style="left:75%; animation-delay: 0.4s">🌟</span>
+    <span style="left:85%; animation-delay: 0.1s">💖</span>
+    <span style="left:95%; animation-delay: 0.8s">✨</span>
+  </div>
+  <div class="final-card">
+    <div class="final-crown">👑</div>
+    <div class="final-eyebrow">30 HARI KHATAM!</div>
+    <h1 class="final-title">Masya Allah,<br><em id="final-name">Mom!</em></h1>
+    <p class="final-lead">Mom berhasil menyelesaikan perjalanan <b>30 hari</b> dengan sepenuh hati. Ini bukan pencapaian kecil — ini <b>bukti cinta Mom</b> pada si kecil dan pada Allah.</p>
+
+    <div class="final-stats">
+      <div class="final-stat"><div class="fs-val" id="final-days">30</div><div class="fs-lbl">HARI SELESAI</div></div>
+      <div class="final-stat"><div class="fs-val" id="final-xp">1,500</div><div class="fs-lbl">XP TOTAL</div></div>
+      <div class="final-stat"><div class="fs-val" id="final-streak">30</div><div class="fs-lbl">🔥 STREAK</div></div>
+    </div>
+
+    <div class="final-quote">
+      "Sebaik-baik wanita adalah yang mendidik anaknya untuk mencintai Allah — bahkan lebih berharga dari seluruh harta dunia."
+      <span class="final-quote-src">— Mommy Salma, untuk Mommy yang berjuang</span>
+    </div>
+
+    <div class="final-message">
+      <p>Hari ini, kamu sudah jadi ibu yang <b>berbeda</b> dari 30 hari yang lalu.</p>
+      <p>Hatimu lebih dalam. Niatmu lebih lurus. Cintamu pada si kecil lebih utuh — karena sekarang Mom mencintai dia tidak cuma di dunia, tapi juga untuk akhirat.</p>
+      <p>Ini belum selesai, Mom. Ini <b>titik awal</b> perjalanan seumur hidup.</p>
+    </div>
+
+    <button class="final-btn-primary" onclick="shareCompletion()">💝 Bagikan Perjalanan Ini</button>
+    <button class="final-btn-secondary" onclick="closeFinalCelebration()">Alhamdulillah, lanjut</button>
+
+    <p class="final-footer">Dari ibu ke ibu — <b>mommysalma.com</b></p>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast">🔒 Selesaikan hari sebelumnya dulu</div>
 
@@ -1457,7 +1639,7 @@ const LESSONS = [
     quote:{t:"Setiap anak dilahirkan dalam keadaan fitrah.",s:"HR. Bukhari Muslim"},
     parenting:{t:"Anak bukanlah kertas putih, tetapi ia adalah benih yang harus kita siram dengan kesabaran.",a:"Kak Seto, Psikolog Anak"},
     body:["Mom, si kecil udah lahir dengan fitrah yang mengenal Allah. Mom sedang <b>menjaga dan menumbuhkan</b>, bukan memasang dari nol.","Fitrah bisa 'tertutup' oleh tontonan, pergaulan, ortu yang nggak ngasih contoh.","Tugas Mom: jaga fitrah itu tetap bersih."],
-    actions:["Amati momen fitrah si kecil tampak","Identifikasi 1 hal di rumah yang mungkin 'menutup' fitrahnya"],
+    actions:["Perhatikan si kecil hari ini — kapan dia spontan nyebut 'Allah', takjub lihat langit, atau nanya soal agama? Tulis 1 contoh yang Mom lihat.","Hari ini, putar murottal pelan-pelan di rumah (saat main, makan, atau tidur siang) — biar fitrah si kecil terpanggil lewat suasana."],
     reflection:"Aku memperlakukan si kecil sebagai 'kanvas kosong' atau 'benih yang sudah ada'?"},
   {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:9,title:"Usia 0–3 Tahun: JANGAN Paksa Ibadah",
     quote:{t:"Sesungguhnya Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya...",s:"QS. Al-Baqarah: 286"},
@@ -1493,8 +1675,8 @@ const LESSONS = [
     quote:{t:"Dan hendaklah setiap diri memperhatikan apa yang telah diperbuatnya untuk hari esok.",s:"QS. Al-Hasyr: 18"},
     parenting:{t:"Mendidik anak tanpa hadirnya hati orangtua sama saja menggarami lautan.",a:"Elly Risman, Psikolog Parenting"},
     body:["Peta lengkap:","• 0–3: JANGAN paksa","• 3–5: pengenalan &amp; teladan","• 5–7: habit building","• 7–10: fase perintah","• 10+: tegas dengan cinta"],
-    actions:["Buat tabel: nama si kecil, usia, fase, kondisi sholat (1–10)","Pilih 1 anak yang paling butuh perhatian"],
-    reflection:"Aku siap bertindak, atau masih sekadar membaca?"},
+    actions:["Lihat si kecil dengan mata baru — di fase mana dia sekarang (0-3 / 3-5 / 5-7 / 7-10 / 10+)? Tulis 1 pendekatan yang paling cocok untuk fasenya.","Praktikkan 1 pendekatan itu hari ini — jangan nunggu besok. Contoh: kalau fase 5-7, ajak dia sholat maghrib bareng pakai mukena/sajadahnya."],
+    reflection:"Dari semua fase yang dipelajari minggu ini, mana yang paling aku salah pahami selama ini tentang si kecil?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:15,title:"Kenapa Si Kecil Menolak Sholat?",
     quote:{t:"Ketahuilah bahwa kemenangan datang bersama kesabaran.",s:"HR. Ahmad"},
     parenting:{t:"Anak yang menolak ibadah bukan anak yang bermasalah — dia sedang memberi sinyal bahwa ada sesuatu yang perlu kita dengarkan lebih dalam.",a:"Dr. Aisah Dahlan, Psikolog Keluarga"},
@@ -1514,14 +1696,14 @@ const LESSONS = [
     actions:["Ingatkan dengan cara sama tiap waktu","Kalau menolak: tarik nafas, senyum, 'kita sholat bareng'"],
     reflection:"Aku nyerah terlalu cepat, atau sabar dengan cara salah?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:18,title:"Peran Ayah &amp; Ibu — Nggak Bisa Solo",
-    quote:{t:"Setiap kalian adalah pemimpin dan akan dimintai pertanggungjawaban...",s:"HR. Bukhari Muslim"},
+    quote:{t:"Seorang suami adalah pemimpin di keluarganya, dan ia bertanggung jawab atas mereka. Seorang istri adalah pemimpin di rumah suaminya dan atas anak-anaknya, dan ia pun bertanggung jawab atas mereka.",s:"HR. Bukhari Muslim"},
     parenting:{t:"Ayah yang sering mengajak anaknya bicara dari hati tentang iman, punya pengaruh paling besar pada pertumbuhan spiritual anak itu.",a:"Prof. Christian Smith, Universitas Notre Dame"},
     body:["Butuh <b>tim</b>. Ayah &amp; ibu komplementer.","Ayah: figur otoritas, imam rumah, model laki-laki sholeh, pembawa ke masjid.","Ibu: pemelihara suasana 24 jam, guru fiqih pertama, role model khusyuk, sumber doa."],
     actions:["Diskusi dengan pasangan: peran mana yang belum optimal?","Kalau merasa sendirian: bicara terus terang"],
     reflection:"Kami 'satu tim', atau masing-masing jalan sendiri?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:19,title:"Lingkungan yang Mendukung",
     quote:{t:"Perumpamaan teman yang baik dan teman yang buruk adalah seperti penjual minyak wangi dan pandai besi...",s:"HR. Bukhari"},
-    parenting:{t:"Membesarkan satu anak, butuh satu kampung — bukan cuma orangtuanya aja.",a:"Pepatah Afrika"},
+    parenting:{t:"Lingkungan adalah madrasah kedua bagi anak. Pilih sekolahnya, pilih temannya, pilih tontonannya — karena mereka ikut mendidik anakmu setiap hari.",a:"Ustadz Budi Ashari"},
     body:["Si kecil dibesarkan oleh <b>lingkungan</b>.","Strategi: sekolah yang sholat berjamaah, TPA, komunitas keluarga sholeh, seleksi tontonan.","Kalau lingkungan sangat sulit: pertimbangkan pindah. Rasulullah pernah nyuruh orang pindah."],
     actions:["Skor 1–10 lingkungan si kecil","Pilih 1 area terlemah, buat rencana"],
     reflection:"Aku berusaha sendiri, atau manfaatkan kekuatan lingkungan?"},
@@ -1535,17 +1717,17 @@ const LESSONS = [
     quote:{t:"Barangsiapa bersungguh-sungguh, sesungguhnya kesungguhannya itu adalah untuk dirinya sendiri.",s:"QS. Al-Ankabut: 6"},
     parenting:{t:"Kesabaran mendidik anak itu bukan sabar yang diam menunggu, tapi sabar yang terus bergerak.",a:"Ustadz Abdullah Gymnastiar"},
     body:["Minggu 'berat' dilewati. Mom punya perangkat menghadapi realitas.","Sudahkah Mom benar-benar <i>bertindak</i>, atau cuma ngangguk-angguk baca?"],
-    actions:["Review hari 15–20. Mana yang dipraktikkan?","Pilih 3 perubahan yang akan dipertahankan"],
+    actions:["Tulis 1 perubahan positif yang Mom rasakan di rumah sejak mulai perjalanan ini.","Kasih diri sendiri apresiasi hari ini — me-time 30 menit: minum teh hangat, baca buku, atau apapun yang Mom suka."],
     reflection:"Dari 21 hari ini, apa insight paling mengubah cara pandangku?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:22,title:"Bertahan untuk Jangka Panjang",
     quote:{t:"Amalan yang paling dicintai Allah adalah yang paling konsisten, meskipun sedikit.",s:"HR. Bukhari Muslim"},
     parenting:{t:"Perbaikan kecil yang dilakukan setiap hari, adalah kunci hasil luar biasa dalam jangka panjang.",a:"James Clear, penulis Atomic Habits"},
     body:["Ini <b>maraton, bukan sprint</b>.","Bulan 1 semangat. Bulan 3 bosan. Bulan 6 ingin menyerah. Tahun 5 baru sadar si kecil udah terbentuk.","Motivasi dari <b>makna, bukan perasaan</b>. Celebrate small wins. Self-care penting."],
-    actions:["Reminder HP jam 5 sore: 'Jangan nyerah hari ini'","Gabung komunitas parenting islami"],
+    actions:["Beli 1 buku parenting islami yang bikin Mom penasaran (contoh: karya Ustadz Budi Ashari, Dr. Aisah Dahlan, atau Elly Risman). Pesan hari ini.","Tonton 1 video parenting islami di YouTube hari ini — cari topik yang paling Mom butuhkan sekarang."],
     reflection:"Apa yang bikin motivasiku turun? Gimana cegahnya?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:23,title:"Investasi Dunia &amp; Akhirat",
     quote:{t:"Dunia adalah ladang akhirat.",s:"Hikmah klasik"},
-    parenting:{t:"Anak yang rutin beribadah punya tingkat depresi lebih rendah, lebih terhindar dari narkoba, dan prestasi akademiknya lebih baik.",a:"Prof. Lisa Miller, Universitas Columbia"},
+    parenting:{t:"Mendidik anak untuk akhirat, bukan berarti mengorbankan dunianya. Justru anak yang kuat iman akan lebih sukses di dunia — karena dia punya disiplin, akhlak, dan tujuan yang jelas.",a:"Ustadz Adi Hidayat"},
     body:["Si kecil yang sholat cenderung <b>lebih sukses di dunia</b>.","Disiplin waktu, pengendalian diri, ketenangan &amp; fokus, karakter kuat, support spiritual.","Fokus sholat TIDAK turunkan prestasi akademik. Justru sebaliknya."],
     actions:["Tulis '5 skill hidup dari sholat'","Ceritakan ke si kecil"],
     reflection:"Apakah aku anggap akademik lebih 'produktif' dari sholat?"},
@@ -1559,7 +1741,7 @@ const LESSONS = [
     quote:{t:"Anak-anak adalah peniru ulung.",s:"Prinsip parenting"},
     parenting:{t:"Anak tidak pernah pandai mendengarkan orangtuanya, tapi tidak pernah gagal meniru mereka.",a:"James Baldwin, Penulis"},
     body:["Si kecil jadi <b>versi dari dirimu</b>. Bukan dari ceramahmu.","Bayangkan 20 tahun lagi: kebiasaan yang dia bawa dari rumah.","Kalau jujur, mau si kecil sholat <b>sepersis</b> Mom sekarang?"],
-    actions:["Rekam diri Mom sholat, tonton","Pilih 1 aspek sholat Mom yang paling lemah — perbaiki 30 hari"],
+    actions:["Hari ini, sengaja sholat di depan si kecil — bukan di kamar tertutup. Biar dia lihat Mom khusyuk menghadap Allah.","Perhatikan 1 kebiasaan Mom yang sering ditiru si kecil (baik atau kurang baik). Tulis: yang mau dipertahankan vs yang mau diubah mulai besok."],
     reflection:"Kalau si kecil meniru sholatku 100%, aku puas atau malu?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:26,title:"Rayakan Progres Kecil",
     quote:{t:"Siapa yang tidak bersyukur atas yang sedikit, tidak akan bersyukur atas yang banyak.",s:"Prinsip hidup"},
@@ -2121,14 +2303,52 @@ function completeLesson() {
 // CELEBRATION
 // ============================================================
 function showCelebration(day) {
-  document.getElementById('celeb-sub').textContent = day >= 30
-    ? 'MASYA ALLAH, 30 HARI KHATAM! Ini pencapaian luar biasa.'
-    : `Hari ke-${day} berhasil Mommy selesaikan. Ini langkah besar untuk si kecil.`;
+  if (day >= 30) {
+    // Special final celebration
+    showFinalCelebration();
+    return;
+  }
+  document.getElementById('celeb-sub').textContent = `Hari ke-${day} berhasil Mommy selesaikan. Ini langkah besar untuk si kecil.`;
   document.getElementById('celeb-streak').textContent = state.streak;
   document.getElementById('celeb-overlay').classList.add('open');
 }
 function closeCelebration() {
   document.getElementById('celeb-overlay').classList.remove('open');
+}
+
+function showFinalCelebration() {
+  const nameEl = document.getElementById('final-name');
+  if (nameEl) nameEl.textContent = (state.name || 'Mom') + '!';
+  document.getElementById('final-days').textContent = state.completed.length;
+  document.getElementById('final-xp').textContent = state.xp.toLocaleString('id-ID');
+  document.getElementById('final-streak').textContent = state.streak;
+  document.getElementById('final-overlay').classList.add('open');
+  haptic([30, 60, 30, 60, 80]);
+}
+
+function closeFinalCelebration() {
+  document.getElementById('final-overlay').classList.remove('open');
+}
+
+function shareCompletion() {
+  const name = state.name || 'Mommy';
+  const text = `Alhamdulillah! ${name} baru saja menyelesaikan perjalanan 30 hari "Menuntun Si Kecil Mencintai Sholat" bersama Mommy Salma 🌸\n\nMari bareng-bareng jadi ibu yang lebih baik untuk si kecil!\n\nGabung: https://chat.whatsapp.com/FcS4twswq941ldtrbPL0Eb?mode=gi_t`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Aku berhasil 30 hari! — Mommy Salma',
+      text: text
+    }).catch(() => copyText(text));
+  } else {
+    copyText(text);
+  }
+}
+function copyText(text) {
+  try {
+    navigator.clipboard.writeText(text);
+    showToast('Pesan tersalin — tempel di WhatsApp ✨');
+  } catch(e) {
+    showToast('Salin manual ya Mom');
+  }
 }
 
 // ============================================================
