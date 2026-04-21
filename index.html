@@ -82,11 +82,28 @@ body {
 @keyframes progressFill { from { width: 0; } to { width: var(--fill); } }
 
 /* ================ SCREENS ================ */
-.screen { display: none; min-height: 100vh; position: relative; animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
-.screen.active { display: block; }
+.screen {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  transform: translateY(8px);
+}
+.screen.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.screen.leaving {
+  opacity: 0 !important;
+  transform: translateY(-6px) !important;
+  pointer-events: none;
+}
 
 /* ==================================================
-   SPLASH SCREEN — lock to 1 viewport, no scroll
+   SPLASH SCREEN — fit viewport with browser chrome safe
    ================================================== */
 #splash {
   display: none;
@@ -102,16 +119,18 @@ body {
   position: fixed;
   top: 0; left: 50%; transform: translateX(-50%);
   width: 100%; max-width: 440px;
+  /* svh accounts for browser toolbar being visible - safer on iOS Safari */
   height: 100vh;
-  height: 100dvh;
-  max-height: 100dvh;
-  padding: max(20px, env(safe-area-inset-top)) 28px max(20px, env(safe-area-inset-bottom));
+  height: 100svh;
+  min-height: 100svh;
+  max-height: 100svh;
+  padding: max(16px, env(safe-area-inset-top)) 28px max(28px, calc(env(safe-area-inset-bottom) + 16px));
   overflow: hidden;
   z-index: 50;
   box-shadow: 0 0 80px rgba(42, 32, 23, 0.12);
 }
-body:has(#splash.active) { overflow: hidden; height: 100dvh; }
-body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
+body:has(#splash.active) { overflow: hidden; height: 100svh; }
+body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
 .splash-ornament { position: absolute; opacity: 0.5; }
 .splash-top { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; padding-top: 20px; }
 .splash-middle { display: flex; flex-direction: column; align-items: center; flex: 1 1 auto; justify-content: center; min-height: 0; }
@@ -178,9 +197,11 @@ body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
   position: fixed;
   top: 0; left: 50%; transform: translateX(-50%);
   width: 100%; max-width: 440px;
+  /* svh ensures fit even with Safari URL bar visible */
   height: 100vh;
-  height: 100dvh;
-  max-height: 100dvh;
+  height: 100svh;
+  min-height: 100svh;
+  max-height: 100svh;
   overflow: hidden;
   z-index: 50;
   box-shadow: 0 0 80px rgba(42, 32, 23, 0.12);
@@ -207,14 +228,17 @@ body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
   padding: 4px 10px; border-radius: 100px; background: rgba(139, 122, 110, 0.1);
 }
 
-/* Manual navigation */
+/* Manual navigation — elevated above browser toolbar */
 .story-nav {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 22px calc(18px + env(safe-area-inset-bottom));
+  padding: 16px 22px calc(32px + env(safe-area-inset-bottom));
   gap: 12px;
+  background: linear-gradient(180deg, transparent 0%, var(--cream-mist) 40%, var(--cream-mist) 100%);
+  position: relative;
+  z-index: 10;
 }
 .story-nav-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -247,10 +271,15 @@ body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
 }
 .story-next:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--rose-dark), 0 6px 14px rgba(168, 95, 72, 0.22); }
 .story-card {
-  flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center;
-  padding: 10px 26px calc(16px + env(safe-area-inset-bottom));
-  position: relative; min-height: 0; overflow: hidden;
+  flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-start;
+  padding: 14px 26px 20px;
+  position: relative; min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
+.story-card::-webkit-scrollbar { width: 3px; }
+.story-card::-webkit-scrollbar-thumb { background: rgba(139, 122, 110, 0.2); border-radius: 2px; }
 .story-tap-l, .story-tap-r { display: none; }
 
 .story-eyebrow {
@@ -364,7 +393,8 @@ body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
   border-color: var(--rose);
   box-shadow: 0 0 0 4px rgba(201, 123, 99, 0.12), var(--shadow-sm);
 }
-.setup-content { padding: 30px 28px 110px; }
+.setup-content { padding: 30px 28px calc(140px + env(safe-area-inset-bottom)); }
+#setup { min-height: 100svh; }
 .setup-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--rose); margin-bottom: 10px; }
 .setup-title {
   font-family: 'Fraunces', serif; font-size: 30px; line-height: 1.12;
@@ -405,8 +435,9 @@ body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
 }
 .setup-footer {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 100%; max-width: 440px; padding: 20px 28px calc(24px + env(safe-area-inset-bottom));
-  background: linear-gradient(180deg, transparent, var(--cream) 25%);
+  width: 100%; max-width: 440px;
+  padding: 22px 28px calc(36px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, transparent, var(--cream) 30%, var(--cream) 100%);
   z-index: 20;
   display: flex; justify-content: center; align-items: center;
   pointer-events: none;
@@ -1312,7 +1343,7 @@ const STORIES = [
     eyebrow: "KESALAHAN KEDUA",
     title: "Pas umur 4 tahun,<br>aku <em>paksa</em> sholat.",
     body: [
-      "Aku ancem: <em>\"Kalau nggak sholat, nggak boleh main HP\"</em>. Aku paksa tarawih 23 rakaat padahal dia 4 tahun.",
+      "Aku ancem: <em>\"Kalau nggak sholat, nggak boleh main HP\"</em>. Aku paksa dia ikut tarawih yang rakaatnya banyak sekali, padahal dia masih 4 tahun.",
       "Aku pikir ini parenting Islami yang benar. <strong>Ternyata ini trauma untuk anak.</strong>",
       "Nawyan mulai kabur kalau dengar adzan. Pura-pura tidur. Sholatnya cepet-cepet asal selesai."
     ]
@@ -1579,22 +1610,47 @@ function saveState() {
 // ============================================================
 // NAVIGATION
 // ============================================================
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-  // Lock body scroll on splash/story, unlock on others
-  if (id === 'splash' || id === 'story-flow') {
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100dvh';
-    document.documentElement.style.overflow = 'hidden';
-    document.documentElement.style.height = '100dvh';
-  } else {
-    document.body.style.overflow = '';
-    document.body.style.height = '';
-    document.documentElement.style.overflow = '';
-    document.documentElement.style.height = '';
+let isTransitioning = false;
+function show(id, opts) {
+  opts = opts || {};
+  const currentActive = document.querySelector('.screen.active');
+  const target = document.getElementById(id);
+  if (!target || (currentActive && currentActive.id === id)) return;
+
+  const applyLock = () => {
+    if (id === 'splash' || id === 'story-flow') {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100svh';
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.height = '100svh';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
+    }
+  };
+
+  // No previous screen or instant mode: snap
+  if (!currentActive || opts.instant) {
+    document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.classList.remove('leaving'); });
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+    applyLock();
+    return;
   }
+
+  // Smooth transition: fade out current, then fade in target
+  isTransitioning = true;
+  currentActive.classList.add('leaving');
+  setTimeout(() => {
+    currentActive.classList.remove('active');
+    currentActive.classList.remove('leaving');
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+    applyLock();
+    isTransitioning = false;
+  }, 260);
 }
 function navTo(id, el) {
   show(id);
@@ -1811,12 +1867,15 @@ function setupNext() {
   if (state.setupStep === 0) {
     const name = (state.name || '').trim();
     if (name.length < 2) { showToast('Yuk isi namamu dulu, Mom ✨'); return; }
+    // Blur input so keyboard closes
+    const inp = document.getElementById('name-input');
+    if (inp) inp.blur();
     state.name = name;
     saveState();
     // After name → go to story flow (manual nav)
     state.storyIndex = 0;
+    renderStory(); // pre-render so no flash
     show('story-flow');
-    renderStory();
     return;
   }
   if (state.setupStep < 3) {
@@ -1826,9 +1885,9 @@ function setupNext() {
   } else {
     state.onboarded = true;
     saveState();
+    renderAll();
     show('home');
     document.getElementById('bottom-nav').classList.remove('hidden');
-    renderAll();
   }
 }
 function setupBack() {
@@ -2092,19 +2151,33 @@ function renderAll() {
 }
 
 // ============================================================
+// KEYBOARD HANDLING (iOS/Android)
+// ============================================================
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    const activeEl = document.activeElement;
+    if (activeEl && activeEl.classList && activeEl.classList.contains('name-input')) {
+      setTimeout(() => {
+        try { activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e) {}
+      }, 150);
+    }
+  });
+}
+
+// ============================================================
 // INIT
 // ============================================================
 loadState();
 if (state.onboarded) {
-  show('home');
+  show('home', { instant: true });
   document.getElementById('bottom-nav').classList.remove('hidden');
   renderAll();
 } else {
   // Lock body for splash on first load
   document.body.style.overflow = 'hidden';
-  document.body.style.height = '100dvh';
+  document.body.style.height = '100svh';
   document.documentElement.style.overflow = 'hidden';
-  document.documentElement.style.height = '100dvh';
+  document.documentElement.style.height = '100svh';
 }
 </script>
 
