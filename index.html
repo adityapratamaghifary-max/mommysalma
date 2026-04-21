@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="manifest" href='data:application/manifest+json;charset=utf-8,{"name":"Menuntun Si Kecil — Mommy Salma","short_name":"Mommy Salma","description":"30 hari panduan menuntun si kecil mencintai sholat","start_url":".","display":"standalone","theme_color":"%23C97B63","background_color":"%23FAF3E7","orientation":"portrait","icons":[{"src":"data:image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 192 192%22><rect width=%22192%22 height=%22192%22 rx=%2240%22 fill=%22%23C97B63%22/><text x=%2296%22 y=%22130%22 font-size=%22120%22 text-anchor=%22middle%22 fill=%22white%22>🌸</text></svg>","sizes":"192x192","type":"image/svg+xml"}]}'>
 <style>
 :root {
   --cream: #FAF3E7;
@@ -85,44 +86,64 @@ body {
 .screen.active { display: block; }
 
 /* ==================================================
-   SPLASH SCREEN
+   SPLASH SCREEN — lock to 1 viewport, no scroll
    ================================================== */
 #splash {
+  display: none;
+  background: linear-gradient(180deg, var(--cream-mist) 0%, var(--cream) 50%, #F5E0C8 100%);
+  text-align: center;
+  overflow: hidden;
+}
+#splash.active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px 32px;
-  background: linear-gradient(180deg, var(--cream-mist) 0%, var(--cream) 50%, #F5E0C8 100%);
-  text-align: center;
-  position: relative;
+  justify-content: space-between;
+  position: fixed;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 440px;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: max(20px, env(safe-area-inset-top)) 28px max(20px, env(safe-area-inset-bottom));
   overflow: hidden;
+  z-index: 50;
+  box-shadow: 0 0 80px rgba(42, 32, 23, 0.12);
 }
-#splash.active { display: flex; }
+body:has(#splash.active) { overflow: hidden; height: 100dvh; }
+body:has(#story-flow.active) { overflow: hidden; height: 100dvh; }
 .splash-ornament { position: absolute; opacity: 0.5; }
-.splash-hero-art { width: 280px; height: 280px; animation: float 4s ease-in-out infinite; margin-bottom: 24px; }
+.splash-top { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; padding-top: 20px; }
+.splash-middle { display: flex; flex-direction: column; align-items: center; flex: 1 1 auto; justify-content: center; min-height: 0; }
+.splash-bottom { display: flex; flex-direction: column; align-items: stretch; flex: 0 0 auto; width: 100%; max-width: 340px; }
+.splash-hero-art {
+  width: min(52vw, 210px); height: min(52vw, 210px);
+  animation: float 4s ease-in-out infinite;
+  margin-bottom: 8px;
+}
 .splash-eyebrow {
-  font-size: 11px; font-weight: 700; letter-spacing: 3.5px; color: var(--rose);
-  background: var(--rose-mist); padding: 7px 16px; border-radius: 100px;
-  margin-bottom: 20px; box-shadow: var(--shadow-sm);
+  font-size: 10.5px; font-weight: 700; letter-spacing: 3px; color: var(--rose);
+  background: var(--rose-mist); padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 14px; box-shadow: var(--shadow-sm);
 }
 .splash-title {
-  font-family: 'Fraunces', serif; font-size: 42px; line-height: 1.04; font-weight: 700;
-  color: var(--ink); margin-bottom: 14px; letter-spacing: -0.03em;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(28px, 8vw, 36px); line-height: 1.05; font-weight: 700;
+  color: var(--ink); margin-bottom: 12px; letter-spacing: -0.025em;
 }
 .splash-title em { font-style: italic; color: var(--rose); font-weight: 500; }
 .splash-subtitle {
-  font-size: 15px; line-height: 1.55; color: var(--muted);
-  max-width: 340px; margin-bottom: 32px;
+  font-size: 13.5px; line-height: 1.5; color: var(--muted);
+  max-width: 320px; margin-bottom: 0;
 }
 .btn-primary {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; max-width: 340px;
-  padding: 18px 24px;
+  padding: 16px 22px;
   background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
-  color: white; border: none; border-radius: 18px;
-  font-size: 16px; font-weight: 700; cursor: pointer;
-  box-shadow: 0 6px 0 var(--rose-dark), 0 10px 24px rgba(168, 95, 72, 0.3);
+  color: white; border: none; border-radius: 16px;
+  font-size: 15.5px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 5px 0 var(--rose-dark), 0 8px 20px rgba(168, 95, 72, 0.25);
   transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
   font-family: inherit; letter-spacing: -0.005em;
 }
@@ -132,7 +153,8 @@ body {
 }
 .btn-primary.ghost {
   background: transparent; color: var(--muted); box-shadow: none;
-  font-weight: 600; padding-top: 14px; padding-bottom: 14px;
+  font-weight: 600; padding-top: 10px; padding-bottom: 10px;
+  font-size: 13.5px; margin-top: 4px;
 }
 .btn-primary.ghost:active { transform: none; box-shadow: none; color: var(--rose); }
 .btn-primary.secondary {
@@ -143,86 +165,100 @@ body {
 .splash-note span { color: var(--rose); font-weight: 600; }
 
 /* ==================================================
-   STORY CARDS (Onboarding narrative)
+   STORY CARDS — fit 100dvh, no scroll
    ================================================== */
 #story-flow {
   display: none;
-  position: relative;
-  height: 100vh;
   background: linear-gradient(180deg, #F9F0DD 0%, #F3E4C8 100%);
   overflow: hidden;
 }
-#story-flow.active { display: flex; flex-direction: column; }
+#story-flow.active {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 440px;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  z-index: 50;
+  box-shadow: 0 0 80px rgba(42, 32, 23, 0.12);
+}
 .story-progress {
-  display: flex; gap: 4px; padding: 14px 16px; flex-shrink: 0;
+  display: flex; gap: 4px; padding: calc(12px + env(safe-area-inset-top)) 16px 10px; flex-shrink: 0;
 }
 .story-bar {
   flex: 1; height: 3px; background: rgba(139, 122, 110, 0.25); border-radius: 2px; overflow: hidden;
 }
 .story-bar.filled { background: var(--ink); }
 .story-bar.active .fill {
-  width: 0; height: 100%; background: var(--ink); animation: progressFill 5.5s linear forwards;
+  width: 0; height: 100%; background: var(--ink); animation: progressFill 7s linear forwards;
   --fill: 100%;
 }
 .story-bar .fill { height: 100%; background: var(--ink); }
 .story-bar.filled .fill { width: 100%; }
 
 .story-header {
-  padding: 6px 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+  padding: 2px 16px 6px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
 }
 .story-brand {
-  font-size: 12px; font-weight: 700; color: var(--rose); letter-spacing: 1.5px;
+  font-size: 11px; font-weight: 700; color: var(--rose); letter-spacing: 1.5px;
 }
 .story-skip {
-  font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer;
-  padding: 6px 12px; border-radius: 100px; background: rgba(139, 122, 110, 0.1);
+  font-size: 11px; font-weight: 600; color: var(--muted); cursor: pointer;
+  padding: 5px 10px; border-radius: 100px; background: rgba(139, 122, 110, 0.1);
 }
 .story-card {
-  flex: 1; display: flex; flex-direction: column; justify-content: center;
-  padding: 20px 32px 36px; position: relative; overflow-y: auto;
+  flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center;
+  padding: 10px 26px calc(16px + env(safe-area-inset-bottom));
+  position: relative; min-height: 0; overflow: hidden;
 }
 .story-tap-l, .story-tap-r {
-  position: absolute; top: 40px; bottom: 80px; width: 35%; cursor: pointer; z-index: 3;
+  position: absolute; top: 50px; bottom: 40px; width: 30%; cursor: pointer; z-index: 3;
 }
 .story-tap-l { left: 0; }
 .story-tap-r { right: 0; }
 
 .story-eyebrow {
-  font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--rose);
-  margin-bottom: 18px; animation: fadeUp 0.5s; animation-delay: 0.1s; animation-fill-mode: both;
+  font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--rose);
+  margin-bottom: 10px; animation: fadeUp 0.5s; animation-delay: 0.1s; animation-fill-mode: both;
+  text-align: left;
 }
 .story-title {
-  font-family: 'Fraunces', serif; font-size: 32px; line-height: 1.15; font-weight: 700;
-  color: var(--ink); margin-bottom: 18px; letter-spacing: -0.02em;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(22px, 6.5vw, 28px); line-height: 1.12; font-weight: 700;
+  color: var(--ink); margin-bottom: 12px; letter-spacing: -0.02em;
   animation: fadeUp 0.6s; animation-delay: 0.2s; animation-fill-mode: both;
 }
 .story-title em { font-style: italic; color: var(--rose); font-weight: 500; }
 .story-body {
-  font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); margin-bottom: 14px;
+  font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 10px;
   animation: fadeUp 0.6s; animation-delay: 0.3s; animation-fill-mode: both;
 }
 .story-body strong { color: var(--rose-deep); font-weight: 700; }
 .story-dialog {
-  background: white; padding: 14px 18px; border-radius: 16px; margin: 12px 0;
-  font-style: italic; color: var(--sage-deep); font-size: 14.5px; line-height: 1.5;
+  background: white; padding: 11px 14px; border-radius: 14px; margin: 10px 0;
+  font-style: italic; color: var(--sage-deep); font-size: 13px; line-height: 1.45;
   box-shadow: var(--shadow-sm); border-left: 3px solid var(--sage-deep);
   animation: fadeUp 0.6s; animation-delay: 0.45s; animation-fill-mode: both;
 }
 .story-hadith {
   background: linear-gradient(135deg, rgba(92, 113, 88, 0.08), rgba(143, 166, 142, 0.08));
-  padding: 20px 22px; border-radius: 18px; margin: 18px 0;
+  padding: 14px 18px; border-radius: 16px; margin: 12px 0;
   border: 1px solid rgba(92, 113, 88, 0.15);
   animation: fadeUp 0.6s; animation-delay: 0.4s; animation-fill-mode: both;
 }
 .story-hadith-text {
-  font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; line-height: 1.45;
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 14.5px; line-height: 1.4;
   color: var(--sage-deep); font-weight: 500;
 }
-.story-hadith-src { font-size: 12px; color: var(--muted); margin-top: 10px; font-weight: 600; }
+.story-hadith-src { font-size: 11px; color: var(--muted); margin-top: 8px; font-weight: 600; }
 .story-illo {
-  width: 200px; height: 200px; margin: 0 auto 18px;
+  width: min(30vw, 130px); height: min(30vw, 130px); margin: 0 auto 10px;
   animation: fadeUp 0.6s, float 4s ease-in-out 0.6s infinite;
   animation-delay: 0s, 0.6s; animation-fill-mode: both;
+  flex-shrink: 0;
 }
 .story-stat-row { display: flex; gap: 18px; justify-content: center; margin: 20px 0; }
 .story-stat {
@@ -409,11 +445,11 @@ body {
 .pwb-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-top: 2px; position: relative; letter-spacing: -0.01em; }
 .pwb-sub { font-size: 12px; color: var(--muted); margin-top: 4px; position: relative; }
 
-.path-node-wrap { display: flex; justify-content: center; margin: 22px 0; position: relative; }
-.path-node-wrap.l-120 { padding-right: 160px; }
-.path-node-wrap.r-120 { padding-left: 160px; }
-.path-node-wrap.l-60 { padding-right: 80px; }
-.path-node-wrap.r-60 { padding-left: 80px; }
+.path-node-wrap { display: flex; justify-content: center; margin: 30px 0; position: relative; min-height: 80px; }
+.path-node-wrap.l-120 { padding-right: 140px; }
+.path-node-wrap.r-120 { padding-left: 140px; }
+.path-node-wrap.l-60 { padding-right: 70px; }
+.path-node-wrap.r-60 { padding-left: 70px; }
 
 .node-container {
   position: relative; display: inline-flex; flex-direction: column; align-items: center;
@@ -465,13 +501,17 @@ body {
 }
 
 .node-title {
-  position: absolute; font-size: 11.5px; font-weight: 600; color: var(--ink);
-  max-width: 150px; line-height: 1.3; letter-spacing: -0.01em;
+  position: absolute; font-size: 12px; font-weight: 600; color: var(--ink);
+  line-height: 1.3; letter-spacing: -0.01em;
   top: 50%; transform: translateY(-50%);
+  padding: 0 8px;
 }
-.l-120 .node-title, .l-60 .node-title { left: calc(50% + 56px); }
-.r-120 .node-title, .r-60 .node-title { right: calc(50% + 56px); text-align: right; }
-.node.locked ~ .node-title, .node-container.locked .node-title { color: var(--muted); }
+.l-60 .node-title { left: calc(50% + 48px); max-width: 130px; }
+.l-120 .node-title { left: calc(50% + 48px); max-width: 150px; }
+.r-60 .node-title { right: calc(50% + 48px); text-align: right; max-width: 130px; }
+.r-120 .node-title { right: calc(50% + 48px); text-align: right; max-width: 150px; }
+.node-container.locked ~ .node-title,
+.path-node-wrap:has(.node.locked) .node-title { color: var(--muted); opacity: 0.7; }
 
 /* ==================================================
    LESSON MODAL
@@ -804,6 +844,9 @@ body {
 
 <!-- ==================== SPLASH ==================== -->
 <div class="screen active" id="splash">
+  <div class="splash-top">
+  </div>
+  <div class="splash-middle">
   <svg class="splash-hero-art" viewBox="0 0 280 280">
     <!-- Halo -->
     <circle cx="140" cy="140" r="125" fill="#E8D5A3" fill-opacity="0.2"/>
@@ -845,15 +888,17 @@ body {
 
   <div class="splash-eyebrow">30 HARI · MOMMY MUSLIMAH</div>
   <h1 class="splash-title">Menuntun Si Kecil<br><em>mencintai Sholat</em></h1>
-  <p class="splash-subtitle">Panduan dari ibu ke ibu — untuk mommy yang anaknya usia 6–7 tahun.<br>Dari Mommy Salma dengan cinta.</p>
+  <p class="splash-subtitle">Panduan dari ibu ke ibu — untuk mommy yang anaknya usia 6–7 tahun.</p>
+  </div>
 
-  <button class="btn-primary" onclick="startJourney()">
-    <span>Mulai Perjalananku</span>
-    <span style="font-size: 18px">→</span>
-  </button>
-  <button class="btn-primary ghost" onclick="skipToHome()">Aku sudah tahu, langsung mulai</button>
-
-  <p class="splash-note">Gratis · Tersimpan otomatis · <span>mommysalma.com</span></p>
+  <div class="splash-bottom">
+    <button class="btn-primary" onclick="startJourney()">
+      <span>Mulai Perjalananku</span>
+      <span style="font-size: 18px">→</span>
+    </button>
+    <button class="btn-primary ghost" onclick="skipToHome()">Langsung ke perjalanan</button>
+    <p class="splash-note" style="margin-top: 8px">Gratis · <span>mommysalma.com</span></p>
+  </div>
 </div>
 
 <!-- ==================== STORY FLOW ==================== -->
@@ -1429,6 +1474,7 @@ function getLevel(xp) {
 // ============================================================
 let state = {
   onboarded: false,
+  name: '',
   storyIndex: 0,
   setupStep: 0,
   age: '6-7',
@@ -1456,6 +1502,18 @@ function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
+  // Lock body scroll on splash/story, unlock on others
+  if (id === 'splash' || id === 'story-flow') {
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100dvh';
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100dvh';
+  } else {
+    document.body.style.overflow = '';
+    document.body.style.height = '';
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.height = '';
+  }
 }
 function navTo(id, el) {
   show(id);
@@ -1543,10 +1601,10 @@ function renderStory() {
 
   document.getElementById('story-card').innerHTML = html;
 
-  // Auto-advance
+  // Auto-advance — sync with progress bar (7s)
   clearTimeout(storyTimer);
   if (!s.cta) {
-    storyTimer = setTimeout(() => nextStory(), 6500);
+    storyTimer = setTimeout(() => nextStory(), 7000);
   }
 }
 
@@ -1660,7 +1718,8 @@ function renderPath() {
   const container = document.getElementById('path-container');
   let html = '';
   let currentWeek = null;
-  const offsets = ['', 'l-60', 'r-60', 'l-120', 'r-120', 'l-60', 'r-60'];
+  // Zigzag pattern, always with offset so title never overlaps the node
+  const offsets = ['r-60', 'l-60', 'r-120', 'l-120', 'r-60', 'l-60', 'r-120'];
   let idx = 0;
 
   LESSONS.forEach((lesson) => {
@@ -1796,6 +1855,8 @@ function openLesson(day) {
   };
 }
 
+function haptic(ms) { try { if (navigator.vibrate) navigator.vibrate(ms || 10); } catch(e) {} }
+
 function toggleAction(i) {
   if (!state.actions[currentLessonDay]) {
     const lesson = LESSONS.find(l => l.day === currentLessonDay);
@@ -1805,6 +1866,7 @@ function toggleAction(i) {
   const cb = document.getElementById('check-' + i);
   cb.classList.toggle('checked');
   cb.textContent = state.actions[currentLessonDay][i] ? '✓' : '';
+  haptic(12);
   saveState();
 }
 
@@ -1831,6 +1893,7 @@ function completeLesson() {
       state.streak = 1;
     }
     state.lastCompleteDate = today;
+    haptic([20, 80, 30]);
   }
 
   saveState();
@@ -1889,6 +1952,12 @@ if (state.onboarded) {
   show('home');
   document.getElementById('bottom-nav').classList.remove('hidden');
   renderAll();
+} else {
+  // Lock body for splash on first load
+  document.body.style.overflow = 'hidden';
+  document.body.style.height = '100dvh';
+  document.documentElement.style.overflow = 'hidden';
+  document.documentElement.style.height = '100dvh';
 }
 </script>
 
