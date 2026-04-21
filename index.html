@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FAF3E7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Menuntun Si Kecil · Mommy Salma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF3E7;
+  --cream-deep: #F3E7CE;
+  --cream-mist: #FDF9F0;
+  --rose: #C97B63;
+  --rose-deep: #A85F48;
+  --rose-dark: #8B4832;
+  --rose-soft: #E8C4B8;
+  --rose-mist: #F6E5DD;
+  --rose-light: #F9EFEA;
+  --sage: #8FA68E;
+  --sage-deep: #5C7158;
+  --sage-dark: #3F5240;
+  --sage-light: #EAF0E8;
+  --sage-mist: #F3F7F2;
+  --gold: #C9A961;
+  --gold-deep: #9E8240;
+  --gold-light: #E8D5A3;
+  --gold-mist: #FAF2DB;
+  --ink: #2A2017;
+  --ink-soft: #3E3225;
+  --muted: #8B7A6E;
+  --muted-soft: #B6A99B;
+  --shadow-sm: 0 2px 6px rgba(42, 32, 23, 0.05), 0 1px 2px rgba(42, 32, 23, 0.04);
+  --shadow: 0 4px 12px rgba(42, 32, 23, 0.08), 0 1px 3px rgba(42, 32, 23, 0.05);
+  --shadow-lg: 0 14px 34px rgba(42, 32, 23, 0.13), 0 4px 10px rgba(42, 32, 23, 0.08);
+  --shadow-xl: 0 28px 60px rgba(42, 32, 23, 0.22), 0 10px 20px rgba(42, 32, 23, 0.1);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+  font-feature-settings: "ss01", "cv01", "cv11";
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  background: linear-gradient(135deg, #f0e6d2 0%, #eadfc8 100%);
+}
+#app {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  background: var(--cream);
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 80px rgba(42, 32, 23, 0.12);
+}
+.serif { font-family: 'Fraunces', 'Playfair Display', Georgia, serif; letter-spacing: -0.015em; }
+
+/* ================ ANIMATIONS ================ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { 0% { transform: scale(0.8); } 55% { transform: scale(1.1); } 100% { transform: scale(1); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes slideInRight { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.9; } }
+@keyframes sparkle { 0%, 100% { transform: scale(1) rotate(0); opacity: 0.6; } 50% { transform: scale(1.3) rotate(180deg); opacity: 1; } }
+@keyframes progressFill { from { width: 0; } to { width: var(--fill); } }
+
+/* ================ SCREENS ================ */
+.screen { display: none; min-height: 100vh; position: relative; animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.screen.active { display: block; }
+
+/* ==================================================
+   SPLASH SCREEN
+   ================================================== */
+#splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  background: linear-gradient(180deg, var(--cream-mist) 0%, var(--cream) 50%, #F5E0C8 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#splash.active { display: flex; }
+.splash-ornament { position: absolute; opacity: 0.5; }
+.splash-hero-art { width: 280px; height: 280px; animation: float 4s ease-in-out infinite; margin-bottom: 24px; }
+.splash-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 3.5px; color: var(--rose);
+  background: var(--rose-mist); padding: 7px 16px; border-radius: 100px;
+  margin-bottom: 20px; box-shadow: var(--shadow-sm);
+}
+.splash-title {
+  font-family: 'Fraunces', serif; font-size: 42px; line-height: 1.04; font-weight: 700;
+  color: var(--ink); margin-bottom: 14px; letter-spacing: -0.03em;
+}
+.splash-title em { font-style: italic; color: var(--rose); font-weight: 500; }
+.splash-subtitle {
+  font-size: 15px; line-height: 1.55; color: var(--muted);
+  max-width: 340px; margin-bottom: 32px;
+}
+.btn-primary {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; max-width: 340px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+  color: white; border: none; border-radius: 18px;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 6px 0 var(--rose-dark), 0 10px 24px rgba(168, 95, 72, 0.3);
+  transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: inherit; letter-spacing: -0.005em;
+}
+.btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--rose-dark), 0 6px 14px rgba(168, 95, 72, 0.28);
+}
+.btn-primary.ghost {
+  background: transparent; color: var(--muted); box-shadow: none;
+  font-weight: 600; padding-top: 14px; padding-bottom: 14px;
+}
+.btn-primary.ghost:active { transform: none; box-shadow: none; color: var(--rose); }
+.btn-primary.secondary {
+  background: white; color: var(--rose); box-shadow: 0 3px 0 var(--rose-soft), var(--shadow);
+}
+.btn-primary.secondary:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--rose-soft), var(--shadow-sm); }
+.splash-note { font-size: 12px; color: var(--muted); margin-top: 14px; max-width: 280px; }
+.splash-note span { color: var(--rose); font-weight: 600; }
+
+/* ==================================================
+   STORY CARDS (Onboarding narrative)
+   ================================================== */
+#story-flow {
+  display: none;
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(180deg, #F9F0DD 0%, #F3E4C8 100%);
+  overflow: hidden;
+}
+#story-flow.active { display: flex; flex-direction: column; }
+.story-progress {
+  display: flex; gap: 4px; padding: 14px 16px; flex-shrink: 0;
+}
+.story-bar {
+  flex: 1; height: 3px; background: rgba(139, 122, 110, 0.25); border-radius: 2px; overflow: hidden;
+}
+.story-bar.filled { background: var(--ink); }
+.story-bar.active .fill {
+  width: 0; height: 100%; background: var(--ink); animation: progressFill 5.5s linear forwards;
+  --fill: 100%;
+}
+.story-bar .fill { height: 100%; background: var(--ink); }
+.story-bar.filled .fill { width: 100%; }
+
+.story-header {
+  padding: 6px 16px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+}
+.story-brand {
+  font-size: 12px; font-weight: 700; color: var(--rose); letter-spacing: 1.5px;
+}
+.story-skip {
+  font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer;
+  padding: 6px 12px; border-radius: 100px; background: rgba(139, 122, 110, 0.1);
+}
+.story-card {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 20px 32px 36px; position: relative; overflow-y: auto;
+}
+.story-tap-l, .story-tap-r {
+  position: absolute; top: 40px; bottom: 80px; width: 35%; cursor: pointer; z-index: 3;
+}
+.story-tap-l { left: 0; }
+.story-tap-r { right: 0; }
+
+.story-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--rose);
+  margin-bottom: 18px; animation: fadeUp 0.5s; animation-delay: 0.1s; animation-fill-mode: both;
+}
+.story-title {
+  font-family: 'Fraunces', serif; font-size: 32px; line-height: 1.15; font-weight: 700;
+  color: var(--ink); margin-bottom: 18px; letter-spacing: -0.02em;
+  animation: fadeUp 0.6s; animation-delay: 0.2s; animation-fill-mode: both;
+}
+.story-title em { font-style: italic; color: var(--rose); font-weight: 500; }
+.story-body {
+  font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); margin-bottom: 14px;
+  animation: fadeUp 0.6s; animation-delay: 0.3s; animation-fill-mode: both;
+}
+.story-body strong { color: var(--rose-deep); font-weight: 700; }
+.story-dialog {
+  background: white; padding: 14px 18px; border-radius: 16px; margin: 12px 0;
+  font-style: italic; color: var(--sage-deep); font-size: 14.5px; line-height: 1.5;
+  box-shadow: var(--shadow-sm); border-left: 3px solid var(--sage-deep);
+  animation: fadeUp 0.6s; animation-delay: 0.45s; animation-fill-mode: both;
+}
+.story-hadith {
+  background: linear-gradient(135deg, rgba(92, 113, 88, 0.08), rgba(143, 166, 142, 0.08));
+  padding: 20px 22px; border-radius: 18px; margin: 18px 0;
+  border: 1px solid rgba(92, 113, 88, 0.15);
+  animation: fadeUp 0.6s; animation-delay: 0.4s; animation-fill-mode: both;
+}
+.story-hadith-text {
+  font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; line-height: 1.45;
+  color: var(--sage-deep); font-weight: 500;
+}
+.story-hadith-src { font-size: 12px; color: var(--muted); margin-top: 10px; font-weight: 600; }
+.story-illo {
+  width: 200px; height: 200px; margin: 0 auto 18px;
+  animation: fadeUp 0.6s, float 4s ease-in-out 0.6s infinite;
+  animation-delay: 0s, 0.6s; animation-fill-mode: both;
+}
+.story-stat-row { display: flex; gap: 18px; justify-content: center; margin: 20px 0; }
+.story-stat {
+  text-align: center; background: white; padding: 14px 10px; border-radius: 18px;
+  flex: 1; box-shadow: var(--shadow-sm);
+  animation: fadeUp 0.6s; animation-delay: 0.5s; animation-fill-mode: both;
+}
+.story-stat-num { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--rose); }
+.story-stat-lbl { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+.story-timeline {
+  display: flex; align-items: center; gap: 10px; margin: 16px 0;
+  animation: fadeUp 0.6s; animation-delay: 0.4s; animation-fill-mode: both;
+}
+.story-time-node {
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  font-family: 'Fraunces', serif; font-size: 22px; font-weight: 800; color: white;
+  flex-shrink: 0; box-shadow: var(--shadow);
+}
+.story-time-node.gold { background: var(--gold); }
+.story-time-node.rose { background: var(--rose); }
+.story-time-line {
+  flex: 1; height: 3px; background: repeating-linear-gradient(90deg, var(--muted-soft) 0, var(--muted-soft) 4px, transparent 4px, transparent 8px);
+}
+.story-time-lbl { font-size: 11px; font-weight: 700; color: var(--muted); }
+
+.story-cta-stack {
+  display: flex; flex-direction: column; gap: 10px; margin-top: 24px;
+  animation: fadeUp 0.6s; animation-delay: 0.7s; animation-fill-mode: both;
+}
+.story-nav-hint {
+  text-align: center; font-size: 11px; color: var(--muted); padding: 12px 0 0;
+  opacity: 0.6; font-weight: 500;
+}
+
+/* ==================================================
+   SETUP (after story)
+   ================================================== */
+#setup { display: none; min-height: 100vh; padding: 0; }
+#setup.active { display: block; }
+.setup-header {
+  padding: 20px 24px 6px; display: flex; align-items: center; gap: 10px;
+}
+.setup-back {
+  width: 36px; height: 36px; border-radius: 50%; background: white;
+  display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow-sm);
+  font-size: 16px; color: var(--muted); font-weight: 700;
+}
+.setup-progress { flex: 1; display: flex; gap: 4px; }
+.setup-dot { flex: 1; height: 3px; border-radius: 2px; background: rgba(139, 122, 110, 0.2); }
+.setup-dot.active { background: var(--rose); }
+.setup-dot.done { background: var(--sage); }
+.setup-content { padding: 30px 28px 110px; }
+.setup-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--rose); margin-bottom: 10px; }
+.setup-title {
+  font-family: 'Fraunces', serif; font-size: 30px; line-height: 1.12;
+  font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
+}
+.setup-subtitle { font-size: 14.5px; color: var(--muted); line-height: 1.5; margin-bottom: 26px; }
+.opt-stack { display: flex; flex-direction: column; gap: 12px; }
+.opt-card {
+  background: white; border: 2px solid transparent;
+  border-radius: 20px; padding: 16px 18px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--shadow-sm); position: relative;
+}
+.opt-card:active { transform: scale(0.98); }
+.opt-card.selected {
+  border-color: var(--rose); background: var(--rose-light);
+  box-shadow: 0 4px 14px rgba(201, 123, 99, 0.18);
+}
+.opt-card.selected::after {
+  content: '✓'; position: absolute; top: 14px; right: 14px;
+  width: 24px; height: 24px; background: var(--rose); color: white;
+  border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 800;
+}
+.opt-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--cream-deep); display: grid; place-items: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.opt-card.selected .opt-icon { background: var(--rose); }
+.opt-text { flex: 1; }
+.opt-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+.opt-sub { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.opt-tag {
+  display: inline-block; background: var(--rose); color: white;
+  font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 4px;
+  margin-left: 8px; letter-spacing: 0.5px; vertical-align: middle;
+}
+.setup-footer {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 440px; padding: 16px 24px calc(20px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, transparent, var(--cream) 30%);
+  z-index: 20;
+}
+
+/* ==================================================
+   HOME (PATH)
+   ================================================== */
+#home { display: none; padding-bottom: 120px; background: var(--cream); }
+#home.active { display: block; }
+.home-topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(250, 243, 231, 0.88);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  padding: 12px 18px 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+}
+.home-greeting {
+  font-size: 13px; font-weight: 600; color: var(--muted);
+}
+.home-greeting strong { color: var(--rose); font-weight: 700; font-size: 14px; }
+.home-stats { display: flex; gap: 6px; align-items: center; }
+.stat-chip {
+  display: flex; align-items: center; gap: 4px;
+  background: white; padding: 7px 11px; border-radius: 100px;
+  font-size: 12px; font-weight: 800; box-shadow: var(--shadow-sm);
+  transition: transform 0.15s;
+}
+.stat-chip:active { transform: scale(0.94); }
+.stat-streak { color: var(--rose); }
+.stat-xp { color: var(--gold-deep); }
+
+.home-hero {
+  padding: 22px 24px 6px; text-align: center;
+}
+.home-hero-title {
+  font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700;
+  color: var(--ink); line-height: 1.18; letter-spacing: -0.02em;
+}
+.home-hero-title em { color: var(--rose); font-style: italic; font-weight: 500; }
+.home-hero-sub {
+  font-size: 13px; color: var(--muted); margin-top: 6px;
+}
+
+.current-day-banner {
+  margin: 20px 24px 0;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+  border-radius: 24px; padding: 18px 22px; color: white;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 8px 22px rgba(201, 123, 99, 0.35);
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: transform 0.15s;
+}
+.current-day-banner:active { transform: scale(0.98); }
+.current-day-banner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 120% -20%, rgba(255,255,255,0.25), transparent 50%);
+}
+.cdb-num {
+  width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.22);
+  display: grid; place-items: center; flex-shrink: 0; position: relative;
+}
+.cdb-num-day { font-size: 8px; font-weight: 800; opacity: 0.85; letter-spacing: 1px; }
+.cdb-num-val { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 800; line-height: 1; }
+.cdb-text { flex: 1; position: relative; }
+.cdb-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; opacity: 0.85; }
+.cdb-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; line-height: 1.2; margin-top: 2px; }
+.cdb-arrow { font-size: 22px; opacity: 0.8; position: relative; }
+
+.path {
+  padding: 28px 20px 40px; position: relative;
+}
+.path-week-banner {
+  margin: 22px -20px 8px; padding: 20px 24px;
+  background: linear-gradient(135deg, var(--rose-mist), var(--gold-mist));
+  position: relative; overflow: hidden;
+  border-top: 1px solid rgba(201, 123, 99, 0.12);
+  border-bottom: 1px solid rgba(201, 123, 99, 0.12);
+  text-align: center;
+}
+.path-week-banner::before {
+  content: ''; position: absolute; top: -30px; left: -30px; width: 80px; height: 80px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(201, 169, 97, 0.3), transparent 70%);
+}
+.path-week-banner::after {
+  content: ''; position: absolute; bottom: -30px; right: -30px; width: 100px; height: 100px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(201, 123, 99, 0.2), transparent 70%);
+}
+.pwb-icon { font-size: 32px; position: relative; margin-bottom: 4px; }
+.pwb-label { font-size: 10px; font-weight: 800; letter-spacing: 2.5px; color: var(--rose); position: relative; }
+.pwb-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-top: 2px; position: relative; letter-spacing: -0.01em; }
+.pwb-sub { font-size: 12px; color: var(--muted); margin-top: 4px; position: relative; }
+
+.path-node-wrap { display: flex; justify-content: center; margin: 22px 0; position: relative; }
+.path-node-wrap.l-120 { padding-right: 160px; }
+.path-node-wrap.r-120 { padding-left: 160px; }
+.path-node-wrap.l-60 { padding-right: 80px; }
+.path-node-wrap.r-60 { padding-left: 80px; }
+
+.node-container {
+  position: relative; display: inline-flex; flex-direction: column; align-items: center;
+}
+.node {
+  width: 76px; height: 76px; border-radius: 50%; position: relative;
+  display: grid; place-items: center; cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.node:active { transform: scale(0.92); }
+.node-bg {
+  position: absolute; inset: 0; border-radius: 50%;
+}
+.node-inner {
+  width: 68px; height: 68px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; text-align: center;
+}
+.node-day-label { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; opacity: 0.8; text-transform: uppercase; line-height: 1; }
+.node-day-num { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 800; line-height: 1; margin-top: 2px; }
+
+.node.locked .node-bg { background: #CFC5B1; }
+.node.locked .node-inner { background: #BCB19C; color: #8A7F69; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.08); }
+
+.node.unlocked .node-bg {
+  background: var(--rose-deep); animation: float 3.5s ease-in-out infinite;
+}
+.node.unlocked .node-inner {
+  background: var(--rose); color: white;
+  box-shadow: 0 0 0 6px rgba(201, 123, 99, 0.14), inset 0 -3px 0 rgba(0,0,0,0.06);
+}
+.node.unlocked::before {
+  content: 'MULAI'; position: absolute; bottom: -26px; left: 50%; transform: translateX(-50%);
+  background: var(--rose); color: white; font-size: 9px; font-weight: 800;
+  padding: 4px 10px; border-radius: 100px; letter-spacing: 1.5px;
+  animation: pulse 2s ease-in-out infinite; box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+.node.done .node-bg { background: var(--sage-deep); }
+.node.done .node-inner {
+  background: var(--sage); color: white;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.06);
+}
+.node.done::after {
+  content: '✓'; position: absolute; top: -6px; right: -6px;
+  width: 28px; height: 28px; background: var(--gold); color: white;
+  border-radius: 50%; display: grid; place-items: center;
+  font-size: 14px; font-weight: 800; box-shadow: var(--shadow);
+}
+
+.node-title {
+  position: absolute; font-size: 11.5px; font-weight: 600; color: var(--ink);
+  max-width: 150px; line-height: 1.3; letter-spacing: -0.01em;
+  top: 50%; transform: translateY(-50%);
+}
+.l-120 .node-title, .l-60 .node-title { left: calc(50% + 56px); }
+.r-120 .node-title, .r-60 .node-title { right: calc(50% + 56px); text-align: right; }
+.node.locked ~ .node-title, .node-container.locked .node-title { color: var(--muted); }
+
+/* ==================================================
+   LESSON MODAL
+   ================================================== */
+.lesson-overlay {
+  position: fixed; inset: 0; background: rgba(42, 32, 23, 0.55);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  z-index: 100; display: none; align-items: flex-end; justify-content: center;
+}
+.lesson-overlay.open { display: flex; animation: fadeIn 0.25s; }
+.lesson-modal {
+  width: 100%; max-width: 440px;
+  background: var(--cream); border-radius: 28px 28px 0 0;
+  max-height: 93vh; overflow-y: auto;
+  animation: slideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+.lesson-topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(250, 243, 231, 0.95);
+  backdrop-filter: blur(14px);
+  padding: 14px 18px 12px; display: flex; gap: 12px; align-items: center;
+  border-bottom: 1px solid rgba(139, 122, 110, 0.12);
+}
+.lesson-close {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--cream-deep); border: none; cursor: pointer;
+  font-size: 16px; color: var(--ink-soft); display: grid; place-items: center;
+  font-weight: 700; transition: background 0.15s; flex-shrink: 0;
+}
+.lesson-close:active { background: var(--rose-soft); }
+.lesson-bar {
+  flex: 1; height: 8px; background: var(--cream-deep);
+  border-radius: 100px; overflow: hidden;
+}
+.lesson-fill {
+  height: 100%; background: linear-gradient(90deg, var(--rose), var(--gold));
+  border-radius: 100px; transition: width 0.3s;
+}
+
+.lesson-body { padding: 24px 26px 120px; }
+.lesson-week {
+  font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+  color: var(--rose); text-align: center;
+}
+.lesson-day {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  text-align: center; margin-top: 4px; letter-spacing: 2px;
+}
+.lesson-title {
+  font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700;
+  color: var(--ink); text-align: center; line-height: 1.14;
+  margin: 12px 0 24px; letter-spacing: -0.02em;
+}
+.quote-card {
+  background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage-mist) 100%);
+  border-left: 4px solid var(--sage-deep);
+  padding: 20px 22px; border-radius: 0 18px 18px 0;
+  margin: 18px 0;
+}
+.quote-text {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 16px; line-height: 1.5; color: var(--sage-dark); font-weight: 500;
+}
+.quote-src {
+  font-size: 11.5px; color: var(--sage-deep); margin-top: 10px;
+  font-weight: 700; letter-spacing: 0.5px;
+}
+.parenting-card {
+  background: linear-gradient(135deg, var(--rose-light) 0%, var(--rose-mist) 100%);
+  border-left: 4px solid var(--rose);
+  padding: 18px 22px; border-radius: 0 18px 18px 0;
+  margin: 18px 0;
+}
+.parenting-label {
+  font-size: 10px; font-weight: 800; color: var(--rose-deep);
+  letter-spacing: 2.5px; margin-bottom: 8px;
+}
+.parenting-text {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 15px; line-height: 1.5; color: var(--ink);
+}
+.parenting-author { font-size: 11.5px; color: var(--rose-deep); font-weight: 700; margin-top: 8px; }
+
+.section-label {
+  font-size: 11px; font-weight: 800; color: var(--rose);
+  letter-spacing: 2.5px; margin: 24px 0 12px;
+}
+.content-text { font-size: 15px; line-height: 1.68; color: var(--ink-soft); margin: 12px 0; }
+.content-text strong { color: var(--rose-deep); font-weight: 700; }
+.content-text em { color: var(--sage-deep); font-style: italic; }
+
+.action-card {
+  background: white; border: 1px solid rgba(201, 169, 97, 0.3);
+  padding: 18px 20px; border-radius: 18px;
+  margin: 20px 0; box-shadow: var(--shadow-sm);
+}
+.action-label {
+  font-size: 10px; font-weight: 800; color: var(--gold-deep);
+  letter-spacing: 2.5px; margin-bottom: 14px;
+}
+.action-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+  cursor: pointer;
+}
+.action-item:last-child { border-bottom: none; }
+.action-checkbox {
+  width: 24px; height: 24px; min-width: 24px; border-radius: 7px;
+  border: 2px solid var(--gold); background: white;
+  display: grid; place-items: center; color: white;
+  font-size: 13px; font-weight: 800;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 1px;
+}
+.action-checkbox.checked {
+  background: var(--gold); border-color: var(--gold); animation: pop 0.3s;
+}
+.action-text { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); flex: 1; }
+
+.reflect-card {
+  background: white; border: 1px solid var(--sage-light);
+  padding: 18px 20px; border-radius: 18px;
+  margin: 20px 0; box-shadow: var(--shadow-sm);
+}
+.reflect-label {
+  font-size: 10px; font-weight: 800; color: var(--sage-deep);
+  letter-spacing: 2.5px; margin-bottom: 10px;
+}
+.reflect-q {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 15px; line-height: 1.5; color: var(--sage-dark); margin-bottom: 14px;
+}
+.reflect-input {
+  width: 100%; min-height: 90px; resize: vertical;
+  border: 1.5px solid var(--sage-light); border-radius: 14px;
+  padding: 14px 16px; font-family: inherit; font-size: 14px;
+  color: var(--ink); background: var(--cream-mist);
+  transition: all 0.2s;
+}
+.reflect-input:focus { outline: none; border-color: var(--sage); background: white; }
+
+.lesson-footer {
+  position: sticky; bottom: 0; padding: 16px 24px 20px;
+  background: linear-gradient(180deg, transparent, var(--cream) 40%);
+  margin: 24px -26px -120px;
+}
+
+/* ==================================================
+   CELEBRATION
+   ================================================== */
+.celeb-overlay {
+  position: fixed; inset: 0; background: rgba(42, 32, 23, 0.85);
+  z-index: 200; display: none; align-items: center; justify-content: center; padding: 32px;
+}
+.celeb-overlay.open { display: flex; animation: fadeIn 0.3s; }
+.celeb-card {
+  background: var(--cream); padding: 40px 28px 28px; border-radius: 28px;
+  text-align: center; max-width: 360px; width: 100%; position: relative;
+  animation: pop 0.5s cubic-bezier(0.22, 1.3, 0.36, 1.2);
+  box-shadow: var(--shadow-xl);
+}
+.celeb-sparkles { position: absolute; inset: -20px; pointer-events: none; }
+.celeb-sparkles span {
+  position: absolute; font-size: 20px;
+  animation: sparkle 2.5s ease-in-out infinite;
+}
+.celeb-icon { font-size: 72px; margin-bottom: 10px; animation: pop 0.6s; }
+.celeb-title {
+  font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700;
+  color: var(--rose); margin-bottom: 6px; letter-spacing: -0.02em;
+}
+.celeb-sub {
+  font-size: 14.5px; color: var(--muted); line-height: 1.55; margin-bottom: 24px;
+}
+.celeb-rewards {
+  display: flex; justify-content: center; gap: 32px; margin: 22px 0;
+}
+.celeb-reward { text-align: center; }
+.celeb-reward-icon { font-size: 30px; }
+.celeb-reward-value { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-top: 2px; }
+.celeb-reward-label { font-size: 10px; font-weight: 800; color: var(--muted); letter-spacing: 2px; margin-top: 2px; text-transform: uppercase; }
+
+/* ==================================================
+   BOTTOM NAV
+   ================================================== */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 440px;
+  background: white; z-index: 50;
+  display: flex; padding: 8px 0 calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(139, 122, 110, 0.12);
+  box-shadow: 0 -4px 20px rgba(42, 32, 23, 0.04);
+}
+.bottom-nav.hidden { display: none; }
+.nav-item {
+  flex: 1; text-align: center; padding: 8px 10px; cursor: pointer;
+  transition: all 0.2s; position: relative;
+}
+.nav-item::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 0; height: 3px; background: var(--rose); border-radius: 0 0 3px 3px;
+  transition: width 0.2s;
+}
+.nav-item.active::before { width: 40px; }
+.nav-icon { font-size: 22px; opacity: 0.5; transition: opacity 0.2s; }
+.nav-item.active .nav-icon { opacity: 1; animation: pop 0.3s; }
+.nav-label {
+  font-size: 10px; font-weight: 700; color: var(--muted); margin-top: 4px;
+  text-transform: uppercase; letter-spacing: 1.3px;
+}
+.nav-item.active .nav-label { color: var(--rose); }
+
+/* ==================================================
+   PROFILE
+   ================================================== */
+#profile { display: none; padding: 0 0 120px; background: var(--cream); }
+#profile.active { display: block; }
+.profile-hero {
+  padding: 30px 24px 24px;
+  background: linear-gradient(180deg, var(--rose-mist) 0%, var(--cream) 100%);
+  text-align: center;
+}
+.profile-avatar-wrap { position: relative; width: 110px; margin: 0 auto 14px; }
+.profile-avatar {
+  width: 110px; height: 110px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-soft), var(--gold-light));
+  display: grid; place-items: center; font-size: 44px;
+  box-shadow: 0 8px 24px rgba(201, 123, 99, 0.25);
+}
+.profile-level-badge {
+  position: absolute; bottom: -6px; right: -6px; background: var(--rose);
+  color: white; font-size: 11px; font-weight: 800; padding: 4px 10px;
+  border-radius: 100px; border: 2px solid var(--cream); box-shadow: var(--shadow);
+}
+.profile-name {
+  font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.profile-name em { color: var(--rose); font-style: italic; font-weight: 500; }
+.profile-tagline { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+.profile-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin: 0 20px 24px;
+}
+.profile-stat {
+  background: white; padding: 16px 12px; border-radius: 18px;
+  text-align: center; box-shadow: var(--shadow-sm);
+}
+.profile-stat-val {
+  font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; color: var(--rose);
+  line-height: 1;
+}
+.profile-stat-lbl {
+  font-size: 10px; font-weight: 700; color: var(--muted);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 6px;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+  padding: 0 24px; margin: 24px 0 12px; letter-spacing: -0.01em;
+}
+.badge-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding: 0 24px;
+}
+.badge {
+  background: white; padding: 16px 8px; border-radius: 18px;
+  text-align: center; box-shadow: var(--shadow-sm);
+  opacity: 0.4; transition: all 0.3s;
+}
+.badge.unlocked {
+  opacity: 1; background: linear-gradient(135deg, white, var(--gold-mist));
+  box-shadow: 0 4px 12px rgba(201, 169, 97, 0.2);
+}
+.badge-icon { font-size: 32px; margin-bottom: 6px; }
+.badge-name { font-size: 10px; font-weight: 700; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; }
+
+.cta-card {
+  margin: 16px 20px 0;
+  background: linear-gradient(135deg, var(--rose-light) 0%, var(--gold-mist) 100%);
+  padding: 22px 22px; border-radius: 22px; text-align: left;
+  display: flex; gap: 16px; align-items: center; position: relative; overflow: hidden;
+}
+.cta-card::before {
+  content: ''; position: absolute; top: -40px; right: -40px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.25), transparent 70%);
+}
+.cta-icon { font-size: 42px; flex-shrink: 0; position: relative; }
+.cta-body { flex: 1; position: relative; }
+.cta-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.cta-sub { font-size: 12px; color: var(--muted); margin: 3px 0 10px; line-height: 1.4; }
+.cta-btn {
+  display: inline-block; background: var(--rose); color: white;
+  padding: 8px 14px; border-radius: 100px; text-decoration: none;
+  font-weight: 700; font-size: 12px; box-shadow: 0 3px 0 var(--rose-deep);
+}
+.cta-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--rose-deep); }
+
+.cta-sage { background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage-mist) 100%); }
+.cta-sage .cta-btn { background: var(--sage-deep); box-shadow: 0 3px 0 var(--sage-dark); }
+
+/* Locked toast */
+.toast {
+  position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: white;
+  padding: 14px 22px; border-radius: 100px;
+  font-size: 13px; font-weight: 600;
+  opacity: 0; transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 150; pointer-events: none;
+  box-shadow: var(--shadow-lg); white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Scrollbar */
+.lesson-modal::-webkit-scrollbar { width: 4px; }
+.lesson-modal::-webkit-scrollbar-thumb { background: rgba(139, 122, 110, 0.2); border-radius: 2px; }
+
+/* Desktop refinement */
+@media (min-width: 600px) {
+  body { padding: 24px 0; }
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+<!-- ==================== SPLASH ==================== -->
+<div class="screen active" id="splash">
+  <svg class="splash-hero-art" viewBox="0 0 280 280">
+    <!-- Halo -->
+    <circle cx="140" cy="140" r="125" fill="#E8D5A3" fill-opacity="0.2"/>
+    <circle cx="140" cy="140" r="100" fill="#C9A961" fill-opacity="0.12"/>
+    <!-- Moon -->
+    <path d="M 140 40 a 10 10 0 1 0 7 17 a 7 7 0 1 1 -7 -17" fill="#C9A961"/>
+    <!-- Stars -->
+    <circle cx="70" cy="70" r="2.5" fill="#C9A961"/>
+    <circle cx="210" cy="60" r="2" fill="#C9A961"/>
+    <circle cx="50" cy="130" r="1.5" fill="#C9A961"/>
+    <circle cx="235" cy="120" r="1.5" fill="#C9A961"/>
+    <circle cx="60" cy="200" r="2" fill="#C9A961" opacity="0.6"/>
+    <circle cx="225" cy="195" r="1.5" fill="#C9A961" opacity="0.6"/>
+    <!-- Mommy body -->
+    <path d="M 110 100 Q 110 80 140 80 Q 170 80 170 100 L 175 128 Q 200 148 205 185 L 75 185 Q 80 148 105 128 Z" fill="#5C7158"/>
+    <!-- Mommy face -->
+    <circle cx="140" cy="102" r="16" fill="#E8C4A8"/>
+    <!-- Eyes closed -->
+    <path d="M 132 98 Q 135 95 138 98" stroke="#2A2017" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <path d="M 142 98 Q 145 95 148 98" stroke="#2A2017" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <!-- Smile -->
+    <path d="M 134 108 Q 140 112 146 108" stroke="#2A2017" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <!-- Boy (Nawyan, left side leaning against mommy) -->
+    <path d="M 82 185 L 108 185 L 104 227 L 86 227 Z" fill="#C97B63"/>
+    <circle cx="95" cy="170" r="12" fill="#F2D2B6"/>
+    <!-- Peci -->
+    <path d="M 82 160 Q 82 152 95 152 Q 108 152 108 160 L 108 163 L 82 163 Z" fill="#2C3E2D"/>
+    <!-- Baby right side in swaddle -->
+    <path d="M 175 170 Q 172 190 182 195 Q 195 200 198 180 L 195 155 L 178 155 Z" fill="#E8C4B8"/>
+    <circle cx="187" cy="162" r="9" fill="#F5D5B8"/>
+    <path d="M 178 155 Q 178 147 187 147 Q 196 147 196 155" fill="#C97B63"/>
+    <!-- Hearts -->
+    <path d="M 140 142 c -4 -4 -10 -3 -10 2 c 0 5 10 10 10 10 c 0 0 10 -5 10 -10 c 0 -5 -6 -6 -10 -2" fill="#E96B6B"/>
+    <path d="M 43 85 c -2 -2 -5 -1.3 -5 1.3 c 0 2.7 5 5.3 5 5.3 c 0 0 5 -2.7 5 -5.3 c 0 -2.7 -3 -3.3 -5 -1.3" fill="#C97B63" opacity="0.6"/>
+    <path d="M 235 90 c -2 -2 -5 -1.3 -5 1.3 c 0 2.7 5 5.3 5 5.3 c 0 0 5 -2.7 5 -5.3 c 0 -2.7 -3 -3.3 -5 -1.3" fill="#C97B63" opacity="0.6"/>
+    <path d="M 50 220 c -1.5 -1.5 -4 -1 -4 1 c 0 2 4 4 4 4 c 0 0 4 -2 4 -4 c 0 -2 -2.5 -2.5 -4 -1" fill="#C97B63" opacity="0.5"/>
+    <path d="M 225 220 c -1.5 -1.5 -4 -1 -4 1 c 0 2 4 4 4 4 c 0 0 4 -2 4 -4 c 0 -2 -2.5 -2.5 -4 -1" fill="#C97B63" opacity="0.5"/>
+  </svg>
+
+  <div class="splash-eyebrow">30 HARI · MOMMY MUSLIMAH</div>
+  <h1 class="splash-title">Menuntun Si Kecil<br><em>mencintai Sholat</em></h1>
+  <p class="splash-subtitle">Panduan dari ibu ke ibu — untuk mommy yang anaknya usia 6–7 tahun.<br>Dari Mommy Salma dengan cinta.</p>
+
+  <button class="btn-primary" onclick="startJourney()">
+    <span>Mulai Perjalananku</span>
+    <span style="font-size: 18px">→</span>
+  </button>
+  <button class="btn-primary ghost" onclick="skipToHome()">Aku sudah tahu, langsung mulai</button>
+
+  <p class="splash-note">Gratis · Tersimpan otomatis · <span>mommysalma.com</span></p>
+</div>
+
+<!-- ==================== STORY FLOW ==================== -->
+<div class="screen" id="story-flow">
+  <div class="story-progress" id="story-progress"></div>
+  <div class="story-header">
+    <div class="story-brand">mommysalma.com</div>
+    <div class="story-skip" onclick="skipStory()">Lewati</div>
+  </div>
+  <div class="story-card" id="story-card">
+    <!-- dynamic content -->
+  </div>
+  <div class="story-tap-l" onclick="prevStory()"></div>
+  <div class="story-tap-r" onclick="nextStory()"></div>
+</div>
+
+<!-- ==================== SETUP ==================== -->
+<div class="screen" id="setup">
+  <div class="setup-header">
+    <div class="setup-back" onclick="setupBack()">←</div>
+    <div class="setup-progress" id="setup-progress">
+      <div class="setup-dot active"></div><div class="setup-dot"></div><div class="setup-dot"></div>
+    </div>
+  </div>
+  <div class="setup-content" id="setup-content"></div>
+  <div class="setup-footer">
+    <button class="btn-primary" onclick="setupNext()" id="setup-cta">Lanjut</button>
+  </div>
+</div>
+
+<!-- ==================== HOME ==================== -->
+<div class="screen" id="home">
+  <div class="home-topbar">
+    <div class="home-greeting">Assalamualaikum,<br><strong>Mommy ✨</strong></div>
+    <div class="home-stats">
+      <div class="stat-chip stat-streak">🔥 <span id="streak-val">0</span></div>
+      <div class="stat-chip stat-xp">⭐ <span id="xp-val">0</span></div>
+    </div>
+  </div>
+
+  <div class="home-hero">
+    <h1 class="home-hero-title">Perjalanan 30 Hari<br><em>Mommy &amp; Si Kecil</em></h1>
+    <p class="home-hero-sub">Tap bintang terang untuk memulai</p>
+  </div>
+
+  <div id="current-day-banner"></div>
+  <div id="path-container" class="path"></div>
+</div>
+
+<!-- ==================== PROFILE ==================== -->
+<div class="screen" id="profile">
+  <div class="profile-hero">
+    <div class="profile-avatar-wrap">
+      <div class="profile-avatar">🌸</div>
+      <div class="profile-level-badge" id="profile-level">Pemula</div>
+    </div>
+    <div class="profile-name">Mommy <em>Istiqamah</em></div>
+    <div class="profile-tagline" id="profile-tagline">Ibu yang terus belajar</div>
+  </div>
+
+  <div class="profile-stats">
+    <div class="profile-stat">
+      <div class="profile-stat-val" id="profile-streak">0</div>
+      <div class="profile-stat-lbl">🔥 Streak</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-val" id="profile-done">0/30</div>
+      <div class="profile-stat-lbl">✅ Selesai</div>
+    </div>
+    <div class="profile-stat">
+      <div class="profile-stat-val" id="profile-xp">0</div>
+      <div class="profile-stat-lbl">⭐ Total XP</div>
+    </div>
+  </div>
+
+  <h3 class="section-title">🏅 Badge Perjalanan</h3>
+  <div class="badge-grid" id="badge-grid"></div>
+
+  <h3 class="section-title">💝 Untuk Mommy</h3>
+
+  <div class="cta-card">
+    <div class="cta-icon">💬</div>
+    <div class="cta-body">
+      <div class="cta-title">Gabung Komunitas Mommy</div>
+      <div class="cta-sub">WhatsApp group ibu-ibu yang berjuang sama</div>
+      <a class="cta-btn" href="https://chat.whatsapp.com/FcS4twswq941ldtrbPL0Eb?mode=gi_t" target="_blank">Join Grup WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="cta-card cta-sage">
+    <div class="cta-icon">📖</div>
+    <div class="cta-body">
+      <div class="cta-title">Download Panduan PDF</div>
+      <div class="cta-sub">76 halaman lengkap — dapatkan di grup WhatsApp</div>
+      <a class="cta-btn" href="https://chat.whatsapp.com/FcS4twswq941ldtrbPL0Eb?mode=gi_t" target="_blank">Join &amp; Download</a>
+    </div>
+  </div>
+
+  <div class="cta-card">
+    <div class="cta-icon">🌙</div>
+    <div class="cta-body">
+      <div class="cta-title">Coming Soon</div>
+      <div class="cta-sub">Panduan mengajarkan sholat ke si kecil — launching di grup</div>
+      <a class="cta-btn" href="https://chat.whatsapp.com/FcS4twswq941ldtrbPL0Eb?mode=gi_t" target="_blank">Pantau di Grup</a>
+    </div>
+  </div>
+
+  <h3 class="section-title">👋 Tentang Mommy Salma</h3>
+  <div style="padding: 0 24px 20px;">
+    <div style="background: white; padding: 20px; border-radius: 18px; box-shadow: var(--shadow-sm);">
+      <p style="font-family: 'Fraunces', serif; font-style: italic; color: var(--rose); font-size: 15px; line-height: 1.5; margin-bottom: 10px;">"Aku bukan ustadzah. Aku cuma ibu rumah tangga yang capek sehari-hari — sama seperti Mom."</p>
+      <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 8px;">Ibu dari <strong>Nawyan (6 th)</strong> &amp; <strong>Nasheera (2 bln)</strong>.</p>
+      <p style="font-size: 13px; color: var(--muted); line-height: 1.5;">Kepala Sekolah PAUD Permata Harapan. S1 Pendidikan Anak Usia Dini &amp; S1 Keperawatan.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LESSON MODAL ==================== -->
+<div class="lesson-overlay" id="lesson-overlay" onclick="closeLessonBg(event)">
+  <div class="lesson-modal" id="lesson-modal" onclick="event.stopPropagation()">
+    <div class="lesson-topbar">
+      <button class="lesson-close" onclick="closeLesson()">✕</button>
+      <div class="lesson-bar"><div class="lesson-fill" id="lesson-fill" style="width:0%"></div></div>
+    </div>
+    <div class="lesson-body" id="lesson-body"></div>
+  </div>
+</div>
+
+<!-- ==================== CELEBRATION ==================== -->
+<div class="celeb-overlay" id="celeb-overlay">
+  <div class="celeb-card">
+    <div class="celeb-sparkles">
+      <span style="top: 10%; left: 10%; animation-delay: 0s">✨</span>
+      <span style="top: 15%; right: 15%; animation-delay: 0.3s">⭐</span>
+      <span style="bottom: 30%; left: 8%; animation-delay: 0.6s">✨</span>
+      <span style="bottom: 20%; right: 12%; animation-delay: 0.9s">⭐</span>
+    </div>
+    <div class="celeb-icon">🎉</div>
+    <h2 class="celeb-title">Masya Allah, Mom!</h2>
+    <p class="celeb-sub" id="celeb-sub">Hari ke-1 berhasil. Ini langkah besar untuk si kecil.</p>
+    <div class="celeb-rewards">
+      <div class="celeb-reward">
+        <div class="celeb-reward-icon">⭐</div>
+        <div class="celeb-reward-value">+50</div>
+        <div class="celeb-reward-label">XP</div>
+      </div>
+      <div class="celeb-reward">
+        <div class="celeb-reward-icon">🔥</div>
+        <div class="celeb-reward-value" id="celeb-streak">1</div>
+        <div class="celeb-reward-label">Streak</div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="closeCelebration()">Alhamdulillah, lanjut!</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">🔒 Selesaikan hari sebelumnya dulu</div>
+
+<!-- Bottom nav -->
+<div class="bottom-nav hidden" id="bottom-nav">
+  <div class="nav-item active" onclick="navTo('home', this)">
+    <div class="nav-icon">🏡</div>
+    <div class="nav-label">Perjalanan</div>
+  </div>
+  <div class="nav-item" onclick="navTo('profile', this)">
+    <div class="nav-icon">👑</div>
+    <div class="nav-label">Profil</div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ============================================================
+// STORY CARDS — narrative from PDF
+// ============================================================
+const BU_RINA_ILLO = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="85" fill="#E8D5A3" fill-opacity="0.18"/>
+  <!-- Older woman in hijab -->
+  <path d="M 75 70 Q 75 55 100 55 Q 125 55 125 70 L 128 95 Q 148 110 152 140 L 48 140 Q 52 110 72 95 Z" fill="#5C7158"/>
+  <circle cx="100" cy="75" r="13" fill="#E8C4A8"/>
+  <!-- Tear on cheek -->
+  <ellipse cx="93" cy="80" rx="1.5" ry="2.5" fill="#8FA6C4" opacity="0.8"/>
+  <!-- Sad closed eyes -->
+  <path d="M 92 72 Q 94 70 96 72" stroke="#2A2017" stroke-width="1" fill="none"/>
+  <path d="M 104 72 Q 106 70 108 72" stroke="#2A2017" stroke-width="1" fill="none"/>
+  <path d="M 96 82 Q 100 80 104 82" stroke="#2A2017" stroke-width="1" fill="none"/>
+  <!-- Phone in hand -->
+  <rect x="140" y="130" width="18" height="28" rx="3" fill="#2A2017"/>
+  <rect x="142" y="133" width="14" height="20" rx="1" fill="#8FA68E" opacity="0.6"/>
+</svg>`;
+
+const SAJADAH_ILLO = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="85" fill="#E8C4B8" fill-opacity="0.15"/>
+  <!-- Folded sajadah in plastic bag -->
+  <rect x="55" y="75" width="90" height="60" rx="8" fill="#C97B63" opacity="0.3" stroke="#8B7A6E" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="60" y="80" width="80" height="50" rx="6" fill="#C97B63"/>
+  <path d="M 75 90 L 125 90 M 75 100 L 125 100 M 75 110 L 125 110 M 75 120 L 125 120" stroke="#A85F48" stroke-width="0.8" opacity="0.5"/>
+  <!-- Plastic seal -->
+  <rect x="55" y="72" width="90" height="8" rx="2" fill="#CCC" opacity="0.6"/>
+  <text x="100" y="155" text-anchor="middle" font-family="serif" font-size="11" fill="#8B7A6E" font-style="italic">Belum dibuka</text>
+  <!-- Dust -->
+  <circle cx="70" cy="68" r="1" fill="#8B7A6E" opacity="0.5"/>
+  <circle cx="135" cy="66" r="1" fill="#8B7A6E" opacity="0.5"/>
+  <circle cx="92" cy="65" r="0.8" fill="#8B7A6E" opacity="0.4"/>
+</svg>`;
+
+const MOSQUE_ILLO = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="85" fill="#E8D5A3" fill-opacity="0.15"/>
+  <!-- Mosque -->
+  <rect x="55" y="110" width="90" height="50" fill="#5C7158"/>
+  <path d="M 60 110 Q 60 75 100 75 Q 140 75 140 110" fill="#5C7158"/>
+  <!-- Dome finial -->
+  <path d="M 100 70 a 3 3 0 1 0 2.5 5 a 2.5 2.5 0 1 1 -2.5 -5" fill="#C9A961"/>
+  <!-- Minarets -->
+  <rect x="40" y="105" width="8" height="55" fill="#5C7158"/>
+  <path d="M 36 105 L 44 98 L 52 105" fill="#5C7158"/>
+  <rect x="152" y="105" width="8" height="55" fill="#5C7158"/>
+  <path d="M 148 105 L 156 98 L 164 105" fill="#5C7158"/>
+  <!-- Window -->
+  <path d="M 90 130 Q 90 118 100 118 Q 110 118 110 130 L 110 148 L 90 148 Z" fill="#FAF3E7"/>
+  <!-- Stars above -->
+  <circle cx="50" cy="40" r="2" fill="#C9A961"/>
+  <circle cx="150" cy="45" r="2" fill="#C9A961"/>
+  <circle cx="100" cy="30" r="2.5" fill="#C9A961"/>
+</svg>`;
+
+const FAMILY_ILLO = `<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="110" cy="110" r="95" fill="#E8D5A3" fill-opacity="0.2"/>
+  <circle cx="110" cy="110" r="75" fill="#C9A961" fill-opacity="0.12"/>
+  <path d="M 85 80 Q 85 60 110 60 Q 135 60 135 80 L 138 105 Q 160 120 165 160 L 55 160 Q 60 120 82 105 Z" fill="#5C7158"/>
+  <circle cx="110" cy="85" r="13" fill="#E8C4A8"/>
+  <path d="M 104 82 Q 106 80 108 82" stroke="#2A2017" stroke-width="1" fill="none"/>
+  <path d="M 112 82 Q 114 80 116 82" stroke="#2A2017" stroke-width="1" fill="none"/>
+  <path d="M 106 90 Q 110 92 114 90" stroke="#2A2017" stroke-width="1" fill="none"/>
+  <!-- Boy -->
+  <path d="M 65 160 L 88 160 L 85 188 L 68 188 Z" fill="#C97B63"/>
+  <circle cx="76" cy="148" r="10" fill="#F2D2B6"/>
+  <path d="M 66 140 Q 66 134 76 134 Q 86 134 86 140 L 86 143 L 66 143 Z" fill="#2C3E2D"/>
+  <!-- Baby -->
+  <path d="M 138 148 Q 135 165 148 167 Q 162 168 162 150 L 158 135 L 142 135 Z" fill="#E8C4B8"/>
+  <circle cx="150" cy="142" r="8" fill="#F5D5B8"/>
+  <path d="M 142 135 Q 142 128 150 128 Q 158 128 158 135" fill="#C97B63"/>
+  <!-- Hearts -->
+  <path d="M 110 125 c -3 -3 -8 -2 -8 2 c 0 4 8 8 8 8 c 0 0 8 -4 8 -8 c 0 -4 -5 -5 -8 -2" fill="#E96B6B"/>
+</svg>`;
+
+const STORIES = [
+  {
+    eyebrow: "SEBENTAR YA, MOM — ADA CERITA",
+    title: "Aku mau cerita<br><em>tentang seorang ibu.</em>",
+    illo: BU_RINA_ILLO,
+    body: [
+      "Sebut saja namanya <strong>Bu Rina</strong>. Sekarang udah 55 tahun.",
+      "Anak tunggalnya — Rafi — udah kerja di perusahaan ternama di Jakarta. Sukses. Gaji lumayan. Mobil pribadi. Dari luar, hidup Bu Rina kelihatan tenang."
+    ]
+  },
+  {
+    eyebrow: "TAPI KALAU NGOBROL LEBIH DALAM...",
+    title: "Matanya<br><em>berkaca-kaca.</em>",
+    body: [
+      "Karena Rafi — anak yang beliau banggakan itu — <strong>susah banget dihubungi</strong>.",
+      "WA dibaca, tapi nggak dibalas. Ditelepon jarang diangkat. Diajak pulang Lebaran, selalu ada alasan: <em>\"kerjaan banyak Ma, next time ya.\"</em>",
+      "Sekali setahun Rafi pulang. Paling lama 2 hari."
+    ]
+  },
+  {
+    eyebrow: "SUATU HARI, BU RINA KUNJUNGI RAFI",
+    title: "Bu Rina<br><em>cari sajadah</em> di kamar Rafi.",
+    illo: SAJADAH_ILLO,
+    body: [
+      "Di lemari — nggak ada.<br>Di rak — nggak ada.<br>Di kolong kasur — juga nggak ada.",
+      "Di pojok atas lemari, akhirnya beliau nemu satu.<br><strong>Tapi masih berbungkus plastik. Belum pernah dibuka.</strong>",
+      "Hadiah dari Lebaran 3 tahun lalu — yang Bu Rina sendiri kasih ke Rafi."
+    ]
+  },
+  {
+    eyebrow: "SAAT MAGHRIB TIBA...",
+    title: "\"Fi, sholat dulu yuk.\"",
+    body: [
+      "Rafi agak kaget. Ngelirik HP. Matanya bingung.<br><em>\"Eh... ini maghrib ya, Ma?\"</em>"
+    ],
+    dialog: "\"Maaf Ma... Rafi udah lama gak sholat. Jumat kemarin juga ketinggalan. Sibuk deadline.\"",
+    footer: [
+      "Bu Rina pelan: <em>\"Kapan terakhir kamu sholat, Fi?\"</em>",
+      "Rafi mikir lama. Senyum canggung:<br><em>\"Rafi... lupa Ma. Mungkin Lebaran kemarin.\"</em>",
+      "<strong>Lebaran — 5 bulan yang lalu.</strong>"
+    ]
+  },
+  {
+    eyebrow: "SABDA RASULULLAH SAW",
+    illo: MOSQUE_ILLO,
+    hadith: "\"Perintahkanlah anak-anakmu untuk melaksanakan sholat ketika mereka berusia tujuh tahun.\"",
+    hadithSrc: "HR. Abu Dawud — hadits hasan sahih",
+    title: "Tujuh tahun, Mom.",
+    body: [
+      "Bukan sepuluh. Bukan \"nanti kalau udah besar.\" Bukan \"tunggu dia ngerti sendiri.\"",
+      "Rasulullah SAW sebutkan <strong>tujuh tahun</strong> dengan sangat spesifik, 1.400 tahun yang lalu — karena beliau tahu persis kapan hati kecil seorang anak paling siap mulai mencintai Allah."
+    ]
+  },
+  {
+    eyebrow: "3 TAHUN EMAS YANG TIDAK AKAN TERULANG",
+    title: "Window waktu<br><em>yang Allah kasih.</em>",
+    timeline: true,
+    body: [
+      "Usia 7: mulai dibimbing dengan lembut &amp; sabar.<br>Usia 10: tegas dengan cinta, tanpa kekerasan fisik.",
+      "Artinya — <strong>Mom cuma punya 3 tahun</strong> untuk menanam kebiasaan ini ke dalam hati si kecil. 3 tahun yang nggak akan pernah terulang."
+    ]
+  },
+  {
+    eyebrow: "SURAT JUJUR DARI MOMMY SALMA",
+    title: "Aku mau jujur<br>tentang <em>kesalahanku.</em>",
+    body: [
+      "Aku bukan ustadzah, Mom. Aku ibu rumah tangga yang capek seharian ngurus rumah — sama seperti Mom.",
+      "Panduan ini lahir dari <strong>kesalahan-kesalahan</strong> yang aku &amp; suami buat waktu mendidik Nawyan di tahun-tahun awalnya."
+    ]
+  },
+  {
+    eyebrow: "KESALAHAN PERTAMA",
+    title: "Waktu Nawyan bayi...",
+    body: [
+      "Babanya suka <strong>paksa bawa dia ke masjid subuh-subuh</strong>. Niatnya baik — \"biar terbiasa sejak bayi\".",
+      "Tapi itu kurang tepat, Mom. Bayi fase tidurnya paling penting untuk tumbuh kembang otak.",
+      "<strong>Rasulullah SAW aja nunggu sampai usia 7 tahun</strong> baru perintahkan sholat. Bukan sejak bayi."
+    ]
+  },
+  {
+    eyebrow: "KESALAHAN KEDUA",
+    title: "Pas umur 4 tahun,<br>aku <em>paksa</em> sholat.",
+    body: [
+      "Aku ancem: <em>\"Kalau nggak sholat, nggak boleh main HP\"</em>. Aku paksa tarawih 23 rakaat padahal dia 4 tahun.",
+      "Aku pikir ini parenting Islami yang benar. <strong>Ternyata ini trauma untuk anak.</strong>",
+      "Nawyan mulai kabur kalau dengar adzan. Pura-pura tidur. Sholatnya cepet-cepet asal selesai."
+    ]
+  },
+  {
+    eyebrow: "KENAPA AKU TULIS INI UNTUK MOM",
+    title: "Nawyan sekarang <em>6 tahun.</em>",
+    body: [
+      "Setahun lagi dia usia 7. Fase emas yang Rasulullah maksud. Dan aku masih terus belajar, setiap hari.",
+      "Panduan 30 hari ini aku tulis dari <strong>semua kesalahan itu</strong> — biar Mom nggak perlu ngulang apa yang aku alami.",
+      "<em>Ini bukan panduan dari ustadzah. Ini surat dari ibu ke ibu.</em>"
+    ],
+    signature: true
+  },
+  {
+    eyebrow: "UNDANGAN",
+    title: "Kamu masih<br><em>punya waktu.</em>",
+    body: [
+      "30 hari. 15 menit per hari. Seumur hidup manfaatnya.",
+      "Baca satu materi per hari. Lakukan tindakannya. Renungkan pertanyaannya. <strong>Rumahmu akan berubah. Hatimu dulu yang berubah.</strong>"
+    ],
+    cta: "Siap mulai, Mom?"
+  }
+];
+
+// ============================================================
+// LESSONS — 30 hari (condensed)
+// ============================================================
+const LESSONS = [
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:1,title:"Muhasabah — Sholatku Gimana, Mom?",
+    quote:{t:"Mengapa kamu suruh orang lain (mengerjakan) kebajikan, sedang kamu melupakan diri (kewajiban)mu sendiri?",s:"QS. Al-Baqarah: 44"},
+    parenting:{t:"Anak-anak adalah peniru ulung. Mereka tidak mendengarkan yang kamu katakan — mereka merekam yang kamu lakukan.",a:"Haim Ginott, Psikolog Anak"},
+    body:["Mom, sebelum kita ngurus sholat si kecil — kita harus jujur sama diri sendiri dulu.","Kapan terakhir Mom sholat Subuh tepat waktu? Kapan terakhir dengan khusyuk, bukan cepet-cepet sambil mikir masakan?","<b>Anak nggak bodoh.</b> Mereka lihat ketika Mama nyuruh sholat tapi sendirinya sholat di ujung waktu. Bertahun-tahun kemudian, mereka menganggap sholat memang nggak terlalu penting.","Hari ini bukan tentang menyalahkan diri. Hari ini titik balik. <b>Mulai dari Mom dulu.</b>"],
+    actions:["Tulis di notes HP: kondisi sholatku sekarang — jujur, tepat waktu atau sering telat?","Tulis 1 target perbaikan sholatku di 30 hari ke depan","Malam ini sujud terakhir — minta maaf ke Allah: 'aku mau perbaiki sholatku dulu'"],
+    reflection:"Kalau Allah ngasih nilai untuk sholatku bulan lalu, kira-kira nilainya berapa dari 100?"},
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:2,title:"Pahala yang Mengalir Sampai ke Kubur",
+    quote:{t:"Apabila anak Adam meninggal, terputuslah amalnya kecuali tiga: sedekah jariyah, ilmu bermanfaat, dan anak sholeh yang mendoakannya.",s:"HR. Muslim"},
+    parenting:{t:"Your children are not your children. They are the sons and daughters of Life's longing for itself.",a:"Kahlil Gibran, Penyair"},
+    body:["Mom, kata kuncinya: <b>anak sholeh</b>. Bukan anak pintar. Bukan anak kaya. Dan nggak ada anak sholeh yang nggak sholat.","Bayangkan: Mom udah meninggal 20 tahun. Tapi setiap si kecil sholat, setiap dia mendoakan Mom — <b>pahalanya mengalir terus ke kubur Mom</b>.","Cuma anak sholeh yang returnnya nggak pernah putus sampai akhirat."],
+    actions:["Hitung: berapa menit Mom scroll sosmed hari ini vs menit nemenin si kecil sholat?","Doakan 3 keluarga yang udah meninggal setelah sholat hari ini"],
+    reflection:"Kalau aku meninggal hari ini, amalan apa yang akan terus mengalir dari anakku?"},
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:3,title:"Warisan Terbaik Bukan Harta",
+    quote:{t:"Ya Tuhanku, jadikanlah aku dan anak cucuku orang-orang yang tetap mendirikan sholat.",s:"QS. Ibrahim: 40"},
+    parenting:{t:"Didiklah anak-anakmu bukan seperti keadaanmu saat ini, karena mereka akan hidup di zaman yang berbeda.",a:"Muhammad Iqbal, Filosof Muslim"},
+    body:["Mom, harta bisa habis dalam 1 generasi. Tapi kebiasaan sholat bisa diwariskan <b>sampai 7 turunan</b>.","Nabi Ibrahim — yang punya akses doa langsung ke Allah — yang beliau minta untuk anak cucunya: <b>anak cucu tetap sholat</b>.","Kalau berhasil menanamkan sholat di hati si kecil, Mom mewariskan sesuatu yang lebih berharga dari emas."],
+    actions:["Tulis 'Family Vision Statement' singkat","Bilang ke si kecil: 'Mama lebih bangga kamu rajin sholat daripada jadi jutawan tapi nggak sholat'"],
+    reflection:"Aku lebih sibuk mewariskan apa — harta, prestasi, atau ibadah?"},
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:4,title:"Sholat Benteng Karakter",
+    quote:{t:"Sesungguhnya sholat itu mencegah dari (perbuatan) keji dan mungkar.",s:"QS. Al-Ankabut: 45"},
+    parenting:{t:"It's easier to build strong children than to repair broken men.",a:"Frederick Douglass"},
+    body:["Mom, kita khawatir anak kena narkoba, pergaulan bebas, bullying. Jawabannya sederhana: <b>pastiin sholatnya benar dulu</b>.","Disiplin 5 kali sehari membentuk pengendalian diri, ketenangan, tanggung jawab, kesadaran moral. <b>Nggak bisa didapat dari les manapun</b>.","Sholat = benteng paling ampuh."],
+    actions:["Tulis 5 masalah remaja yang paling Mom takutkan","Puji si kecil yang sholat: 'Mama bangga kamu sholat tanpa disuruh'"],
+    reflection:"Kapan terakhir aku nanya sholatnya dengan serius?"},
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:5,title:"Belajar Parenting dari Rasulullah SAW",
+    quote:{t:"Sungguh telah ada pada (diri) Rasulullah itu suri teladan yang baik bagimu...",s:"QS. Al-Ahzab: 21"},
+    parenting:{t:"Parents are often so busy with the physical rearing of their children that they miss the glory of parenthood.",a:"Haim Ginott, Between Parent and Child"},
+    body:["Parenting terbaik udah dicontohkan 14 abad lalu.","<b>Teladan sebelum perintah.</b> Rasulullah sholat tahajjud DULU, baru sahabat ikuti.","<b>Lembut, sabar.</b> Waktu cucu Rasulullah naik ke punggungnya saat sujud, beliau memperlama sujud — bukan dimarahi.","<b>Doa yang nggak putus</b> — senjata paling ampuh."],
+    actions:["Pilih 1 prinsip Rasulullah hari ini, praktikkan","Baca 1 kisah parenting Rasulullah, ceritakan ke pasangan"],
+    reflection:"Gaya parentingku lebih mirip Rasulullah, atau cara orangtuaku dulu?"},
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:6,title:"Refleksi &amp; Komitmen Minggu Pertama",
+    quote:{t:"Sesungguhnya Allah tidak akan mengubah keadaan suatu kaum sehingga mereka mengubah keadaan yang ada pada diri mereka sendiri.",s:"QS. Ar-Ra'd: 11"},
+    parenting:{t:"Kebiasaan adalah cara kita memprogram ulang hati.",a:"Prof. Ahmad Mubarok, Psikologi Islam"},
+    body:["Mom, selamat! 6 hari berhasil. Banyak mommy lain nyerah di hari ke-3.","Mindset yang benar bukan cuma 'tahu' — tapi <b>merasa, meyakini, terbakar</b>.","Minggu depan kita masuk ke hal praktis: memahami si kecil sesuai usianya."],
+    actions:["Review catatan hari 1–5","Tulis 'Surat untuk Diri Sendiri'","Sholat hajat malam ini"],
+    reflection:"Dari 6 hari ini, mana yang paling menyentuh hatiku?"},
+  {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:7,title:"Tanggung Jawab Terbesar Kita, Mom",
+    quote:{t:"Hai orang-orang yang beriman, peliharalah dirimu dan keluargamu dari api neraka...",s:"QS. At-Tahrim: 6"},
+    parenting:{t:"Anak adalah amanah di tangan orangtuanya. Hatinya yang suci adalah permata yang masih polos, siap menerima apa yang diukirkan padanya.",a:"Imam Al-Ghazali, Ihya Ulumuddin"},
+    body:["Mom, selama ini kita ukur sukses dari nilai sekolah, prestasi. Semua penting.","Tapi ada yang jauh lebih penting: apakah si kecil tumbuh jadi pribadi yang menegakkan sholat?","Ayat itu mulai dengan 'jaga diri sendiri dulu', baru keluarga. Tanggung jawab utama: <b>menyelamatkan anak dari neraka</b>.","Setiap anak yang nggak sholat, <b>ada ibunya yang akan dimintai pertanggungjawaban</b>."],
+    actions:["Tulis: 'Tanggung jawab terbesarku sebagai ibu adalah ____'","Sholat 5 waktu tepat waktu hari ini"],
+    reflection:"Apakah sholat masuk 3 kekhawatiran teratasku untuk si kecil?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:8,title:"Fitrah — Dia Lahir Sudah Mengenal Allah",
+    quote:{t:"Setiap anak dilahirkan dalam keadaan fitrah.",s:"HR. Bukhari Muslim"},
+    parenting:{t:"Anak bukanlah kertas putih, tetapi ia adalah benih yang harus kita siram dengan kesabaran.",a:"Kak Seto, Psikolog Anak"},
+    body:["Mom, si kecil udah lahir dengan fitrah yang mengenal Allah. Mom sedang <b>menjaga dan menumbuhkan</b>, bukan memasang dari nol.","Fitrah bisa 'tertutup' oleh tontonan, pergaulan, ortu yang nggak ngasih contoh.","Tugas Mom: jaga fitrah itu tetap bersih."],
+    actions:["Amati momen fitrah si kecil tampak","Identifikasi 1 hal di rumah yang mungkin 'menutup' fitrahnya"],
+    reflection:"Aku memperlakukan si kecil sebagai 'kanvas kosong' atau 'benih yang sudah ada'?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:9,title:"Usia 0–3 Tahun: JANGAN Paksa Ibadah",
+    quote:{t:"Sesungguhnya Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya...",s:"QS. Al-Baqarah: 286"},
+    parenting:{t:"The first three years of life are the most important. If the foundation is wrong, everything built upon it will be unstable.",a:"Maria Montessori"},
+    body:["Ini bagian yang paling aku sesali. Waktu Nawyan bayi, babanya paksa ke masjid subuh.","Bayi fase tidurnya paling penting untuk tumbuh kembang otak. Dipaksa bangun = stress.","Di usia 0–3, si kecil <b>belum wajib apa-apa</b>. Cukup: sholat di depannya, peluk, cium, tidur cukup."],
+    actions:["Kalau Mom punya bayi: jangan paksa — cukup sholat di hadapannya","Pastikan tidur bayi cukup"],
+    reflection:"Apakah aku pernah 'memaksa' ibadah ke anakku di usia belum tepat?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:10,title:"Usia 3–5 Tahun: Pengenalan &amp; Teladan",
+    quote:{t:"Anak kecil itu belajar dari apa yang dia lihat, bukan dari apa yang didengarnya.",s:"Prinsip parenting klasik"},
+    parenting:{t:"The greatest gifts you can give your children are the roots of responsibility and the wings of independence.",a:"Denis Waitley"},
+    body:["Otak si kecil kayak spons. <b>Masa emas</b> untuk kenalkan sholat — dengan suasana, bukan perintah.","Sholat di depannya dengan terlihat. Kasih sajadah kecil &amp; mukena cantik. Cerita tentang Nabi sebelum tidur.","Puji percobaan kecil. Peluk waktu dia sujud.","<b>JANGAN</b> paksa, marahi saat main di sajadah, atau hukum. Belum wajib. Tekanan = kebencian jangka panjang."],
+    actions:["Sholat di ruang tamu hari ini (bukan kamar)","Siapkan sajadah/mukena warna yang dia suka"],
+    reflection:"Apakah sholatku terlihat oleh si kecil, atau 'tersembunyi'?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:11,title:"Usia 5–7 Tahun: Habit Building",
+    quote:{t:"Amalan yang paling dicintai Allah adalah yang paling konsisten, meskipun sedikit.",s:"HR. Bukhari Muslim"},
+    parenting:{t:"Tell me and I forget. Teach me and I remember. Involve me and I learn.",a:"Benjamin Franklin"},
+    body:["Fase transisi dari <b>meniru ke berlatih serius</b>.","Fokus: pembentukan habit, bukan kesempurnaan.","Hafalan surat pendek seperti lagu. Sholat berjamaah keluarga 1x sehari (maghrib).","Reward SEHAT: bukan uang, tapi quality time (sabtu ke taman bareng)."],
+    actions:["Buat jadwal sholat berjamaah keluarga 1x sehari","Papan progress dengan stiker di kulkas"],
+    reflection:"Kebiasaan apa yang udah aku tanamkan — yang baik dan kurang baik?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:12,title:"Usia 7 Tahun: Perintah Sholat Dimulai",
+    quote:{t:"Perintahkanlah anak-anakmu sholat ketika berumur tujuh tahun...",s:"HR. Abu Dawud — hasan sahih"},
+    parenting:{t:"Children thrive in an environment of love, discipline, and consistency.",a:"Dr. James Dobson, Parenting Researcher"},
+    body:["INI hari paling penting minggu ini. Nawyan-ku 6 tahun. Setahun lagi fase ini.","Kata 'perintahkan' — bukan 'saranin'. Di usia 7, Mom punya otoritas menuntut sholat.","Tapi <b>'perintah' bukan bentakan atau hukuman fisik</b>. Ketegasan yang lembut.","Aturan rumah: adzan = berhenti semua, wudhu, sholat. Berlaku untuk Mom &amp; Ayah juga."],
+    actions:["Review: si kecil udah sholat 5 waktu konsisten?","Duduk bicara: 'Menurut kamu kenapa kita sholat?'"],
+    reflection:"Apakah aku cukup tegas — tapi tetap dalam koridor kelembutan?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:13,title:"Usia 10+ Tahun: Tegas dengan Cinta",
+    quote:{t:"...dan pukullah mereka karena meninggalkan sholat ketika berusia sepuluh tahun.",s:"HR. Abu Dawud"},
+    parenting:{t:"Pukulan di sini adalah simbolis — tidak menyakiti, tidak meninggalkan bekas. Banyak ulama modern menganjurkan tidak memukul sama sekali.",a:"Syaikh Yusuf Al-Qaradawi"},
+    body:["Hadits SERING disalahpahami. Pukulan di sini <b>simbolis — lemah lembut, tanpa menyakiti</b>.","Maksud: di usia 10, ketegasan naik level — tapi tetap dengan cinta. Bukan 'tanpa kompromi', tapi 'batas jelas, konsekuensi mendidik, dengan cinta'.","Sebentar lagi baligh — setiap sholat ditinggalkan = dosa."],
+    actions:["Duduk bicara dari hati minggu ini, bukan memerintah","Review apakah sholat subuh benar-benar dipatuhi semua anggota keluarga"],
+    reflection:"Kalau si kecil baligh bulan depan, apakah dia udah siap?"},
+  {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:14,title:"Refleksi Minggu Kedua",
+    quote:{t:"Dan hendaklah setiap diri memperhatikan apa yang telah diperbuatnya untuk hari esok.",s:"QS. Al-Hasyr: 18"},
+    parenting:{t:"Mendidik anak tanpa hadirnya hati orangtua sama saja menggarami lautan.",a:"Elly Risman, Psikolog Parenting"},
+    body:["Peta lengkap:","• 0–3: JANGAN paksa","• 3–5: pengenalan &amp; teladan","• 5–7: habit building","• 7–10: fase perintah","• 10+: tegas dengan cinta"],
+    actions:["Buat tabel: nama si kecil, usia, fase, kondisi sholat (1–10)","Pilih 1 anak yang paling butuh perhatian"],
+    reflection:"Aku siap bertindak, atau masih sekadar membaca?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:15,title:"Kenapa Si Kecil Menolak Sholat?",
+    quote:{t:"Ketahuilah bahwa kemenangan datang bersama kesabaran.",s:"HR. Ahmad"},
+    parenting:{t:"Children are like wet cement. Whatever falls on them makes an impression.",a:"Dr. Haim Ginott"},
+    body:["Kalau si kecil menolak — <b>Mom nggak sendirian</b>. Aku juga dulu.","Biasanya akarnya: nggak ada contoh, pernah trauma, nggak paham <i>kenapa</i>, distraksi, pergaulan, persepsi Allah jauh &amp; menakutkan.","<b>Jangan langsung marahi</b>. Cari akarnya: 'Nak, kenapa sih kamu susah sholat?'"],
+    actions:["Ajak si kecil bicara tanpa emosi","Catat apa yang dia bilang"],
+    reflection:"Aku mendiagnosis dengan tepat, atau langsung judge 'kamu malas'?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:16,title:"Kesalahan yang Sering Kita Buat",
+    quote:{t:"Barangsiapa yang tidak menyayangi, maka dia tidak akan disayangi.",s:"HR. Bukhari"},
+    parenting:{t:"Menyiksa anak dengan kata-kata jauh lebih berbahaya daripada dengan pukulan. Kata bisa membekas seumur hidup.",a:"Dr. Aisah Dahlan, Psikolog Keluarga"},
+    body:["Aku pernah lakukan SEMUA ini. Bukan untuk nge-judge.","(1) Membentak (2) Sholat jadi hukuman (3) Permalukan (4) Paksa padahal Mom nggak sholat (5) Bandingin (6) Abaikan usaha kecil (7) Fokus gerakan abaikan hati (8) Paksa di usia belum tepat."],
+    actions:["Review 1 minggu terakhir — pernah lakukan?","Kalau iya — minta maaf spesifik ke si kecil"],
+    reflection:"Dari 8 kesalahan, mana yang paling sering aku lakukan?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:17,title:"Sabar &amp; Konsisten — Kunci Utama",
+    quote:{t:"Dan perintahkanlah kepada keluargamu mendirikan sholat dan bersabarlah kamu...",s:"QS. Thaha: 132"},
+    parenting:{t:"The days are long, but the years are short.",a:"Gretchen Rubin, Parenting Writer"},
+    body:["Mom akan ngingetin si kecil <b>ribuan kali</b>. Normal.","Banyak mommy nyerah di titik salah — ingatan ke-50, padahal ke-51 habit terbentuk.","Sabar = <b>tetap bertindak konsisten tanpa emosi negatif</b>."],
+    actions:["Ingatkan dengan cara sama tiap waktu","Kalau menolak: tarik nafas, senyum, 'kita sholat bareng'"],
+    reflection:"Aku nyerah terlalu cepat, atau sabar dengan cara salah?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:18,title:"Peran Ayah &amp; Ibu — Nggak Bisa Solo",
+    quote:{t:"Setiap kalian adalah pemimpin dan akan dimintai pertanggungjawaban...",s:"HR. Bukhari Muslim"},
+    parenting:{t:"Fathers who engage in meaningful discussion with their children about faith have the most significant impact on their spiritual development.",a:"Prof. Christian Smith, Notre Dame"},
+    body:["Butuh <b>tim</b>. Ayah &amp; ibu komplementer.","Ayah: figur otoritas, imam rumah, model laki-laki sholeh, pembawa ke masjid.","Ibu: pemelihara suasana 24 jam, guru fiqih pertama, role model khusyuk, sumber doa."],
+    actions:["Diskusi dengan pasangan: peran mana yang belum optimal?","Kalau merasa sendirian: bicara terus terang"],
+    reflection:"Kami 'satu tim', atau masing-masing jalan sendiri?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:19,title:"Lingkungan yang Mendukung",
+    quote:{t:"Perumpamaan teman yang baik dan teman yang buruk adalah seperti penjual minyak wangi dan pandai besi...",s:"HR. Bukhari"},
+    parenting:{t:"It takes a village to raise a child.",a:"Pepatah Afrika"},
+    body:["Si kecil dibesarkan oleh <b>lingkungan</b>.","Strategi: sekolah yang sholat berjamaah, TPA, komunitas keluarga sholeh, seleksi tontonan.","Kalau lingkungan sangat sulit: pertimbangkan pindah. Rasulullah pernah nyuruh orang pindah."],
+    actions:["Skor 1–10 lingkungan si kecil","Pilih 1 area terlemah, buat rencana"],
+    reflection:"Aku berusaha sendiri, atau manfaatkan kekuatan lingkungan?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:20,title:"Strategi Jitu Hadapi yang Malas",
+    quote:{t:"Sesungguhnya pertolongan itu datang bersama kesabaran...",s:"HR. Ahmad"},
+    parenting:{t:"Give children choices within limits — that's how they learn to make good decisions.",a:"Jim Fay, Love and Logic"},
+    body:["9 strategi:","(1) Hilangkan friksi (2) Warning 5-10 menit sebelum adzan (3) Sholat bareng, bukan nyuruh (4) Gamifikasi stiker (5) Kaitkan dengan yang dia suka (6) Diskusi di waktu lain (7) Cerita bukan ancaman (8) Tunjukkan doa untuknya (9) Bikin subuh spesial — coklat hangat"],
+    actions:["Pilih 2 strategi, terapkan hari ini","Evaluasi minggu depan"],
+    reflection:"Aku lebih banyak marah atau mencari strategi?"},
+  {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:21,title:"Refleksi Minggu Ketiga",
+    quote:{t:"Barangsiapa bersungguh-sungguh, sesungguhnya kesungguhannya itu adalah untuk dirinya sendiri.",s:"QS. Al-Ankabut: 6"},
+    parenting:{t:"Kesabaran mendidik anak itu bukan sabar yang diam menunggu, tapi sabar yang terus bergerak.",a:"Ustadz Abdullah Gymnastiar"},
+    body:["Minggu 'berat' dilewati. Mom punya perangkat menghadapi realitas.","Sudahkah Mom benar-benar <i>bertindak</i>, atau cuma ngangguk-angguk baca?"],
+    actions:["Review hari 15–20. Mana yang dipraktikkan?","Pilih 3 perubahan yang akan dipertahankan"],
+    reflection:"Dari 21 hari ini, apa insight paling mengubah cara pandangku?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:22,title:"Bertahan untuk Jangka Panjang",
+    quote:{t:"Amalan yang paling dicintai Allah adalah yang paling konsisten, meskipun sedikit.",s:"HR. Bukhari Muslim"},
+    parenting:{t:"Small daily improvements are the key to staggering long-term results.",a:"James Clear, Atomic Habits"},
+    body:["Ini <b>maraton, bukan sprint</b>.","Bulan 1 semangat. Bulan 3 bosan. Bulan 6 ingin menyerah. Tahun 5 baru sadar si kecil udah terbentuk.","Motivasi dari <b>makna, bukan perasaan</b>. Celebrate small wins. Self-care penting."],
+    actions:["Reminder HP jam 5 sore: 'Jangan nyerah hari ini'","Gabung komunitas parenting islami"],
+    reflection:"Apa yang bikin motivasiku turun? Gimana cegahnya?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:23,title:"Investasi Dunia &amp; Akhirat",
+    quote:{t:"Dunia adalah ladang akhirat.",s:"Hikmah klasik"},
+    parenting:{t:"Children with strong religious practice have lower rates of depression, substance abuse, and higher academic performance.",a:"Prof. Lisa Miller, Columbia"},
+    body:["Si kecil yang sholat cenderung <b>lebih sukses di dunia</b>.","Disiplin waktu, pengendalian diri, ketenangan &amp; fokus, karakter kuat, support spiritual.","Fokus sholat TIDAK turunkan prestasi akademik. Justru sebaliknya."],
+    actions:["Tulis '5 skill hidup dari sholat'","Ceritakan ke si kecil"],
+    reflection:"Apakah aku anggap akademik lebih 'produktif' dari sholat?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:24,title:"Doa Ibu — Senjata Rahasia",
+    quote:{t:"Tiga doa yang mustajab: doa orangtua untuk anaknya, doa orang yang berpuasa, dan doa musafir.",s:"HR. Baihaqi, hasan"},
+    parenting:{t:"Doa ibu itu naik tanpa hijab menuju langit.",a:"Ustadz Hanan Attaki"},
+    body:["Hati manusia di tangan Allah. Mom suruh 1000 kali — kalau hatinya nggak dibuka, nggak berubah.","Waktu mustajab: sepertiga malam, sujud terakhir, antara adzan-iqamah, berbuka puasa, hujan.","<b>PERINGATAN:</b> JANGAN doakan buruk walau marah. Doa ibu mustajab, <i>termasuk yang buruk</i>."],
+    actions:["Hafal doa 'Rabbij'alnii muqiimash sholaati'","Tahajud 2 rakaat, doakan si kecil dengan nama"],
+    reflection:"Kapan terakhir aku serius berdoa untuk si kecil dari hati?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:25,title:"Si Kecil Itu Cerminanmu",
+    quote:{t:"Anak-anak adalah peniru ulung.",s:"Prinsip parenting"},
+    parenting:{t:"Anak tidak pernah pandai mendengarkan orangtuanya, tapi tidak pernah gagal meniru mereka.",a:"James Baldwin, Penulis"},
+    body:["Si kecil jadi <b>versi dari dirimu</b>. Bukan dari ceramahmu.","Bayangkan 20 tahun lagi: kebiasaan yang dia bawa dari rumah.","Kalau jujur, mau si kecil sholat <b>sepersis</b> Mom sekarang?"],
+    actions:["Rekam diri Mom sholat, tonton","Pilih 1 aspek sholat Mom yang paling lemah — perbaiki 30 hari"],
+    reflection:"Kalau si kecil meniru sholatku 100%, aku puas atau malu?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:26,title:"Rayakan Progres Kecil",
+    quote:{t:"Siapa yang tidak bersyukur atas yang sedikit, tidak akan bersyukur atas yang banyak.",s:"Prinsip hidup"},
+    parenting:{t:"Catch them being good. Praise what you want to see more of.",a:"Prof. John Gottman"},
+    body:["Standar 'ideal' bikin kecewa terus.","Rayakan <b>progress</b>, bukan pencapaian akhir.","Pujian spesifik: bukan 'pintar!' tapi 'Mama bangga tadi kamu langsung wudhu waktu dipanggil.'"],
+    actions:["Cari 1 progress si kecil yang selama ini Mom lewatkan","Rayakan dengan pujian spesifik + peluk"],
+    reflection:"Rasio kritik:apresiasi dari aku ke si kecil berapa?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:27,title:"Ketika Mom Lelah",
+    quote:{t:"Sesungguhnya bersama kesulitan ada kemudahan.",s:"QS. Al-Insyirah: 6"},
+    parenting:{t:"You cannot pour from an empty cup. Take care of yourself first.",a:"Anonim"},
+    body:["Mom juga manusia. Semua mommy pernah merasa capek dan ingin nyerah.","Hasil bukan di tangan Mom. Tugas Mom: <b>berusaha</b>. Yang balik hati = Allah.","Timeline Allah berbeda. Mungkin si kecil baru cinta sholat di usia 22. Nggak apa."],
+    actions:["Kalau lelah: izinkan diri istirahat","Sholat hajat, curhat ke Allah","Hubungi 1 support"],
+    reflection:"Kapan terakhir aku hampir nyerah? Apa yang bikinku bertahan?"},
+  {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:28,title:"Pasangan Hidup — Tim Terbaik",
+    quote:{t:"Mukmin dengan mukmin lainnya seperti sebuah bangunan yang saling menguatkan.",s:"HR. Bukhari"},
+    parenting:{t:"A team of two parents united in vision is the foundation upon which children's character is built.",a:"Dr. Stephen Covey"},
+    body:["Bukan solo. Butuh tim dengan pasangan.","Visi bersama. Kompak aturan. Saling mengingatkan. Pembagian peran. Evaluasi berkala."],
+    actions:["Duduk bicara dengan pasangan malam ini","Minta bantuan kakek/nenek sholeh"],
+    reflection:"Kami 'satu tim', atau masing-masing jalan sendiri?"},
+  {week:4,wkTitle:"Minggu 4 — Penutup",day:29,title:"Visi Keluarga Sakinah",
+    quote:{t:"Ya Tuhan kami, anugerahkanlah kepada kami pasangan dan keturunan sebagai penyejuk hati...",s:"QS. Al-Furqan: 74"},
+    parenting:{t:"The home is the first school and the parents are the first teachers. The most powerful school is a happy home.",a:"Dr. Bambang Trim"},
+    body:["Bayangkan 15–20 tahun lagi: Idul Fitri rumah ramai. Maghrib — <b>tanpa diingatkan</b>, semua berdiri menyiapkan sajadah. 3 generasi sholat berjamaah.","Itulah keluarga sakinah. Qurrota a'yun — penyejuk mata."],
+    actions:["Tulis 'Family Vision Statement' 1 halaman","Ambil foto keluarga, tulis: 'Perjalanan dimulai hari ini'"],
+    reflection:"Aku sedang menuju visi keluarga yang aku inginkan, atau menjauhinya?"},
+  {week:4,wkTitle:"Minggu 4 — Penutup",day:30,title:"Komitmen Seumur Hidup",
+    quote:{t:"...Maka berlomba-lombalah kalian dalam (mengerjakan) kebaikan.",s:"QS. Al-Baqarah: 148"},
+    parenting:{t:"Tidak ada kesuksesan dalam hidup yang lebih berharga daripada melihat anakmu tumbuh jadi pribadi yang mencintai Allah.",a:"Mommy Salma"},
+    body:["Selamat, Mom. 30 hari berhasil. Ini bukan pencapaian kecil.","Hari 30 = titik awal perjalanan seumur hidup.","Komitmen: terus perbaiki sholat, sabar, berdoa, jadikan rumah madrasah, dukung mommy lain.","<b>Coming soon:</b> Kurikulum mengajarkan sholat ke si kecil."],
+    actions:["Baca ulang 'Surat untuk Diri Sendiri' dari Hari 6","Tulis 'Komitmen 30 Hari Berikutnya'","Share panduan ini ke 1 mommy lain","Sholat syukur 2 rakaat"],
+    reflection:"Dari semua ini, apa 1 hal yang akan aku bawa seumur hidup?"}
+];
+
+const WEEK_BANNERS = {
+  1: { icon: "🌱", label: "MINGGU 1", title: "Meluruskan Mindset", sub: "Niat &amp; motivasi dulu — fondasi semua" },
+  2: { icon: "🌿", label: "MINGGU 2", title: "Memahami Si Kecil", sub: "Sesuai fase — jangan salah pendekatan" },
+  3: { icon: "🌊", label: "MINGGU 3", title: "Menghadapi Tantangan", sub: "Realitas, kesabaran, strategi praktis" },
+  4: { icon: "🌟", label: "MINGGU 4", title: "Motivasi Berkelanjutan", sub: "Bertahan, berbuah, berkomitmen" }
+};
+
+const BADGES = [
+  { id:"start", icon:"🌱", name:"Langkah Pertama", cond:(s)=>s.done>=1 },
+  { id:"streak3", icon:"🔥", name:"Streak 3 Hari", cond:(s)=>s.streak>=3 },
+  { id:"w1", icon:"💎", name:"Tuntas Minggu 1", cond:(s)=>s.done>=7 },
+  { id:"streak7", icon:"⚡", name:"Streak 7 Hari", cond:(s)=>s.streak>=7 },
+  { id:"half", icon:"🏆", name:"Separuh Jalan", cond:(s)=>s.done>=15 },
+  { id:"w3", icon:"⭐", name:"Survivor", cond:(s)=>s.done>=21 },
+  { id:"reflection", icon:"📝", name:"Jurnal Ibu", cond:(s)=>s.reflections>=3 },
+  { id:"consistent", icon:"💪", name:"Konsisten", cond:(s)=>s.done>=10 },
+  { id:"complete", icon:"👑", name:"Ibu Teladan", cond:(s)=>s.done>=30 }
+];
+
+function getLevel(xp) {
+  if (xp < 200) return { name: "Pemula" };
+  if (xp < 500) return { name: "Berjuang" };
+  if (xp < 900) return { name: "Istiqamah" };
+  if (xp < 1400) return { name: "Sabar" };
+  return { name: "Ibu Teladan" };
+}
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  onboarded: false,
+  storyIndex: 0,
+  setupStep: 0,
+  age: '6-7',
+  focus: 'all',
+  time: 'morning',
+  completed: [],
+  reflections: {},
+  actions: {},
+  streak: 0,
+  lastCompleteDate: null,
+  xp: 0
+};
+
+function loadState() {
+  try { const s = localStorage.getItem('mommysalma_v2'); if (s) state = { ...state, ...JSON.parse(s) }; } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('mommysalma_v2', JSON.stringify(state)); } catch(e) {}
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function navTo(id, el) {
+  show(id);
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  if (id === 'profile') renderProfile();
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ============================================================
+// STORY FLOW
+// ============================================================
+let storyTimer = null;
+function startJourney() {
+  state.storyIndex = 0;
+  show('story-flow');
+  renderStory();
+}
+function skipToHome() {
+  state.onboarded = true;
+  saveState();
+  show('home');
+  document.getElementById('bottom-nav').classList.remove('hidden');
+  renderAll();
+}
+function skipStory() {
+  clearTimeout(storyTimer);
+  state.storyIndex = STORIES.length;
+  goToSetup();
+}
+
+function renderStory() {
+  const idx = state.storyIndex;
+  const s = STORIES[idx];
+  if (!s) { goToSetup(); return; }
+
+  // Progress bars
+  const progress = document.getElementById('story-progress');
+  progress.innerHTML = STORIES.map((_, i) => {
+    if (i < idx) return `<div class="story-bar filled"><div class="fill"></div></div>`;
+    if (i === idx) return `<div class="story-bar active"><div class="fill"></div></div>`;
+    return `<div class="story-bar"></div>`;
+  }).join('');
+
+  // Card content
+  let html = `<div class="story-eyebrow">${s.eyebrow}</div>`;
+  if (s.title) html += `<h1 class="story-title serif">${s.title}</h1>`;
+  if (s.illo) html += `<div class="story-illo">${s.illo}</div>`;
+  if (s.hadith) {
+    html += `<div class="story-hadith"><div class="story-hadith-text">"${s.hadith}"</div><div class="story-hadith-src">— ${s.hadithSrc}</div></div>`;
+  }
+  if (s.timeline) {
+    html += `<div class="story-timeline">
+      <div class="story-time-node gold">7</div>
+      <div class="story-time-line"></div>
+      <div class="story-time-node rose">10</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:0 8px;margin:-8px 0 8px;">
+      <div class="story-time-lbl">MULAI DIBIMBING<br><span style="font-weight:400;color:var(--muted-soft)">lembut &amp; sabar</span></div>
+      <div class="story-time-lbl" style="text-align:right">TEGAS DENGAN CINTA<br><span style="font-weight:400;color:var(--muted-soft)">tanpa kekerasan</span></div>
+    </div>`;
+  }
+  if (s.body) s.body.forEach(p => { html += `<div class="story-body">${p}</div>`; });
+  if (s.dialog) html += `<div class="story-dialog">${s.dialog}</div>`;
+  if (s.footer) s.footer.forEach(p => { html += `<div class="story-body">${p}</div>`; });
+  if (s.signature) {
+    html += `<div style="text-align:center; margin: 24px 0 0;">
+      <div style="font-size:13px; color:var(--muted); margin-bottom:4px;">Dengan cinta,</div>
+      <div style="font-family:'Fraunces',serif; font-size:22px; font-weight:700; color:var(--rose);">Mommy Salma</div>
+      <div style="font-size:11px; color:var(--muted); font-style:italic;">Ibu dari Nawyan (6 th) &amp; Nasheera (2 bln)</div>
+    </div>`;
+  }
+  if (s.cta) {
+    html += `<div class="story-cta-stack">
+      <button class="btn-primary" onclick="goToSetup()">Ya, aku siap Mom →</button>
+    </div>`;
+  } else {
+    html += `<div class="story-nav-hint">Tap kanan untuk lanjut · Tap kiri untuk kembali</div>`;
+  }
+
+  document.getElementById('story-card').innerHTML = html;
+
+  // Auto-advance
+  clearTimeout(storyTimer);
+  if (!s.cta) {
+    storyTimer = setTimeout(() => nextStory(), 6500);
+  }
+}
+
+function nextStory() {
+  clearTimeout(storyTimer);
+  if (state.storyIndex < STORIES.length - 1) {
+    state.storyIndex++;
+    renderStory();
+  } else {
+    goToSetup();
+  }
+}
+function prevStory() {
+  clearTimeout(storyTimer);
+  if (state.storyIndex > 0) {
+    state.storyIndex--;
+    renderStory();
+  }
+}
+
+// ============================================================
+// SETUP
+// ============================================================
+function goToSetup() {
+  clearTimeout(storyTimer);
+  state.setupStep = 0;
+  show('setup');
+  renderSetup();
+}
+function renderSetup() {
+  const step = state.setupStep;
+  const dots = document.getElementById('setup-progress');
+  dots.innerHTML = [0,1,2].map(i => {
+    if (i < step) return `<div class="setup-dot done"></div>`;
+    if (i === step) return `<div class="setup-dot active"></div>`;
+    return `<div class="setup-dot"></div>`;
+  }).join('');
+
+  const c = document.getElementById('setup-content');
+  if (step === 0) {
+    c.innerHTML = `
+      <div class="setup-eyebrow">STEP 1 DARI 3</div>
+      <h2 class="setup-title serif">Umur si kecil berapa, Mom?</h2>
+      <p class="setup-subtitle">Kurikulum ini dirancang khusus untuk anak usia 6–7 tahun. Tapi tetap berguna untuk personalisasi.</p>
+      <div class="opt-stack">
+        <div class="opt-card ${state.age==='0-3'?'selected':''}" data-val="0-3"><div class="opt-icon">👶</div><div class="opt-text"><div class="opt-title">0–3 tahun</div><div class="opt-sub">Fase tumbuh kembang, butuh tidur &amp; cinta</div></div></div>
+        <div class="opt-card ${state.age==='3-5'?'selected':''}" data-val="3-5"><div class="opt-icon">🧒</div><div class="opt-text"><div class="opt-title">3–5 tahun</div><div class="opt-sub">Pengenalan &amp; teladan — jangan paksa</div></div></div>
+        <div class="opt-card ${state.age==='6-7'?'selected':''}" data-val="6-7"><div class="opt-icon">🌟</div><div class="opt-text"><div class="opt-title">6–7 tahun <span class="opt-tag">PALING TEPAT</span></div><div class="opt-sub">Masa emas — Rasulullah perintahkan sholat</div></div></div>
+        <div class="opt-card ${state.age==='8+'?'selected':''}" data-val="8+"><div class="opt-icon">📚</div><div class="opt-text"><div class="opt-title">8 tahun ke atas</div><div class="opt-sub">Penguatan, menuju baligh</div></div></div>
+      </div>`;
+    c.querySelectorAll('.opt-card').forEach(el => el.onclick = () => selectSetupOption(el, 'age'));
+  } else if (step === 1) {
+    c.innerHTML = `
+      <div class="setup-eyebrow">STEP 2 DARI 3</div>
+      <h2 class="setup-title serif">Apa fokusmu, Mom?</h2>
+      <p class="setup-subtitle">Pilih yang paling bikin Mom ragu akhir-akhir ini.</p>
+      <div class="opt-stack">
+        <div class="opt-card ${state.focus==='motivation'?'selected':''}" data-val="motivation"><div class="opt-icon">✨</div><div class="opt-text"><div class="opt-title">Meluruskan niat &amp; motivasi</div><div class="opt-sub">Kenapa aku harus serius?</div></div></div>
+        <div class="opt-card ${state.focus==='teknik'?'selected':''}" data-val="teknik"><div class="opt-icon">🌱</div><div class="opt-text"><div class="opt-title">Teknik parenting</div><div class="opt-sub">Caranya gimana biar nggak trauma</div></div></div>
+        <div class="opt-card ${state.focus==='self'?'selected':''}" data-val="self"><div class="opt-icon">🤍</div><div class="opt-text"><div class="opt-title">Perbaiki sholatku dulu</div><div class="opt-sub">Aku masih bolong-bolong</div></div></div>
+        <div class="opt-card ${state.focus==='all'?'selected':''}" data-val="all"><div class="opt-icon">💯</div><div class="opt-text"><div class="opt-title">Semuanya <span class="opt-tag">REKOMENDASI</span></div><div class="opt-sub">Aku butuh semua aspek</div></div></div>
+      </div>`;
+    c.querySelectorAll('.opt-card').forEach(el => el.onclick = () => selectSetupOption(el, 'focus'));
+  } else {
+    c.innerHTML = `
+      <div class="setup-eyebrow">STEP 3 DARI 3</div>
+      <h2 class="setup-title serif">Kapan waktu terbaikmu, Mom?</h2>
+      <p class="setup-subtitle">10–15 menit per hari. Pilih yang paling tenang buat refleksi.</p>
+      <div class="opt-stack">
+        <div class="opt-card ${state.time==='morning'?'selected':''}" data-val="morning"><div class="opt-icon">🌅</div><div class="opt-text"><div class="opt-title">Pagi</div><div class="opt-sub">Setelah sholat subuh, 06:00</div></div></div>
+        <div class="opt-card ${state.time==='afternoon'?'selected':''}" data-val="afternoon"><div class="opt-icon">🌞</div><div class="opt-text"><div class="opt-title">Sore</div><div class="opt-sub">Sebelum anak pulang, 15:00</div></div></div>
+        <div class="opt-card ${state.time==='night'?'selected':''}" data-val="night"><div class="opt-icon">🌙</div><div class="opt-text"><div class="opt-title">Malam</div><div class="opt-sub">Setelah anak tidur, 21:00</div></div></div>
+      </div>`;
+    c.querySelectorAll('.opt-card').forEach(el => el.onclick = () => selectSetupOption(el, 'time'));
+  }
+
+  document.getElementById('setup-cta').textContent = step === 2 ? 'Mulai Hari ke-1 ✨' : 'Lanjut →';
+}
+function selectSetupOption(el, key) {
+  el.parentElement.querySelectorAll('.opt-card').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  state[key] = el.dataset.val;
+}
+function setupNext() {
+  if (state.setupStep < 2) {
+    state.setupStep++;
+    renderSetup();
+  } else {
+    state.onboarded = true;
+    saveState();
+    show('home');
+    document.getElementById('bottom-nav').classList.remove('hidden');
+    renderAll();
+  }
+}
+function setupBack() {
+  if (state.setupStep > 0) {
+    state.setupStep--;
+    renderSetup();
+  } else {
+    state.storyIndex = STORIES.length - 1;
+    show('story-flow');
+    renderStory();
+  }
+}
+
+// ============================================================
+// HOME / PATH
+// ============================================================
+function renderPath() {
+  const container = document.getElementById('path-container');
+  let html = '';
+  let currentWeek = null;
+  const offsets = ['', 'l-60', 'r-60', 'l-120', 'r-120', 'l-60', 'r-60'];
+  let idx = 0;
+
+  LESSONS.forEach((lesson) => {
+    if (lesson.week !== currentWeek) {
+      const div = WEEK_BANNERS[lesson.week];
+      html += `<div class="path-week-banner">
+        <div class="pwb-icon">${div.icon}</div>
+        <div class="pwb-label">${div.label}</div>
+        <div class="pwb-title">${div.title}</div>
+        <div class="pwb-sub">${div.sub}</div>
+      </div>`;
+      currentWeek = lesson.week;
+      idx = 0;
+    }
+
+    const isDone = state.completed.includes(lesson.day);
+    const isUnlocked = lesson.day === 1 || state.completed.includes(lesson.day - 1) || isDone;
+    const status = isDone ? 'done' : (isUnlocked ? 'unlocked' : 'locked');
+    const offset = offsets[idx % offsets.length];
+    idx++;
+
+    const titleShort = lesson.title.replace(/,\s*Mom\??/g,'').replace(/&amp;/g,'&');
+    html += `<div class="path-node-wrap ${offset}">
+      <div class="node-container ${status}">
+        <div class="node ${status}" onclick="handleNode(${lesson.day}, ${isUnlocked})">
+          <div class="node-bg"></div>
+          <div class="node-inner">
+            <div class="node-day-label">HARI</div>
+            <div class="node-day-num">${lesson.day}</div>
+          </div>
+        </div>
+      </div>
+      <div class="node-title">${titleShort}</div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function handleNode(day, unlocked) {
+  if (!unlocked) {
+    showToast('🔒 Selesaikan hari sebelumnya dulu');
+    return;
+  }
+  openLesson(day);
+}
+
+function renderCurrentDayBanner() {
+  const nextDay = state.completed.length === 0 ? 1 :
+    state.completed.length >= 30 ? 30 : (Math.max(...state.completed) + 1);
+  const lesson = LESSONS.find(l => l.day === nextDay);
+  if (!lesson) return;
+
+  const el = document.getElementById('current-day-banner');
+  const isAlreadyDone = state.completed.includes(nextDay);
+  const titleShort = lesson.title.replace(/,\s*Mom\??/g,'').replace(/&amp;/g,'&');
+  el.innerHTML = `<div class="current-day-banner" onclick="openLesson(${nextDay})">
+    <div class="cdb-num">
+      <div class="cdb-num-day">HARI</div>
+      <div class="cdb-num-val">${nextDay}</div>
+    </div>
+    <div class="cdb-text">
+      <div class="cdb-label">${isAlreadyDone ? '✓ SELESAI · BACA ULANG' : 'LANJUTKAN HARI INI'}</div>
+      <div class="cdb-title">${titleShort}</div>
+    </div>
+    <div class="cdb-arrow">→</div>
+  </div>`;
+}
+
+// ============================================================
+// LESSON
+// ============================================================
+let currentLessonDay = null;
+function openLesson(day) {
+  currentLessonDay = day;
+  const lesson = LESSONS.find(l => l.day === day);
+  if (!lesson) return;
+
+  const body = document.getElementById('lesson-body');
+  const isDone = state.completed.includes(day);
+  const savedActions = state.actions[day] || lesson.actions.map(() => false);
+  const savedRefl = state.reflections[day] || '';
+
+  let html = `
+    <div class="lesson-week">${lesson.wkTitle.toUpperCase()}</div>
+    <div class="lesson-day">HARI ${lesson.day} DARI 30</div>
+    <div class="lesson-title serif">${lesson.title}</div>
+
+    <div class="quote-card">
+      <div class="quote-text">"${lesson.quote.t}"</div>
+      <div class="quote-src">— ${lesson.quote.s}</div>
+    </div>
+
+    <div class="parenting-card">
+      <div class="parenting-label">✦ KUTIPAN PARENTING</div>
+      <div class="parenting-text">"${lesson.parenting.t}"</div>
+      <div class="parenting-author">— ${lesson.parenting.a}</div>
+    </div>
+
+    <div class="section-label">MATERI HARI INI</div>
+    ${lesson.body.map(p => `<div class="content-text">${p}</div>`).join('')}
+
+    <div class="action-card">
+      <div class="action-label">✨ TINDAKAN HARI INI</div>
+      ${lesson.actions.map((a, i) => `
+        <div class="action-item" onclick="toggleAction(${i})">
+          <div class="action-checkbox ${savedActions[i] ? 'checked' : ''}" id="check-${i}">${savedActions[i] ? '✓' : ''}</div>
+          <div class="action-text">${a}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="reflect-card">
+      <div class="reflect-label">♡ PERTANYAAN DARI HATI</div>
+      <div class="reflect-q">${lesson.reflection}</div>
+      <textarea class="reflect-input" id="reflect-input" placeholder="Tulis jawabanmu di sini (opsional)...">${savedRefl}</textarea>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="btn-primary" onclick="completeLesson()">${isDone ? '✓ Sudah Selesai — Simpan Update' : 'Selesaikan Hari Ini'}</button>
+    </div>
+  `;
+
+  body.innerHTML = html;
+  document.getElementById('lesson-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const modal = document.getElementById('lesson-modal');
+  modal.scrollTop = 0;
+  modal.onscroll = () => {
+    const p = (modal.scrollTop / Math.max(1, modal.scrollHeight - modal.clientHeight)) * 100;
+    document.getElementById('lesson-fill').style.width = Math.min(p, 100) + '%';
+  };
+}
+
+function toggleAction(i) {
+  if (!state.actions[currentLessonDay]) {
+    const lesson = LESSONS.find(l => l.day === currentLessonDay);
+    state.actions[currentLessonDay] = lesson.actions.map(() => false);
+  }
+  state.actions[currentLessonDay][i] = !state.actions[currentLessonDay][i];
+  const cb = document.getElementById('check-' + i);
+  cb.classList.toggle('checked');
+  cb.textContent = state.actions[currentLessonDay][i] ? '✓' : '';
+  saveState();
+}
+
+function closeLesson() {
+  document.getElementById('lesson-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLessonBg(e) { if (e.target.id === 'lesson-overlay') closeLesson(); }
+
+function completeLesson() {
+  const day = currentLessonDay;
+  const refl = document.getElementById('reflect-input').value;
+  if (refl.trim()) state.reflections[day] = refl;
+
+  const wasNew = !state.completed.includes(day);
+  if (wasNew) {
+    state.completed.push(day);
+    state.xp += 50;
+    const today = new Date().toDateString();
+    if (state.lastCompleteDate) {
+      const diff = Math.floor((new Date(today) - new Date(state.lastCompleteDate)) / 86400000);
+      state.streak = diff <= 1 ? state.streak + 1 : 1;
+    } else {
+      state.streak = 1;
+    }
+    state.lastCompleteDate = today;
+  }
+
+  saveState();
+  closeLesson();
+  if (wasNew) showCelebration(day);
+  renderAll();
+}
+
+// ============================================================
+// CELEBRATION
+// ============================================================
+function showCelebration(day) {
+  document.getElementById('celeb-sub').textContent = day >= 30
+    ? 'MASYA ALLAH, 30 HARI KHATAM! Ini pencapaian luar biasa.'
+    : `Hari ke-${day} berhasil Mommy selesaikan. Ini langkah besar untuk si kecil.`;
+  document.getElementById('celeb-streak').textContent = state.streak;
+  document.getElementById('celeb-overlay').classList.add('open');
+}
+function closeCelebration() {
+  document.getElementById('celeb-overlay').classList.remove('open');
+}
+
+// ============================================================
+// PROFILE
+// ============================================================
+function renderProfile() {
+  document.getElementById('profile-streak').textContent = state.streak;
+  document.getElementById('profile-done').textContent = state.completed.length + '/30';
+  document.getElementById('profile-xp').textContent = state.xp;
+  const lvl = getLevel(state.xp);
+  document.getElementById('profile-level').textContent = lvl.name;
+
+  const stats = { done: state.completed.length, streak: state.streak, reflections: Object.keys(state.reflections).length };
+  document.getElementById('badge-grid').innerHTML = BADGES.map(b => {
+    const un = b.cond(stats);
+    return `<div class="badge ${un ? 'unlocked' : ''}">
+      <div class="badge-icon">${un ? b.icon : '🔒'}</div>
+      <div class="badge-name">${b.name}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderAll() {
+  document.getElementById('streak-val').textContent = state.streak;
+  document.getElementById('xp-val').textContent = state.xp;
+  renderPath();
+  renderCurrentDayBanner();
+  renderProfile();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+loadState();
+if (state.onboarded) {
+  show('home');
+  document.getElementById('bottom-nav').classList.remove('hidden');
+  renderAll();
+}
+</script>
+
+</body>
+</html>
