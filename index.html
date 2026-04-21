@@ -180,8 +180,13 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
   background: white; color: var(--rose); box-shadow: 0 3px 0 var(--rose-soft), var(--shadow);
 }
 .btn-primary.secondary:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--rose-soft), var(--shadow-sm); }
-.splash-note { font-size: 12px; color: var(--muted); margin-top: 14px; max-width: 280px; }
-.splash-note span { color: var(--rose); font-weight: 600; }
+.splash-note {
+  font-size: 13px; color: var(--rose); font-weight: 700; letter-spacing: 0.3px;
+  margin: 14px auto 0;
+  text-align: center;
+  width: 100%;
+}
+.splash-note span { color: var(--rose); font-weight: 700; }
 
 /* ==================================================
    STORY CARDS — fit 100dvh, no scroll
@@ -763,6 +768,14 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
   position: sticky; bottom: 0; padding: 16px 24px 20px;
   background: linear-gradient(180deg, transparent, var(--cream) 40%);
   margin: 24px -26px -120px;
+  text-align: center;
+}
+.lesson-footer .btn-primary { margin: 0 auto; }
+.lesson-footer .btn-primary:disabled {
+  background: #CEC2AE;
+  color: white;
+  box-shadow: 0 4px 0 #A69B88;
+  pointer-events: none;
 }
 
 /* ==================================================
@@ -1002,7 +1015,7 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
       <span style="font-size: 18px">→</span>
     </button>
     <button class="btn-primary ghost" onclick="skipToHome()">Langsung ke perjalanan</button>
-    <p class="splash-note" style="margin-top: 8px">Gratis · <span>mommysalma.com</span></p>
+    <p class="splash-note" style="margin-top: 8px; text-align: center; width: 100%;"><span>mommysalma.com</span></p>
   </div>
 </div>
 
@@ -1033,7 +1046,7 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
   <div class="setup-header">
     <div class="setup-back" onclick="setupBack()">←</div>
     <div class="setup-progress" id="setup-progress">
-      <div class="setup-dot active"></div><div class="setup-dot"></div><div class="setup-dot"></div><div class="setup-dot"></div>
+      <div class="setup-dot active"></div><div class="setup-dot"></div><div class="setup-dot"></div>
     </div>
   </div>
   <div class="setup-content" id="setup-content"></div>
@@ -1124,7 +1137,18 @@ body:has(#story-flow.active) { overflow: hidden; height: 100svh; }
     <div style="background: white; padding: 20px; border-radius: 18px; box-shadow: var(--shadow-sm);">
       <p style="font-family: 'Fraunces', serif; font-style: italic; color: var(--rose); font-size: 15px; line-height: 1.5; margin-bottom: 10px;">"Aku bukan ustadzah. Aku cuma ibu rumah tangga yang capek sehari-hari — sama seperti Mom."</p>
       <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 8px;">Ibu dari <strong>Nawyan (6 th)</strong> &amp; <strong>Nasheera (2 bln)</strong>.</p>
-      <p style="font-size: 13px; color: var(--muted); line-height: 1.5;">Kepala Sekolah PAUD Permata Harapan. S1 Pendidikan Anak Usia Dini &amp; S1 Keperawatan.</p>
+      <p style="font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px;">Kepala Sekolah PAUD Permata Harapan. S1 Pendidikan Anak Usia Dini &amp; S1 Keperawatan.</p>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="https://www.instagram.com/salmauliaaaa/" target="_blank" style="flex: 1; min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 14px; background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%); color: white; text-decoration: none; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: var(--shadow-sm);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.tiktok.com/@mommysalmaofficial" target="_blank" style="flex: 1; min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 14px; background: #000; color: white; text-decoration: none; border-radius: 12px; font-size: 13px; font-weight: 700; box-shadow: var(--shadow-sm);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+          TikTok
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -1380,25 +1404,25 @@ const LESSONS = [
     reflection:"Kalau Allah ngasih nilai untuk sholatku bulan lalu, kira-kira nilainya berapa dari 100?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:2,title:"Pahala yang Mengalir Sampai ke Kubur",
     quote:{t:"Apabila anak Adam meninggal, terputuslah amalnya kecuali tiga: sedekah jariyah, ilmu bermanfaat, dan anak sholeh yang mendoakannya.",s:"HR. Muslim"},
-    parenting:{t:"Your children are not your children. They are the sons and daughters of Life's longing for itself.",a:"Kahlil Gibran, Penyair"},
-    body:["Mom, kata kuncinya: <b>anak sholeh</b>. Bukan anak pintar. Bukan anak kaya. Dan nggak ada anak sholeh yang nggak sholat.","Bayangkan: Mom udah meninggal 20 tahun. Tapi setiap si kecil sholat, setiap dia mendoakan Mom — <b>pahalanya mengalir terus ke kubur Mom</b>.","Cuma anak sholeh yang returnnya nggak pernah putus sampai akhirat."],
-    actions:["Hitung: berapa menit Mom scroll sosmed hari ini vs menit nemenin si kecil sholat?","Doakan 3 keluarga yang udah meninggal setelah sholat hari ini"],
+    parenting:{t:"Investasi terbesar untuk akhirat bukan harta yang kamu tinggalkan, tapi anak sholeh yang mendoakanmu.",a:"Ustadz Hanan Attaki"},
+    body:["Mom, kata kuncinya: <b>anak sholeh</b>. Bukan anak pintar. Bukan anak kaya. Dan nggak ada anak sholeh yang nggak sholat.","Bayangkan: Mom udah meninggal 20 tahun. Tapi setiap si kecil sholat, setiap dia mendoakan Mom — <b>pahalanya mengalir terus ke kubur Mom</b>.","Hanya anak sholeh yang pahalanya terus mengalir tanpa putus — bahkan sampai kita sudah tiada."],
+    actions:["Hitung jujur: hari ini berapa menit Mom habiskan untuk HP/sosmed, dan berapa menit untuk ibadah sendiri?","Tulis 3 hal yang paling Mom harapkan untuk si kecil di masa depan. Apakah 'jadi anak sholeh yang mendoakan aku' masuk di dalamnya?"],
     reflection:"Kalau aku meninggal hari ini, amalan apa yang akan terus mengalir dari anakku?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:3,title:"Warisan Terbaik Bukan Harta",
     quote:{t:"Ya Tuhanku, jadikanlah aku dan anak cucuku orang-orang yang tetap mendirikan sholat.",s:"QS. Ibrahim: 40"},
-    parenting:{t:"Didiklah anak-anakmu bukan seperti keadaanmu saat ini, karena mereka akan hidup di zaman yang berbeda.",a:"Muhammad Iqbal, Filosof Muslim"},
+    parenting:{t:"Betapa banyak orangtua yang membuat anaknya sengsara di dunia dan akhirat, karena mereka cuma sibuk mewariskan harta — bukan adab dan agama.",a:"Ibnu Qayyim Al-Jauziyah"},
     body:["Mom, harta bisa habis dalam 1 generasi. Tapi kebiasaan sholat bisa diwariskan <b>sampai 7 turunan</b>.","Nabi Ibrahim — yang punya akses doa langsung ke Allah — yang beliau minta untuk anak cucunya: <b>anak cucu tetap sholat</b>.","Kalau berhasil menanamkan sholat di hati si kecil, Mom mewariskan sesuatu yang lebih berharga dari emas."],
-    actions:["Tulis 'Family Vision Statement' singkat","Bilang ke si kecil: 'Mama lebih bangga kamu rajin sholat daripada jadi jutawan tapi nggak sholat'"],
+    actions:["Tulis di notes HP: 'Apa yang paling aku ingin anakku warisi dari aku?' Jawab jujur — mau itu kebiasaan baik, nilai hidup, atau iman.","Bilang ke si kecil hari ini: 'Nak, Mama doakan kamu sukses, rezekinya lancar, DAN tetap jadi anak yang rajin sholat. Dua-duanya penting buat Mama.'"],
     reflection:"Aku lebih sibuk mewariskan apa — harta, prestasi, atau ibadah?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:4,title:"Sholat Benteng Karakter",
     quote:{t:"Sesungguhnya sholat itu mencegah dari (perbuatan) keji dan mungkar.",s:"QS. Al-Ankabut: 45"},
-    parenting:{t:"It's easier to build strong children than to repair broken men.",a:"Frederick Douglass"},
+    parenting:{t:"Sholat lima waktu bukan cuma ibadah — dia adalah latihan mengalahkan hawa nafsu lima kali sehari. Anak yang terbiasa sholat, punya benteng dari dalam dirinya sendiri.",a:"Ustadz Adi Hidayat"},
     body:["Mom, kita khawatir anak kena narkoba, pergaulan bebas, bullying. Jawabannya sederhana: <b>pastiin sholatnya benar dulu</b>.","Disiplin 5 kali sehari membentuk pengendalian diri, ketenangan, tanggung jawab, kesadaran moral. <b>Nggak bisa didapat dari les manapun</b>.","Sholat = benteng paling ampuh."],
-    actions:["Tulis 5 masalah remaja yang paling Mom takutkan","Puji si kecil yang sholat: 'Mama bangga kamu sholat tanpa disuruh'"],
-    reflection:"Kapan terakhir aku nanya sholatnya dengan serius?"},
+    actions:["Review jujur: apa 3 kekurangan atau kebiasaan si kecil yang paling Mom khawatirkan saat ini? Tulis di notes — ini PR kita untuk diperbaiki pelan-pelan.","Puji si kecil hari ini — saat dia sholat, atau saat dia melakukan kebaikan lain (misal: berbagi, jujur, membantu). Pujian spesifik: 'Mama bangga kamu tadi ___'"],
+    reflection:"Kalau aku lihat karakter si kecil sekarang, mana yang paling butuh dibentuk oleh kebiasaan sholat?"},
   {week:1,wkTitle:"Minggu 1 — Meluruskan Mindset",day:5,title:"Belajar Parenting dari Rasulullah SAW",
     quote:{t:"Sungguh telah ada pada (diri) Rasulullah itu suri teladan yang baik bagimu...",s:"QS. Al-Ahzab: 21"},
-    parenting:{t:"Parents are often so busy with the physical rearing of their children that they miss the glory of parenthood.",a:"Haim Ginott, Between Parent and Child"},
+    parenting:{t:"Tidak ada metode parenting yang lebih sempurna daripada cara Rasulullah mendidik — tegas dalam prinsip, lembut dalam cara. Cukup kita teladani beliau.",a:"Ustadz Budi Ashari, Pakar Parenting Nabawiyah"},
     body:["Parenting terbaik udah dicontohkan 14 abad lalu.","<b>Teladan sebelum perintah.</b> Rasulullah sholat tahajjud DULU, baru sahabat ikuti.","<b>Lembut, sabar.</b> Waktu cucu Rasulullah naik ke punggungnya saat sujud, beliau memperlama sujud — bukan dimarahi.","<b>Doa yang nggak putus</b> — senjata paling ampuh."],
     actions:["Pilih 1 prinsip Rasulullah hari ini, praktikkan","Baca 1 kisah parenting Rasulullah, ceritakan ke pasangan"],
     reflection:"Gaya parentingku lebih mirip Rasulullah, atau cara orangtuaku dulu?"},
@@ -1422,25 +1446,25 @@ const LESSONS = [
     reflection:"Aku memperlakukan si kecil sebagai 'kanvas kosong' atau 'benih yang sudah ada'?"},
   {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:9,title:"Usia 0–3 Tahun: JANGAN Paksa Ibadah",
     quote:{t:"Sesungguhnya Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya...",s:"QS. Al-Baqarah: 286"},
-    parenting:{t:"The first three years of life are the most important. If the foundation is wrong, everything built upon it will be unstable.",a:"Maria Montessori"},
+    parenting:{t:"Di usia dini, anak membutuhkan pelukan, tidur yang cukup, dan ketenangan — bukan tuntutan ibadah. Tanamkan cinta pada Allah lewat kehangatan dulu, bukan lewat kewajiban.",a:"Dr. Aisah Dahlan, Psikolog Keluarga"},
     body:["Ini bagian yang paling aku sesali. Waktu Nawyan bayi, babanya paksa ke masjid subuh.","Bayi fase tidurnya paling penting untuk tumbuh kembang otak. Dipaksa bangun = stress.","Di usia 0–3, si kecil <b>belum wajib apa-apa</b>. Cukup: sholat di depannya, peluk, cium, tidur cukup."],
     actions:["Kalau Mom punya bayi: jangan paksa — cukup sholat di hadapannya","Pastikan tidur bayi cukup"],
     reflection:"Apakah aku pernah 'memaksa' ibadah ke anakku di usia belum tepat?"},
   {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:10,title:"Usia 3–5 Tahun: Pengenalan &amp; Teladan",
     quote:{t:"Anak kecil itu belajar dari apa yang dia lihat, bukan dari apa yang didengarnya.",s:"Prinsip parenting klasik"},
-    parenting:{t:"The greatest gifts you can give your children are the roots of responsibility and the wings of independence.",a:"Denis Waitley"},
+    parenting:{t:"Anak tidak belajar agama dari yang kita ceramahkan — dia belajar dari yang kita praktikkan di depan matanya setiap hari.",a:"Dr. Aisah Dahlan, Psikolog Keluarga"},
     body:["Otak si kecil kayak spons. <b>Masa emas</b> untuk kenalkan sholat — dengan suasana, bukan perintah.","Sholat di depannya dengan terlihat. Kasih sajadah kecil &amp; mukena cantik. Cerita tentang Nabi sebelum tidur.","Puji percobaan kecil. Peluk waktu dia sujud.","<b>JANGAN</b> paksa, marahi saat main di sajadah, atau hukum. Belum wajib. Tekanan = kebencian jangka panjang."],
     actions:["Sholat di ruang tamu hari ini (bukan kamar)","Siapkan sajadah/mukena warna yang dia suka"],
     reflection:"Apakah sholatku terlihat oleh si kecil, atau 'tersembunyi'?"},
   {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:11,title:"Usia 5–7 Tahun: Habit Building",
     quote:{t:"Amalan yang paling dicintai Allah adalah yang paling konsisten, meskipun sedikit.",s:"HR. Bukhari Muslim"},
-    parenting:{t:"Tell me and I forget. Teach me and I remember. Involve me and I learn.",a:"Benjamin Franklin"},
+    parenting:{t:"Ceritakan padaku — aku lupa. Ajarkan padaku — aku ingat. Libatkan aku — aku benar-benar belajar.",a:"Benjamin Franklin"},
     body:["Fase transisi dari <b>meniru ke berlatih serius</b>.","Fokus: pembentukan habit, bukan kesempurnaan.","Hafalan surat pendek seperti lagu. Sholat berjamaah keluarga 1x sehari (maghrib).","Reward SEHAT: bukan uang, tapi quality time (sabtu ke taman bareng)."],
     actions:["Buat jadwal sholat berjamaah keluarga 1x sehari","Papan progress dengan stiker di kulkas"],
     reflection:"Kebiasaan apa yang udah aku tanamkan — yang baik dan kurang baik?"},
   {week:2,wkTitle:"Minggu 2 — Memahami Si Kecil",day:12,title:"Usia 7 Tahun: Perintah Sholat Dimulai",
     quote:{t:"Perintahkanlah anak-anakmu sholat ketika berumur tujuh tahun...",s:"HR. Abu Dawud — hasan sahih"},
-    parenting:{t:"Children thrive in an environment of love, discipline, and consistency.",a:"Dr. James Dobson, Parenting Researcher"},
+    parenting:{t:"Usia tujuh tahun adalah masa emas — bukan karena anak sudah mengerti segalanya, tapi karena hatinya masih paling terbuka menerima cinta pada Allah. Jangan sia-siakan.",a:"Ustadz Salim A. Fillah"},
     body:["INI hari paling penting minggu ini. Nawyan-ku 6 tahun. Setahun lagi fase ini.","Kata 'perintahkan' — bukan 'saranin'. Di usia 7, Mom punya otoritas menuntut sholat.","Tapi <b>'perintah' bukan bentakan atau hukuman fisik</b>. Ketegasan yang lembut.","Aturan rumah: adzan = berhenti semua, wudhu, sholat. Berlaku untuk Mom &amp; Ayah juga."],
     actions:["Review: si kecil udah sholat 5 waktu konsisten?","Duduk bicara: 'Menurut kamu kenapa kita sholat?'"],
     reflection:"Apakah aku cukup tegas — tapi tetap dalam koridor kelembutan?"},
@@ -1458,7 +1482,7 @@ const LESSONS = [
     reflection:"Aku siap bertindak, atau masih sekadar membaca?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:15,title:"Kenapa Si Kecil Menolak Sholat?",
     quote:{t:"Ketahuilah bahwa kemenangan datang bersama kesabaran.",s:"HR. Ahmad"},
-    parenting:{t:"Children are like wet cement. Whatever falls on them makes an impression.",a:"Dr. Haim Ginott"},
+    parenting:{t:"Anak yang menolak ibadah bukan anak yang bermasalah — dia sedang memberi sinyal bahwa ada sesuatu yang perlu kita dengarkan lebih dalam.",a:"Dr. Aisah Dahlan, Psikolog Keluarga"},
     body:["Kalau si kecil menolak — <b>Mom nggak sendirian</b>. Aku juga dulu.","Biasanya akarnya: nggak ada contoh, pernah trauma, nggak paham <i>kenapa</i>, distraksi, pergaulan, persepsi Allah jauh &amp; menakutkan.","<b>Jangan langsung marahi</b>. Cari akarnya: 'Nak, kenapa sih kamu susah sholat?'"],
     actions:["Ajak si kecil bicara tanpa emosi","Catat apa yang dia bilang"],
     reflection:"Aku mendiagnosis dengan tepat, atau langsung judge 'kamu malas'?"},
@@ -1470,25 +1494,25 @@ const LESSONS = [
     reflection:"Dari 8 kesalahan, mana yang paling sering aku lakukan?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:17,title:"Sabar &amp; Konsisten — Kunci Utama",
     quote:{t:"Dan perintahkanlah kepada keluargamu mendirikan sholat dan bersabarlah kamu...",s:"QS. Thaha: 132"},
-    parenting:{t:"The days are long, but the years are short.",a:"Gretchen Rubin, Parenting Writer"},
+    parenting:{t:"Kesuksesan mendidik anak bukan dari ledakan usaha sesekali, tapi dari kebiasaan kecil yang dilakukan dengan sabar setiap hari.",a:"Ustadz Salim A. Fillah"},
     body:["Mom akan ngingetin si kecil <b>ribuan kali</b>. Normal.","Banyak mommy nyerah di titik salah — ingatan ke-50, padahal ke-51 habit terbentuk.","Sabar = <b>tetap bertindak konsisten tanpa emosi negatif</b>."],
     actions:["Ingatkan dengan cara sama tiap waktu","Kalau menolak: tarik nafas, senyum, 'kita sholat bareng'"],
     reflection:"Aku nyerah terlalu cepat, atau sabar dengan cara salah?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:18,title:"Peran Ayah &amp; Ibu — Nggak Bisa Solo",
     quote:{t:"Setiap kalian adalah pemimpin dan akan dimintai pertanggungjawaban...",s:"HR. Bukhari Muslim"},
-    parenting:{t:"Fathers who engage in meaningful discussion with their children about faith have the most significant impact on their spiritual development.",a:"Prof. Christian Smith, Notre Dame"},
+    parenting:{t:"Ayah yang sering mengajak anaknya bicara dari hati tentang iman, punya pengaruh paling besar pada pertumbuhan spiritual anak itu.",a:"Prof. Christian Smith, Universitas Notre Dame"},
     body:["Butuh <b>tim</b>. Ayah &amp; ibu komplementer.","Ayah: figur otoritas, imam rumah, model laki-laki sholeh, pembawa ke masjid.","Ibu: pemelihara suasana 24 jam, guru fiqih pertama, role model khusyuk, sumber doa."],
     actions:["Diskusi dengan pasangan: peran mana yang belum optimal?","Kalau merasa sendirian: bicara terus terang"],
     reflection:"Kami 'satu tim', atau masing-masing jalan sendiri?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:19,title:"Lingkungan yang Mendukung",
     quote:{t:"Perumpamaan teman yang baik dan teman yang buruk adalah seperti penjual minyak wangi dan pandai besi...",s:"HR. Bukhari"},
-    parenting:{t:"It takes a village to raise a child.",a:"Pepatah Afrika"},
+    parenting:{t:"Membesarkan satu anak, butuh satu kampung — bukan cuma orangtuanya aja.",a:"Pepatah Afrika"},
     body:["Si kecil dibesarkan oleh <b>lingkungan</b>.","Strategi: sekolah yang sholat berjamaah, TPA, komunitas keluarga sholeh, seleksi tontonan.","Kalau lingkungan sangat sulit: pertimbangkan pindah. Rasulullah pernah nyuruh orang pindah."],
     actions:["Skor 1–10 lingkungan si kecil","Pilih 1 area terlemah, buat rencana"],
     reflection:"Aku berusaha sendiri, atau manfaatkan kekuatan lingkungan?"},
   {week:3,wkTitle:"Minggu 3 — Menghadapi Tantangan",day:20,title:"Strategi Jitu Hadapi yang Malas",
     quote:{t:"Sesungguhnya pertolongan itu datang bersama kesabaran...",s:"HR. Ahmad"},
-    parenting:{t:"Give children choices within limits — that's how they learn to make good decisions.",a:"Jim Fay, Love and Logic"},
+    parenting:{t:"Beri anak pilihan dalam batas yang wajar — dari situ mereka belajar ambil keputusan yang baik.",a:"Jim Fay, Love and Logic"},
     body:["9 strategi:","(1) Hilangkan friksi (2) Warning 5-10 menit sebelum adzan (3) Sholat bareng, bukan nyuruh (4) Gamifikasi stiker (5) Kaitkan dengan yang dia suka (6) Diskusi di waktu lain (7) Cerita bukan ancaman (8) Tunjukkan doa untuknya (9) Bikin subuh spesial — coklat hangat"],
     actions:["Pilih 2 strategi, terapkan hari ini","Evaluasi minggu depan"],
     reflection:"Aku lebih banyak marah atau mencari strategi?"},
@@ -1500,13 +1524,13 @@ const LESSONS = [
     reflection:"Dari 21 hari ini, apa insight paling mengubah cara pandangku?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:22,title:"Bertahan untuk Jangka Panjang",
     quote:{t:"Amalan yang paling dicintai Allah adalah yang paling konsisten, meskipun sedikit.",s:"HR. Bukhari Muslim"},
-    parenting:{t:"Small daily improvements are the key to staggering long-term results.",a:"James Clear, Atomic Habits"},
+    parenting:{t:"Perbaikan kecil yang dilakukan setiap hari, adalah kunci hasil luar biasa dalam jangka panjang.",a:"James Clear, penulis Atomic Habits"},
     body:["Ini <b>maraton, bukan sprint</b>.","Bulan 1 semangat. Bulan 3 bosan. Bulan 6 ingin menyerah. Tahun 5 baru sadar si kecil udah terbentuk.","Motivasi dari <b>makna, bukan perasaan</b>. Celebrate small wins. Self-care penting."],
     actions:["Reminder HP jam 5 sore: 'Jangan nyerah hari ini'","Gabung komunitas parenting islami"],
     reflection:"Apa yang bikin motivasiku turun? Gimana cegahnya?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:23,title:"Investasi Dunia &amp; Akhirat",
     quote:{t:"Dunia adalah ladang akhirat.",s:"Hikmah klasik"},
-    parenting:{t:"Children with strong religious practice have lower rates of depression, substance abuse, and higher academic performance.",a:"Prof. Lisa Miller, Columbia"},
+    parenting:{t:"Anak yang rutin beribadah punya tingkat depresi lebih rendah, lebih terhindar dari narkoba, dan prestasi akademiknya lebih baik.",a:"Prof. Lisa Miller, Universitas Columbia"},
     body:["Si kecil yang sholat cenderung <b>lebih sukses di dunia</b>.","Disiplin waktu, pengendalian diri, ketenangan &amp; fokus, karakter kuat, support spiritual.","Fokus sholat TIDAK turunkan prestasi akademik. Justru sebaliknya."],
     actions:["Tulis '5 skill hidup dari sholat'","Ceritakan ke si kecil"],
     reflection:"Apakah aku anggap akademik lebih 'produktif' dari sholat?"},
@@ -1524,25 +1548,25 @@ const LESSONS = [
     reflection:"Kalau si kecil meniru sholatku 100%, aku puas atau malu?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:26,title:"Rayakan Progres Kecil",
     quote:{t:"Siapa yang tidak bersyukur atas yang sedikit, tidak akan bersyukur atas yang banyak.",s:"Prinsip hidup"},
-    parenting:{t:"Catch them being good. Praise what you want to see more of.",a:"Prof. John Gottman"},
+    parenting:{t:"Tangkap anakmu saat dia melakukan hal baik. Puji hal-hal yang Mom ingin lihat lebih sering dari dia.",a:"Prof. John Gottman, Peneliti Keluarga"},
     body:["Standar 'ideal' bikin kecewa terus.","Rayakan <b>progress</b>, bukan pencapaian akhir.","Pujian spesifik: bukan 'pintar!' tapi 'Mama bangga tadi kamu langsung wudhu waktu dipanggil.'"],
     actions:["Cari 1 progress si kecil yang selama ini Mom lewatkan","Rayakan dengan pujian spesifik + peluk"],
     reflection:"Rasio kritik:apresiasi dari aku ke si kecil berapa?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:27,title:"Ketika Mom Lelah",
     quote:{t:"Sesungguhnya bersama kesulitan ada kemudahan.",s:"QS. Al-Insyirah: 6"},
-    parenting:{t:"You cannot pour from an empty cup. Take care of yourself first.",a:"Anonim"},
+    parenting:{t:"Kamu nggak bisa menuangkan air dari cangkir yang kosong. Isi dulu dirimu sebelum memberi pada orang lain.",a:"Pepatah bijak"},
     body:["Mom juga manusia. Semua mommy pernah merasa capek dan ingin nyerah.","Hasil bukan di tangan Mom. Tugas Mom: <b>berusaha</b>. Yang balik hati = Allah.","Timeline Allah berbeda. Mungkin si kecil baru cinta sholat di usia 22. Nggak apa."],
     actions:["Kalau lelah: izinkan diri istirahat","Sholat hajat, curhat ke Allah","Hubungi 1 support"],
     reflection:"Kapan terakhir aku hampir nyerah? Apa yang bikinku bertahan?"},
   {week:4,wkTitle:"Minggu 4 — Motivasi Berkelanjutan",day:28,title:"Pasangan Hidup — Tim Terbaik",
     quote:{t:"Mukmin dengan mukmin lainnya seperti sebuah bangunan yang saling menguatkan.",s:"HR. Bukhari"},
-    parenting:{t:"A team of two parents united in vision is the foundation upon which children's character is built.",a:"Dr. Stephen Covey"},
+    parenting:{t:"Tim dari ayah dan ibu yang satu visi, adalah fondasi tempat karakter anak dibangun.",a:"Dr. Stephen Covey, 7 Habits"},
     body:["Bukan solo. Butuh tim dengan pasangan.","Visi bersama. Kompak aturan. Saling mengingatkan. Pembagian peran. Evaluasi berkala."],
     actions:["Duduk bicara dengan pasangan malam ini","Minta bantuan kakek/nenek sholeh"],
     reflection:"Kami 'satu tim', atau masing-masing jalan sendiri?"},
   {week:4,wkTitle:"Minggu 4 — Penutup",day:29,title:"Visi Keluarga Sakinah",
     quote:{t:"Ya Tuhan kami, anugerahkanlah kepada kami pasangan dan keturunan sebagai penyejuk hati...",s:"QS. Al-Furqan: 74"},
-    parenting:{t:"The home is the first school and the parents are the first teachers. The most powerful school is a happy home.",a:"Dr. Bambang Trim"},
+    parenting:{t:"Rumah adalah sekolah pertama, dan orangtua adalah guru pertama. Sekolah paling hebat adalah rumah yang penuh kebahagiaan.",a:"Dr. Bambang Trim, Pendidik Keluarga"},
     body:["Bayangkan 15–20 tahun lagi: Idul Fitri rumah ramai. Maghrib — <b>tanpa diingatkan</b>, semua berdiri menyiapkan sajadah. 3 generasi sholat berjamaah.","Itulah keluarga sakinah. Qurrota a'yun — penyejuk mata."],
     actions:["Tulis 'Family Vision Statement' 1 halaman","Ambil foto keluarga, tulis: 'Perjalanan dimulai hari ini'"],
     reflection:"Aku sedang menuju visi keluarga yang aku inginkan, atau menjauhinya?"},
@@ -1601,10 +1625,10 @@ let state = {
 };
 
 function loadState() {
-  try { const s = localStorage.getItem('mommysalma_v4'); if (s) state = { ...state, ...JSON.parse(s) }; } catch(e) {}
+  try { const s = localStorage.getItem('mommysalma_v8'); if (s) state = { ...state, ...JSON.parse(s) }; } catch(e) {}
 }
 function saveState() {
-  try { localStorage.setItem('mommysalma_v4', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('mommysalma_v8', JSON.stringify(state)); } catch(e) {}
 }
 
 // ============================================================
@@ -1774,69 +1798,26 @@ function goToSetup() {
   renderSetup();
 }
 function renderSetup() {
-  const step = state.setupStep;
-  const TOTAL_STEPS = 4;
+  // Only 1 step for now: name input
   const dots = document.getElementById('setup-progress');
-  dots.innerHTML = [0,1,2,3].map(i => {
-    if (i < step) return `<div class="setup-dot done"></div>`;
-    if (i === step) return `<div class="setup-dot active"></div>`;
-    return `<div class="setup-dot"></div>`;
-  }).join('');
+  dots.innerHTML = `<div class="setup-dot active"></div>`;
 
   const c = document.getElementById('setup-content');
-  if (step === 0) {
-    c.innerHTML = `
-      <div class="setup-eyebrow">STEP 1 DARI ${TOTAL_STEPS}</div>
-      <h2 class="setup-title serif">Halo Mom! Siapa namamu?</h2>
-      <p class="setup-subtitle">Biar aku bisa menyapamu personal di perjalanan 30 hari ini. Cukup nama panggilan aja ya.</p>
-      <div style="margin-top: 10px">
-        <input type="text" id="name-input" class="name-input" placeholder="Contoh: Aisha, Nabila, Dian..." value="${state.name || ''}" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="words">
-        <p style="font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.5;">Nama kamu akan tersimpan di profil ini aja, tidak dikirim ke manapun.</p>
-      </div>`;
-    setTimeout(() => {
-      const inp = document.getElementById('name-input');
-      if (inp) {
-        inp.oninput = (e) => { state.name = e.target.value.trim(); validateSetupCTA(); };
-        // Autofocus
-        inp.focus();
-      }
-    }, 100);
-  } else if (step === 1) {
-    c.innerHTML = `
-      <div class="setup-eyebrow">STEP 2 DARI ${TOTAL_STEPS}</div>
-      <h2 class="setup-title serif">Umur si kecil berapa, ${escapeHtml(state.name || 'Mom')}?</h2>
-      <p class="setup-subtitle">Kurikulum ini dirancang khusus untuk anak usia 6–7 tahun. Tapi tetap berguna untuk personalisasi.</p>
-      <div class="opt-stack">
-        <div class="opt-card ${state.age==='0-3'?'selected':''}" data-val="0-3"><div class="opt-icon">👶</div><div class="opt-text"><div class="opt-title">0–3 tahun</div><div class="opt-sub">Fase tumbuh kembang, butuh tidur &amp; cinta</div></div></div>
-        <div class="opt-card ${state.age==='3-5'?'selected':''}" data-val="3-5"><div class="opt-icon">🧒</div><div class="opt-text"><div class="opt-title">3–5 tahun</div><div class="opt-sub">Pengenalan &amp; teladan — jangan paksa</div></div></div>
-        <div class="opt-card ${state.age==='6-7'?'selected':''}" data-val="6-7"><div class="opt-icon">🌟</div><div class="opt-text"><div class="opt-title">6–7 tahun <span class="opt-tag">PALING TEPAT</span></div><div class="opt-sub">Masa emas — Rasulullah perintahkan sholat</div></div></div>
-        <div class="opt-card ${state.age==='8+'?'selected':''}" data-val="8+"><div class="opt-icon">📚</div><div class="opt-text"><div class="opt-title">8 tahun ke atas</div><div class="opt-sub">Penguatan, menuju baligh</div></div></div>
-      </div>`;
-    c.querySelectorAll('.opt-card').forEach(el => el.onclick = () => selectSetupOption(el, 'age'));
-  } else if (step === 2) {
-    c.innerHTML = `
-      <div class="setup-eyebrow">STEP 3 DARI ${TOTAL_STEPS}</div>
-      <h2 class="setup-title serif">Apa fokusmu, ${escapeHtml(state.name || 'Mom')}?</h2>
-      <p class="setup-subtitle">Pilih yang paling bikin kamu ragu akhir-akhir ini.</p>
-      <div class="opt-stack">
-        <div class="opt-card ${state.focus==='motivation'?'selected':''}" data-val="motivation"><div class="opt-icon">✨</div><div class="opt-text"><div class="opt-title">Meluruskan niat &amp; motivasi</div><div class="opt-sub">Kenapa aku harus serius?</div></div></div>
-        <div class="opt-card ${state.focus==='teknik'?'selected':''}" data-val="teknik"><div class="opt-icon">🌱</div><div class="opt-text"><div class="opt-title">Teknik parenting</div><div class="opt-sub">Caranya gimana biar nggak trauma</div></div></div>
-        <div class="opt-card ${state.focus==='self'?'selected':''}" data-val="self"><div class="opt-icon">🤍</div><div class="opt-text"><div class="opt-title">Perbaiki sholatku dulu</div><div class="opt-sub">Aku masih bolong-bolong</div></div></div>
-        <div class="opt-card ${state.focus==='all'?'selected':''}" data-val="all"><div class="opt-icon">💯</div><div class="opt-text"><div class="opt-title">Semuanya <span class="opt-tag">REKOMENDASI</span></div><div class="opt-sub">Aku butuh semua aspek</div></div></div>
-      </div>`;
-    c.querySelectorAll('.opt-card').forEach(el => el.onclick = () => selectSetupOption(el, 'focus'));
-  } else {
-    c.innerHTML = `
-      <div class="setup-eyebrow">STEP 4 DARI ${TOTAL_STEPS}</div>
-      <h2 class="setup-title serif">Kapan waktu terbaikmu?</h2>
-      <p class="setup-subtitle">10–15 menit per hari. Pilih yang paling tenang buat refleksi.</p>
-      <div class="opt-stack">
-        <div class="opt-card ${state.time==='morning'?'selected':''}" data-val="morning"><div class="opt-icon">🌅</div><div class="opt-text"><div class="opt-title">Pagi</div><div class="opt-sub">Setelah sholat subuh, 06:00</div></div></div>
-        <div class="opt-card ${state.time==='afternoon'?'selected':''}" data-val="afternoon"><div class="opt-icon">🌞</div><div class="opt-text"><div class="opt-title">Sore</div><div class="opt-sub">Sebelum anak pulang, 15:00</div></div></div>
-        <div class="opt-card ${state.time==='night'?'selected':''}" data-val="night"><div class="opt-icon">🌙</div><div class="opt-text"><div class="opt-title">Malam</div><div class="opt-sub">Setelah anak tidur, 21:00</div></div></div>
-      </div>`;
-    c.querySelectorAll('.opt-card').forEach(el => el.onclick = () => selectSetupOption(el, 'time'));
-  }
+  c.innerHTML = `
+    <div class="setup-eyebrow">PERKENALAN</div>
+    <h2 class="setup-title serif">Halo Mom! Siapa namamu?</h2>
+    <p class="setup-subtitle">Biar aku bisa menyapamu personal di perjalanan 30 hari ini. Cukup nama panggilan aja ya.</p>
+    <div style="margin-top: 10px">
+      <input type="text" id="name-input" class="name-input" placeholder="Contoh: Aisha, Nabila, Dian..." value="${state.name || ''}" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="words">
+      <p style="font-size: 12px; color: var(--muted); margin-top: 10px; line-height: 1.5;">Nama kamu akan tersimpan di profil ini aja, tidak dikirim ke manapun.</p>
+    </div>`;
+  setTimeout(() => {
+    const inp = document.getElementById('name-input');
+    if (inp) {
+      inp.oninput = (e) => { state.name = e.target.value.trim(); validateSetupCTA(); };
+      inp.focus();
+    }
+  }, 100);
 
   validateSetupCTA();
 }
@@ -1844,17 +1825,10 @@ function escapeHtml(s) { return String(s || '').replace(/[&<>"']/g, m => ({'&':'
 
 function validateSetupCTA() {
   const btn = document.getElementById('setup-cta');
-  const step = state.setupStep;
-  if (step === 0) {
-    const nameOK = (state.name || '').trim().length >= 2;
-    btn.disabled = !nameOK;
-    btn.style.opacity = nameOK ? '1' : '0.5';
-    btn.textContent = step === 3 ? 'Mulai Hari ke-1 ✨' : 'Lanjut →';
-  } else {
-    btn.disabled = false;
-    btn.style.opacity = '1';
-    btn.textContent = step === 3 ? 'Mulai Hari ke-1 ✨' : 'Lanjut →';
-  }
+  const nameOK = (state.name || '').trim().length >= 2;
+  btn.disabled = !nameOK;
+  btn.style.opacity = nameOK ? '1' : '0.5';
+  btn.textContent = 'Lanjut →';
 }
 
 function selectSetupOption(el, key) {
@@ -1864,45 +1838,28 @@ function selectSetupOption(el, key) {
   haptic(6);
 }
 function setupNext() {
-  if (state.setupStep === 0) {
-    const name = (state.name || '').trim();
-    if (name.length < 2) { showToast('Yuk isi namamu dulu, Mom ✨'); return; }
-    // Blur input so keyboard closes
-    const inp = document.getElementById('name-input');
-    if (inp) inp.blur();
-    state.name = name;
-    saveState();
-    // After name → go to story flow (manual nav)
-    state.storyIndex = 0;
-    renderStory(); // pre-render so no flash
-    show('story-flow');
-    return;
-  }
-  if (state.setupStep < 3) {
-    state.setupStep++;
-    renderSetup();
-    saveState();
-  } else {
-    state.onboarded = true;
-    saveState();
-    renderAll();
-    show('home');
-    document.getElementById('bottom-nav').classList.remove('hidden');
-  }
+  const name = (state.name || '').trim();
+  if (name.length < 2) { showToast('Yuk isi namamu dulu, Mom ✨'); return; }
+  const inp = document.getElementById('name-input');
+  if (inp) inp.blur();
+  state.name = name;
+  saveState();
+  // After name → go to story flow
+  state.storyIndex = 0;
+  renderStory();
+  show('story-flow');
 }
 function setupBack() {
-  if (state.setupStep > 0) {
-    state.setupStep--;
-    renderSetup();
-  } else {
-    show('splash');
-  }
+  // Only 1 setup step now — always go back to splash
+  show('splash');
 }
-// After story finishes → continue to setup step 2 (age)
+// After story finishes → go directly to home (skip age/time for now)
 function goToSetupAfterStory() {
-  state.setupStep = 1; // age question next
-  show('setup');
-  renderSetup();
+  state.onboarded = true;
+  saveState();
+  renderAll();
+  show('home');
+  document.getElementById('bottom-nav').classList.remove('hidden');
 }
 
 // ============================================================
@@ -2017,7 +1974,7 @@ function openLesson(day) {
     ${lesson.body.map(p => `<div class="content-text">${p}</div>`).join('')}
 
     <div class="action-card">
-      <div class="action-label">✨ TINDAKAN HARI INI</div>
+      <div class="action-label">✨ TINDAKAN HARI INI <span style="color:var(--muted);font-weight:600;font-size:10px;letter-spacing:1px">· WAJIB DICEKLIS SEMUA</span></div>
       ${lesson.actions.map((a, i) => `
         <div class="action-item" onclick="toggleAction(${i})">
           <div class="action-checkbox ${savedActions[i] ? 'checked' : ''}" id="check-${i}">${savedActions[i] ? '✓' : ''}</div>
@@ -2027,13 +1984,15 @@ function openLesson(day) {
     </div>
 
     <div class="reflect-card">
-      <div class="reflect-label">♡ PERTANYAAN DARI HATI</div>
+      <div class="reflect-label">♡ PERTANYAAN DARI HATI <span style="color:var(--muted);font-weight:600;font-size:10px;letter-spacing:1px">· WAJIB DIISI</span></div>
       <div class="reflect-q">${lesson.reflection}</div>
-      <textarea class="reflect-input" id="reflect-input" placeholder="Tulis jawabanmu di sini (opsional)...">${savedRefl}</textarea>
+      <textarea class="reflect-input" id="reflect-input" placeholder="Tulis jawabanmu di sini..." oninput="validateCompleteCTA()">${savedRefl}</textarea>
+      <p id="reflect-hint" style="font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.4;">Jujur aja dari hati ya, Mom. Sesingkat apapun nggak apa.</p>
     </div>
 
     <div class="lesson-footer">
-      <button class="btn-primary" onclick="completeLesson()">${isDone ? '✓ Sudah Selesai — Simpan Update' : 'Selesaikan Hari Ini'}</button>
+      <button class="btn-primary" id="complete-btn" onclick="completeLesson()">${isDone ? '✓ Sudah Selesai — Simpan Update' : 'Selesaikan Hari Ini'}</button>
+      <p id="complete-hint" style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px;min-height:16px;"></p>
     </div>
   `;
 
@@ -2047,6 +2006,9 @@ function openLesson(day) {
     const p = (modal.scrollTop / Math.max(1, modal.scrollHeight - modal.clientHeight)) * 100;
     document.getElementById('lesson-fill').style.width = Math.min(p, 100) + '%';
   };
+
+  // Initial validation check
+  validateCompleteCTA();
 }
 
 function haptic(ms) { try { if (navigator.vibrate) navigator.vibrate(ms || 10); } catch(e) {} }
@@ -2062,6 +2024,43 @@ function toggleAction(i) {
   cb.textContent = state.actions[currentLessonDay][i] ? '✓' : '';
   haptic(12);
   saveState();
+  validateCompleteCTA();
+}
+
+function validateCompleteCTA() {
+  const btn = document.getElementById('complete-btn');
+  const hint = document.getElementById('complete-hint');
+  if (!btn || !currentLessonDay) return;
+  const lesson = LESSONS.find(l => l.day === currentLessonDay);
+  if (!lesson) return;
+
+  const actions = state.actions[currentLessonDay] || [];
+  const checkedCount = actions.filter(Boolean).length;
+  const allChecked = checkedCount === lesson.actions.length;
+
+  const reflInput = document.getElementById('reflect-input');
+  const reflText = (reflInput ? reflInput.value : '').trim();
+  const reflOK = reflText.length >= 1;
+
+  const valid = allChecked && reflOK;
+
+  btn.disabled = !valid;
+  btn.style.opacity = valid ? '1' : '0.5';
+  btn.style.cursor = valid ? 'pointer' : 'not-allowed';
+
+  if (hint) {
+    if (valid) {
+      hint.textContent = 'Semua sudah siap, Mom ✨';
+      hint.style.color = 'var(--sage-deep)';
+    } else if (!allChecked) {
+      const left = lesson.actions.length - checkedCount;
+      hint.textContent = `Masih ${left} tindakan yang belum dicentang`;
+      hint.style.color = 'var(--rose-deep)';
+    } else {
+      hint.textContent = 'Isi jawaban refleksinya dulu ya, Mom';
+      hint.style.color = 'var(--rose-deep)';
+    }
+  }
 }
 
 function closeLesson() {
@@ -2072,8 +2071,15 @@ function closeLessonBg(e) { if (e.target.id === 'lesson-overlay') closeLesson();
 
 function completeLesson() {
   const day = currentLessonDay;
-  const refl = document.getElementById('reflect-input').value;
-  if (refl.trim()) state.reflections[day] = refl;
+  const lesson = LESSONS.find(l => l.day === day);
+  // Validation: all actions must be checked AND reflection must be filled
+  const actions = state.actions[day] || [];
+  const allChecked = actions.filter(Boolean).length === lesson.actions.length;
+  const refl = (document.getElementById('reflect-input').value || '').trim();
+  if (!allChecked) { showToast('Ceklis semua tindakan dulu ya, Mom'); haptic(40); return; }
+  if (refl.length < 1) { showToast('Isi jawaban refleksinya dulu ya'); haptic(40); return; }
+
+  state.reflections[day] = refl;
 
   const wasNew = !state.completed.includes(day);
   if (wasNew) {
